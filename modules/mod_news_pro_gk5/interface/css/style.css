@@ -1,0 +1,623 @@
+/**
+* Main CSS file
+* @package News Show Pro GK5
+* @Copyright (C) 2009-2013 Gavick.com
+* @ All rights reserved
+* @ Joomla! is Free Software
+* @ Released under GNU/GPL License : http://www.gnu.org/copyleft/gpl.html
+* @version $Revision: GK5 1.0 $
+**/
+
+.nsp { 
+	position: relative; 
+}
+.nspMain { 
+	overflow: hidden; 
+}
+
+/* Pagination */
+.nspBotInterface,
+.nspTopInterface { 
+	clear: both; 
+	margin: 5px 0;
+	overflow: hidden; 
+}
+
+/* 
+	Interface - for different looking Top and Bottom interface use the following classes:  
+	.nspTopInterface
+	.nspBotInterface (e.g.: .nspTopInterface .nspPagination li ...)
+*/
+.nspPagination-cont {
+	position: absolute;
+	z-index: 99999;
+	bottom: 30px;
+	left: 0;
+	width: 100%;
+}
+
+.torty .nspPagination-cont {
+	bottom: 10px;
+	left: 0;
+	width: 100%;
+	padding: 5px 0 8px 0;
+	background: rgba(255, 255, 255, 0.3);
+}
+
+.nspPagination { 
+	list-style: none!important;
+	list-style-type: none!important; 
+	margin: 5px 0 0 0!important; 
+	padding: 0!important; 
+	display: inline-block;
+	position: relative;
+}
+.nspPagination li { 
+	list-style: none;
+	background: url("../images/dot.png") no-repeat scroll -19px 0px transparent;
+	float: left;
+	margin: 0;
+	cursor: pointer;
+	width: 16px;
+	height: 16px;
+	text-indent: -9999em;
+	overflow: hidden;
+	opacity: 1;
+}
+.nspPagination li:hover,
+.nspPagination li.active { 
+	background-position: 0px 0px;
+}
+.nspPrev{
+	width: 54px;
+	height: 54px;
+	top: 250px;
+	margin-left: 5px;
+	position: absolute;
+	background: url(../images/prev.png) 0 0 no-repeat;
+	display: block;
+	cursor: pointer;
+	text-indent: -999px;
+	z-index: 999;
+}
+.nspNext {
+	width: 54px;
+	height: 54px;
+	top: 250px;
+	margin-right: 5px;
+	position: absolute;
+	background: url(../images/next.png) 0 0 no-repeat;
+	right: 0px;
+	display: block;
+	cursor: pointer;
+	text-indent: -999px;
+	z-index: 999;
+}
+.nspNext:hover,
+.nspPrev:hover { 
+	background-position: 0 -59px;	
+}
+
+/* Articles layout */
+.nspArts { 
+	overflow: hidden; 
+	position: relative;
+	margin-top: 35px;
+}
+.nspArtPage { 
+	float: left; 
+	width: 838px;
+	padding: 70px;
+	height: 391px;
+	background: #fff;
+}
+.torty .nspArtPage { 
+	float: left; 
+	width: 978px;
+	padding: 0px;
+	height: 531px;
+	background: #fff;
+}
+.nspArtPageList {  
+	width: 978px;
+	background: transparent;
+}
+.nspArt { 
+	-webkit-box-sizing: border-box; 
+	   -moz-box-sizing: border-box;
+			box-sizing: border-box; 
+	float:left; 
+	width: 838px;
+}
+.nspArt div { 
+	overflow: hidden; 
+}
+.nspArt h4.nspHeader { 
+	margin: 0;
+	padding: 10px 0 35px 0;
+	text-align: left;
+	width: 414px;
+	font-family: 'FilmotypeGay', sans-serif;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 36px;
+	line-height: 38px;
+	letter-spacing: 1px;
+	color: #000;
+	text-decoration: none;
+}
+.nspArt h4.nspHeader a { 
+	text-decoration: none;
+	color: #000;
+}
+.nspArt h4.nspHeader a:hover { }
+
+.nspArt table {
+	width: 100%;
+	height: 100%;
+}
+
+.nspArt table td {
+	width: 100%;
+	height: 100%;
+	vertical-align: middle;
+}
+
+.nspCol4 table,
+.nspCol4 table td,
+.nspCol4 table tr,
+.nspCol4 table tbody {
+	display: inline;
+	height: 30px;
+	padding: 0;
+	margin: 0;
+}
+
+.nspCol4 h4.nspHeader {
+	padding: 0;
+	font-size: 22px;
+	line-height: 26px;
+	width: 100%;
+	text-align: center;
+}
+
+.nspArt .cont-content {
+	float: left;
+	text-align: left;
+	width: 414px;
+	height: 361px;
+}
+
+.torty .nspArt .cont-content {
+	width: 374px;
+	height: 386px;
+	padding: 70px 0 70px 20px;
+}
+
+.torty .nspArt .cont-content h4.nspHeader,
+.torty .nspArt .cont-content table {
+	width: 350px !important;
+}
+
+.nspCol4 .cont-content {
+	padding: 0;
+	text-align: center;
+	width: 100%;
+	height: 30px;
+	margin: 0;
+}
+
+.nspArt img.nspImage { 
+	border: none;
+	display: block;
+}
+.nspArt .nspImageWrapper {
+	display: block;
+}
+.nspArt p.nspText, .nspArt p { 
+	display: block!important;
+	margin: 0;
+	padding: 0!important;
+	text-align: left;
+	font-family: 'FilmotypeGay', sans-serif;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 21px;
+	line-height: 25px;
+	letter-spacing: 1px;
+	color: #000;
+	text-decoration: none;
+}
+.nspArt p.nspText a { }
+.nspArt p.nspText a:hover { }
+.nspArt p.nspInfo { 
+	display: block!important;
+	font-size: 90%; 
+}
+.nspArt p.nspInfo a { }
+.nspArt p.nspInfo a:hover { }
+.nspArt .tleft { 
+	text-align: left; 
+}
+.nspArt .tright { 
+	text-align: right; 
+}
+.nspArt .tcenter { 
+	text-align: center;
+}
+.nspArt .tjustify { 
+	text-align: justify; 
+}
+.nspArt .fleft { 
+	float: left; 
+}
+.nspArt .fright { 
+	float: right; 
+}
+.nspArt .fnone { 
+	clear: both; 
+	float: none;
+	width: 100%; 
+}
+.readon.left,
+.readon.right,
+.readon.center { 
+	clear: both; 
+}
+.readon.left { 
+	float: left; 
+}
+.readon.right { 
+	float: right; 
+}
+.readon.center { 
+	display: inline; 
+	float: none; 
+}
+.nspAvatar { }
+
+/* Links layout */
+.nspLinks { 
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 3px;
+}
+.nspList { 
+	float: left; 
+}
+.nspLinks ul { 
+	list-style-type: none!important; 
+	padding: 0!important; 
+}
+.nspLinks .nspLinkScroll1 ul li { 
+	background: #fff;
+	border-top: 1px solid #eee;
+	margin: 0!important;
+	padding: 10px 0;
+}
+.nspLinks .nspLinkScroll1 ul li:first-child {
+	border-top: none;
+}
+.nspLinks ul li:hover { }
+.nspLinks ul li h4 { }
+.nspLinks ul li h4 a { 
+	text-decoration: none; 
+}
+.nspLinks ul li h4 a:hover { }
+.nspLinks ul li p { }
+
+/* positioning */
+.nspArts.left { 
+	float: right; 
+}
+.nspLinksWrap.left { 
+	float: left;
+}
+.nspArts.right { 
+	float: left; 
+}
+.nspLinksWrap.right { 
+	float: right; 
+}
+
+/* make element unvisible */
+.nspMain .unvisible {  
+	left: -9999px;  
+	position: absolute; 
+	top: auto; 
+}
+
+/* Responsive layout */
+.gkResponsive img.nspImage,
+img.nspImage.gkResponsive { 
+	height: auto;
+	width: 100%!important; 
+}
+.nspArt img.nspImage { 
+	max-width: 100%; 
+}
+
+.nspCol4 .gkResponsive img.nspImage,
+.nspCol4 img.nspImage.gkResponsive { 
+	height: auto;
+	width: 212px!important; 
+}
+.nspCol4 .nspArt img.nspImage { 
+	max-width: 212px; 
+}
+
+.nspArtScroll1,
+.nspLinkScroll1 { 
+	clear: both;
+	width: 978px;
+	overflow: hidden; 
+}
+.nspPages1 { width: 100%; }
+.nspPages2 { width: 200%; }
+.nspPages3 { width: 300%; }
+.nspPages4 { width: 400%; }
+.nspPages5 { width: 500%; }
+.nspPages6 { width: 600%; }
+.nspPages7 { width: 700%; }
+.nspPages8 { width: 800%; }
+.nspPages9 { width: 900%; }
+.nspPages10 { width: 1000%; }
+.nspCol1 { width: 100%; }
+.nspCol2 { width: 50%; }
+.nspCol3 { width: 33.333333%; }
+.nspCol4 { 
+	width: 233px;
+	height: 248px;
+	background: url(../images/produkty_tlo.png) 0 0 no-repeat;
+	margin: 5px;
+}
+.nspCol5 { width: 20%; }
+.nspCol6 { width: 16.666666%; }
+.nspCol7 { width: 14.285714%; }
+.nspCol8 { width: 12.5%; }
+.nspCol9 { width: 11.111111%; }
+.nspCol10 { width: 10%; }
+.nspCol11 { width: 9.090909%; }
+.nspCol12 { width: 8.333333%; }
+.nspCol13 { width: 7.692307%; }
+.nspCol14 { width: 7.142857%; }
+.nspCol15 { width: 6.666666%; }
+.nspCol16 { width: 6.25%; }
+.nspCol17 { width: 5.882352%; }
+.nspCol18 { width: 5.555555%; }
+.nspCol19 { width: 5.263157%; }
+.nspCol20 { width: 5%; }
+
+/* Animation */
+.nspList,
+.nspArtPage,
+.nspArtPageList { 
+	opacity: 0; filter: alpha(opacity=0);
+	-webkit-transition: opacity 0.5s ease-out; 
+	   -moz-transition: opacity 0.5s ease-out; 
+		-ms-transition: opacity 0.5s ease-out; 
+		 -o-transition: opacity 0.5s ease-out; 
+			transition: opacity 0.5s ease-out;
+}
+.nspList.active,
+.nspArtPage.active,
+.nspArtPageList.active { 
+	opacity: 1; filter: alpha(opacity=100);
+}
+
+/* Suffix neutral */
+.neutral {
+	color: #999;
+	font-size: 13px;
+}
+.neutral a {
+	color: #333;
+	text-decoration: none;
+}
+.neutral a:active,
+.neutral a:focus,
+.neutral a:hover {
+	color: #777;
+}
+.neutral .nspHeader{
+	font-size: 18px;
+	font-weight: 400;
+}
+.neutral .nspInfo a {
+	padding-right: 5px;
+}
+.neutral .readon {
+	background: #333;
+	-webkit-border-radius: 3px;
+	   -moz-border-radius: 3px;
+			border-radius: 3px;
+	color: #fff;
+	padding: 6px 10px;
+}
+.neutral .readon:active,
+.neutral .readon:focus,
+.neutral .readon:hover {
+	background: #999;
+	color: #fff;
+}
+.neutral .nspLinks ul li h4 {
+	font-size: 15px;
+	margin: 0 0 10px 0;
+}
+
+.nspArtPage {
+	width: 838px;
+}
+.nspArtPageList {
+	width: 978px;
+}
+
+/* Mobile 
+@media (max-width: 800px) {
+	.nspArts,
+	.nspLinksWrap {
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		overflow: hidden;
+		padding: 0 32px;
+		position: relative;
+	}
+	
+	.nspPrev,
+	.nspNext {
+		left: 0;
+		position: absolute;
+		top: 20%;
+		z-index: 101;
+	}
+	
+	.nspNext {
+		left: auto;
+		right: 0;
+	}
+	
+	.nspPagination {
+		display: none;
+	}
+}*/
+
+@media (max-width: 767px) {
+	.nspMain {
+		height: 320px;
+	}
+	.nspImageWrapper {
+		text-align: center;
+	}
+	.nspArt img.nspImage {
+		max-width: 200px;
+		margin: 0 auto;
+	} 
+	.nspArt .fleft {
+		float: none;
+	}
+	.torty .nspArt .cont-content {
+		width: 320px;
+		height: auto;
+		padding: 0;
+		text-align: center;
+	}
+	.nspArt .cont-content  {
+		float: none;
+		width: 320px;
+		height: auto;
+		text-align: center;
+	}
+	.torty .nspArtPage {  
+		width: 320px;
+		padding: 0px;
+	}
+	.nspArtPage {
+		width: 320px;
+		padding: 0;
+	}
+	.nspArts {
+		margin: 0;
+	}
+	.nspArt h4.nspHeader {
+		width: 320px;
+		text-align: center;
+		font-size: 24px;
+		line-height: 26px;
+	}
+	.nspArt p.nspText, .nspArt p {
+		display: none !important;
+	}
+	.nspNext {
+		top: 120px;
+		width: 33px;
+		height: 48px;
+		background: url(../images/next_phone.png) 0 0 no-repeat;
+		margin: 0;
+	}
+	.nspPrev {
+		top: 120px;
+		width: 33px;
+		height: 48px;
+		background: url(../images/prev_phone.png) 0 0 no-repeat;
+		margin: 0;
+	}
+	.nspNext:hover,
+	.nspPrev:hover { 
+		background-position: 0 0;	
+	}
+	.nspPagination-cont {
+		display: none;
+	}
+	.nspArtPageList {
+		width: 320px;
+	}
+	.nspArtScroll1 {
+		width: 320px;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 999px) {
+	.nspLinkScroll1, .nspArtPageList {
+		width: 768px;
+	}
+	.nspArtScroll1 {
+		width: 740px;
+	}
+	.torty .nspArtScroll1, .torty .nspArtPage {
+		width: 922px;
+	}
+	.nspCol4 {
+		margin: 7px;
+	}
+	
+	.torty .nspArt.nspCol1 .cont-content {
+		width: 370px;      
+	}
+	
+	.nspArtPage {
+		width: 740px;
+		padding: 50px 0;
+		height: 431px;
+	}
+	.nspArt.nspCol1 img.nspImage {
+		max-width: 350px;
+		margin-top: 20px;
+	}
+	
+	.torty .nspArt.nspCol1 img.nspImage {
+		max-width: 532px;
+		width: 532px !important;
+		height: 531px;
+		margin-top: 0px;
+		margin-left: -182px;
+		position: relative;
+	}
+	
+	.nspArt.nspCol1 .cont-content, .nspArt h4.nspHeader {
+		width: 380px;
+	}
+	
+	.nspArt.nspCol1 .cont-content {
+		height: 401px;
+	}
+	
+	.nspPrev, .nspNext  {
+		top: 450px;
+	}
+	
+	.nspPagination-cont {
+		display: none;
+	}
+	
+	.nspCol4 h4.nspHeader {
+		width: 212px;
+	}
+}
+
+.nspArtScroll2 {
+	width: 10000%;
+}
+
+/* EOF */

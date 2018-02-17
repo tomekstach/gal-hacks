@@ -1,0 +1,1152 @@
+/**
+* @author JoomlaShine.com Team
+* @copyright JoomlaShine.com
+* @link joomlashine.com
+* @package
+* @version $Id:
+* @license GNU/GPL v2 http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+.jsn-bootstrap * {
+    word-wrap: break-word;
+}
+
+.jsn-master .jsn-bootstrap .jsn-row-container .label,
+.jsn-master .jsn-bootstrap .jsn-row-container {
+    white-space: inherit;
+}
+
+#ui-datepicker-div {
+    z-index: 2147483648 !important;
+}
+
+.jsn-uniform {
+	width: 526px;
+	margin: 0 auto;
+	background: url(../images/zamowienia_top.png) 0 0 no-repeat;
+	padding-top: 121px;
+}
+
+.jsn-uniform.jsn-master .jsn-bootstrap .hide {
+    display: none;
+}
+
+.jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content hr {
+    margin: 10px 0;
+}
+
+.jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content span.required {
+    color: red;
+    font-weight: bold;
+    margin: 0 5px;
+}
+
+.jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group {
+	/*border: 1px solid transparent;
+    margin-bottom: 0px;
+    padding: 10px;
+    transition: background 0.3s ease-out;
+    -moz-transition: background 0.3s ease-out;
+	-webkit-transition: background 0.3s ease-out;*/
+	width: 526px;
+	height: 76px;
+	background: url(../images/zamowienia_input.png) 0 0 no-repeat;
+	margin: 0 !important;
+}
+.jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group-area {
+	/*border: 1px solid transparent;
+	margin-bottom: 0px;
+	padding: 10px;
+	transition: background 0.3s ease-out;
+	-moz-transition: background 0.3s ease-out;
+	-webkit-transition: background 0.3s ease-out;*/
+	width: 526px;
+	height: 130px;
+	background: url(../images/zamowienia_area.png) 0 0 no-repeat;
+	margin: 0 !important;
+}
+.jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group-area textarea {
+	width: 317px !important;
+	height: 122px !important;
+	border: 0;
+	background: #f5f2eb !important;
+	border-left: 1px solid #8a8571;
+	border-right: 1px solid #8a8571;
+	outline: 1px solid #b8b2a6;
+	border-bottom-left-radius: 0 !important;
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+	-webkit-border-radius: 0;
+	   -moz-border-radius: 0;
+			border-radius: 0;
+	-webkit-box-shadow: none;
+	   -moz-box-shadow: none;
+			box-shadow: none;
+	resize: none;
+}
+.jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group.ui-state-highlight {
+	/*background: transparent !important;
+	background-color: transparent !important; */
+	border: 0 !important;
+	outline: 0 #ff0000;
+	margin: 0 !important;
+	box-shadow: none !important;
+	text-shadow: none !important;
+	/*border-color: #FBEED5;
+	background-color: #FCF8E3;*/
+	position: static;
+	background-position: 0 0;
+}
+.ui-state-highlight .controls {
+	border: 0 !important;
+}
+.jsn-master .jsn-row-container {
+	margin: 0 !important;
+}
+.jsn-uniform.jsn-master .jsn-bootstrap .jsn-style-dark .jsn-form-content .control-group.ui-state-highlight {
+	border: none !important;
+	background-color: #444;
+}
+.jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-label {
+	display: block;
+	float: left;
+	width: 130px;
+	color: #39372a !important;
+	font-family: 'MadisonAntiquaPro-Italic', sans-serif !important;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 15px !important;
+	text-shadow: none !important;
+	margin-left: 35px;
+	text-align: left;
+	margin-top: 15px;
+}
+
+.jsn-uniform.jsn-master .jsn-bootstrap form.form-horizontal .jsn-form-content .control-group .row-fluid,
+.jsn-uniform.jsn-master .jsn-bootstrap form.form-horizontal .jsn-form-content .control-group .row-fluid [class*="span"] input {
+    margin-bottom: 10px;
+}
+.jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group .radio,
+.jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group .checkbox {
+	display: inline-block;
+	width: 100%;
+}
+.jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group .jsn-value-Others {
+    display: block;
+}
+
+.ui-daterangepickercontain {
+    text-align: left;
+}
+
+.jsn-uniform.jsn-master .jsn-bootstrap input[type="file"] {
+    height: 24px;
+}
+.jsn-uniform.jsn-master .jsn-bootstrap .placeholder { color: #aaa; }
+.jsn-uniform.jsn-master .jsn-bootstrap select {
+	height: 40px;
+	text-align: center !important;
+	line-height: 30px;
+}
+.jsn-master .jsn-bootstrap .jsn-inline{
+    display: inline;
+}
+.ui-timepicker-div .ui-widget-header { margin-bottom: 8px; }
+.ui-timepicker-div dl { text-align: left; }
+.ui-timepicker-div dl dt { height: 25px; margin-bottom: -25px; }
+.ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
+.ui-timepicker-div td { font-size: 90%; }
+.ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
+.ui-timepicker-div .ui-widget-header {
+    margin-bottom: 8px;
+}
+
+.ui-timepicker-div dl {
+    text-align: left;
+}
+
+.ui-timepicker-div dl dt {
+    height: 25px;
+    margin-bottom: -25px;
+}
+
+.ui-timepicker-div dl dd {
+    margin: 0 10px 10px 65px;
+}
+
+.ui-timepicker-div td {
+    font-size: 90%;
+}
+
+.ui-tpicker-grid-label {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+}
+
+.ui-timepicker-rtl {
+    direction: rtl;
+}
+
+.ui-timepicker-rtl dl {
+    text-align: right;
+}
+
+.ui-timepicker-rtl dl dd {
+    margin: 0 65px 10px 10px;
+}
+
+.jsn-uniform.jsn-master .jsn-bootstrap .btn.btn-icon [class^="icon-"], .jsn-master .jsn-bootstrap .btn.btn-icon [class*=" icon-"] {
+    margin: 0;
+}
+
+.jsn-master .jsn-bootstrap .jsn-style-dark .ui-state-highlight {
+    text-shadow: none;
+}
+
+.jsn-master .jsn-bootstrap .currency-value,
+.jsn-master .jsn-bootstrap .currency-cents {
+    float: left;
+}
+
+.jsn-master .jsn-bootstrap .currency-cents {
+    margin-left: 15px;
+}
+
+.jsn-master .jsn-bootstrap .currency-cents:before {
+    content: ".";
+    display: block;
+    width: 5px;
+    position: absolute;
+    margin-left: -9px;
+    margin-top: 5px;
+}
+
+.jsn-master .jsn-bootstrap .currency-cents .controls-inner input {
+    margin: 0;
+}
+
+.jsn-master .jsn-bootstrap .currency-value .jsn-help-block-inline,
+.jsn-master .jsn-bootstrap .currency-cents .jsn-help-block-inline {
+    font-size: 13px;
+    display: inline-block;
+    float: left;
+    margin-top: 5px;
+}
+
+.jsn-master .jsn-bootstrap .currency-value .jsn-help-block-inline {
+    margin-left: 30px;
+}
+
+.jsn-master .jsn-bootstrap .jsn-field-prefix {
+    margin: 4px;
+}
+
+.hide {
+    display: none;
+}
+.jsn-master .jsn-bootstrap .jsn-uf-select2-dropdown{
+    position: absolute;
+}
+.jsn-master .jsn-bootstrap .form-search .jsn-group-field input,
+.jsn-master .jsn-bootstrap .form-inline .jsn-group-field input,
+.jsn-master .jsn-bootstrap .form-horizontal .jsn-group-field input,
+.jsn-master .jsn-bootstrap .form-search .jsn-group-field textarea,
+.jsn-master .jsn-bootstrap .form-inline .jsn-group-field textarea,
+.jsn-master .jsn-bootstrap .form-horizontal .jsn-group-field textarea,
+.jsn-master .jsn-bootstrap .form-search .jsn-group-field select,
+.jsn-master .jsn-bootstrap .form-inline .jsn-group-field select,
+.jsn-master .jsn-bootstrap .form-horizontal .jsn-group-field select,
+.jsn-master .jsn-bootstrap .form-search .jsn-group-field .help-inline,
+.jsn-master .jsn-bootstrap .form-inline .jsn-group-field .help-inline,
+.jsn-master .jsn-bootstrap .form-horizontal .jsn-group-field .help-inline,
+.jsn-master .jsn-bootstrap .form-search .jsn-group-field .uneditable-input,
+.jsn-master .jsn-bootstrap .form-inline .jsn-group-field .uneditable-input,
+.jsn-master .jsn-bootstrap .form-horizontal .jsn-group-field .uneditable-input,
+.jsn-master .jsn-bootstrap .form-search .jsn-group-field .input-prepend,
+.jsn-master .jsn-bootstrap .form-inline .jsn-group-field .input-prepend,
+.jsn-master .jsn-bootstrap .form-horizontal .jsn-group-field .input-prepend,
+.jsn-master .jsn-bootstrap .form-search .jsn-group-field .input-append,
+.jsn-master .jsn-bootstrap .form-inline .jsn-group-field .input-append,
+.jsn-master .jsn-bootstrap .form-horizontal .jsn-group-field .input-append {
+    margin-bottom: 9px;
+}
+
+.jsn-uniform.jsn-master .jsn-bootstrap .row-fluid input.span12 {
+    width: 97%;
+}
+.jsn-uniform form{
+	display: block;
+}
+/**
+Fix captcha google
+**/
+html[dir="rtl"] .jsn-uniform.jsn-master .jsn-bootstrap #recaptcha_area #recaptcha_response_field {
+    right: 0;
+}
+
+html[dir="rtl"] .jsn-uniform.jsn-master .jsn-bootstrap #recaptcha_area .recaptcha_r2_c1 {
+    background: url("http://www.google.com/recaptcha/api/img/white/sprite.png") no-repeat scroll -27px 0 transparent;
+    height: 57px;
+    width: 9px;
+}
+
+html[dir="rtl"] .jsn-uniform.jsn-master .jsn-bootstrap #recaptcha_area .recaptchatable .recaptcha_r2_c2 {
+    background: url("http://www.google.com/recaptcha/api/img/white/sprite.png") no-repeat scroll -18px 0 transparent;
+    height: 57px;
+    width: 9px;
+}
+
+html[dir="rtl"] .jsn-uniform.jsn-master .jsn-bootstrap #recaptcha_area .recaptchatable .recaptcha_r3_c1 {
+    background: url("http://www.google.com/recaptcha/api/img/white/sprite.png") no-repeat scroll -9px 0 transparent;
+    height: 63px;
+    width: 9px;
+}
+
+html[dir="rtl"] .jsn-uniform.jsn-master .jsn-bootstrap #recaptcha_area .recaptchatable .recaptcha_r3_c3 {
+    background: url("http://www.google.com/recaptcha/api/img/white/sprite.png") no-repeat scroll 0 0 transparent;
+    height: 63px;
+    width: 9px;
+}
+
+html[dir="rtl"] .jsn-uniform.jsn-master .jsn-bootstrap .control-group .controls div.choices,
+html[dir="rtl"] .jsn-uniform.jsn-master .jsn-bootstrap .control-group .controls div.checkboxes {
+    margin-right: 15px;
+}
+
+html[dir="rtl"] .jsn-uniform.jsn-master .jsn-bootstrap .control-group .controls .input-prepend .add-on {
+    border-radius: 0 4px 4px 0;
+    margin-left: -1px;
+}
+
+html[dir="rtl"] .jsn-uniform.jsn-master .jsn-bootstrap .control-group .controls .input-append .btn {
+    border-radius: 4px 0 0 4px;
+    margin-right: -1px;
+}
+html[dir="rtl"] .jsn-uniform.jsn-master .jsn-bootstrap .jsn-columns-container.jsn-columns-count-no .jsn-column-item {
+    float:right;
+    margin-left:20px;
+}
+
+html[dir="rtl"] .jsn-uniform.jsn-master .jsn-bootstrap .control-group .controls .input-append .uneditable-input,
+html[dir="rtl"] .jsn-uniform.jsn-master .jsn-bootstrap .control-group .controls .input-append select,
+html[dir="rtl"] .jsn-uniform.jsn-master .jsn-bootstrap .control-group .controls .input-append input {
+    border-radius: 0px 4px 4px 0px;
+}
+
+html[dir="rtl"] .jsn-uniform.jsn-master .jsn-bootstrap .control-group .controls .input-prepend input,
+html[dir="rtl"] .jsn-uniform.jsn-master .jsn-bootstrap .control-group .controls .input-prepend select,
+html[dir="rtl"] .jsn-uniform.jsn-master .jsn-bootstrap .control-group .controls .input-prepend .uneditable-input {
+    border-radius: 4px 0px 0px 4px;
+}
+
+/*==================== SUBMISSIONS MANAGER ====================*/
+#submissions-list table .data_created_at,
+#submissions-list table .data_created_by,
+#submissions-list table .data_browser,
+#submissions-list table .data_country,
+#submissions-list table .data_ip {
+    width: 100px;
+}
+
+#submissions-list table .data_os {
+    width: 130px;
+}
+
+#submissions-list .jsn-bglabel {
+    padding: 100px 50px;
+    font-size: 24px;
+    color: #666;
+}
+
+#submission-fields-list {
+    min-height: 300px;
+    position: absolute;
+    width: 320px;
+}
+
+#form_field {
+    width: 100%;
+    float: left;
+}
+
+.nofield {
+    color: #CC0000;
+    float: left;
+    font-weight: bold;
+    padding-top: 5px;
+}
+
+#form_field.jsn-items-list {
+    border: 1px solid #CCCCCC;
+    height: 150px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 5px;
+}
+
+.pane-sliders {
+    position: static;
+}
+
+#form_field label,
+#form_field input,
+#submission-fields-list label,
+#submission-fields-list input {
+    float: none;
+    margin: 0 5px 0 0;
+}
+
+#submission-fields-list .popover-content {
+    padding: 0;
+}
+
+#submission-fields-list .jsn-items-list {
+    height: 300px;
+    border: none;
+    overflow: auto;
+}
+
+#submission-fields-list .jsn-item,
+#form_field .jsn-item {
+    padding: 5px;
+}
+
+#submission-fields-list .field-disabled,
+#form_field .field-disabled {
+    cursor: default;
+}
+
+#submission-fields-list hr,
+#form_field hr {
+    margin: 10px 0;
+}
+#submission-fields-list .form-actions,
+.form-actions {
+	/*border-top: 1px solid #ccc;*/
+	margin: 0 !important;
+	padding: 0 !important;
+	width: 526px;
+	height: 102px;
+	background: url(../images/zamowienia_bottom.png) 0 0 no-repeat !important;
+}
+
+#submission-fields-list .form-actions .btn {
+    float: none;
+}
+
+#submission-fields-list .popover {
+    width: 100%;
+}
+
+.jsn-bootstrap .jsn-submission-btn-save {
+    text-align: right;
+}
+
+.jsn-bootstrap .jsn-fieldset-filter {
+    margin: 10px 0px;
+}
+
+#submission-fields-list {
+    text-align: left;
+}
+
+/*==================== SUBMISSION SETINGS ====================*/
+#submission-settings .submission-data h3 {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#submission-settings .submission-data dt {
+    font-size: 14px;
+    color: #000;
+}
+
+#submission-settings .submission-data dd {
+    margin: 5px 0px 15px 0;
+}
+
+#submission-settings .submission-data .thumbnail {
+    display: inline-block;
+}
+
+#submissions-list img,
+#submission-settings .submission-data .thumbnail > img {
+    max-height: 200px;
+}
+
+#submission-settings .submission-content {
+    position: relative;
+}
+
+#submission-settings .jsn-page-actions {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+#submission-settings .jsn-form-bar {
+    z-index: 1;
+    position: relative;
+}
+
+.jsn-master #submission-settings .jsn-tabs .jsn-section-content {
+    border: none;
+}
+
+.jsn-master .jsn-section-header a {
+    text-shadow: none;
+}
+
+.jsn-master .jsn-bootstrap .jsn-section-header .btn .caret {
+    margin-bottom: auto;
+}
+
+#submissions-list ul.pagenav li a, #submissions-list div.pagination ul li a {
+    margin: 0;
+}
+
+.jsn-master .jsn-narrow .jsn-input-mini-fluid,
+.jsn-master .jsn-narrow .jsn-input-small-fluid,
+.jsn-master .jsn-narrow .jsn-input-medium-fluid,
+.jsn-master .jsn-narrow .jsn-input-xlarge-fluid,
+.jsn-master .jsn-narrow .jsn-input-fluid,
+.jsn-master .jsn-narrow .jsn-columns-container.jsn-columns-count-two .jsn-column-item,
+.jsn-master .jsn-narrow .jsn-columns-container.jsn-columns-count-three .jsn-column-item,
+.jsn-master .jsn-narrow .jsn-columns-container.jsn-columns-count-no .jsn-column-item,
+.jsn-master .jsn-bootstrap .jsn-narrow .input-small,
+.jsn-master .jsn-bootstrap .jsn-narrow .input-medium,
+.jsn-master .jsn-bootstrap .jsn-narrow .input-file,
+.jsn-master .jsn-bootstrap .jsn-narrow .jsn-column-item.jsn-uniform-others textarea.jsn-value-Others {
+    width: 95% !important;
+}
+
+.jsn-master .jsn-narrow .jsn-row-container label {
+    display: block;
+    float: none !important;
+    text-align: left !important;
+}
+
+.jsn-master .jsn-narrow .jsn-row-container label + .controls {
+    margin-left: 0;
+}
+
+.jsn-master .jsn-narrow .jsn-daterangepicker.hasDatepicker {
+    width: 40% !important;
+}
+
+.jsn-master .jsn-bootstrap .jsn-narrow .jsn-column-item.jsn-uniform-others {
+    clear: both;
+}
+
+.jsn-master .jsn-bootstrap .jsn-narrow .control-group .row-fluid .span6 {
+    clear: both;
+    margin-left: 0;
+    width: 100%;
+}
+
+.jsn-master .jsn-bootstrap .jsn-narrow .control-group .currency-value {
+    width: 50%;
+    float: left;
+}
+
+.jsn-master .jsn-bootstrap .jsn-narrow .control-group .currency-cents {
+    float: left;
+    width: 48%;
+    margin-left: 0;
+}
+
+.jsn-master .jsn-bootstrap .jsn-narrow .control-group .currency-cents:before {
+    margin-left: -7px;
+}
+
+.jsn-master .jsn-bootstrap .jsn-narrow .control-group .currency-value input,
+.jsn-master .jsn-bootstrap .jsn-narrow .control-group .currency-cents input {
+    width: 50% !important;
+}
+
+.jsn-bootstrap .daterangepicker .ranges li {
+    margin: 0px 0px 8px 0px;
+}
+
+html[dir="rtl"] .jsn-master .jsn-narrow .jsn-row-container label {
+    float: right !important;
+}
+
+/* Google Maps */
+
+/** General */
+.google_maps .buttonize {
+    cursor: pointer;
+    text-shadow: 1px 1px 1px #222;
+    font-weight: bold;
+    color: #fff;
+    padding: 5px 1em;
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -khtml-border-radius: 8px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#008595), to(#02748c));
+    background: -moz-linear-gradient(top, #008595, #02748c);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = #008595, endColorstr = #02748c);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#008595, endColorstr=#02748c)";
+}
+
+.google_maps .buttonize a:hover {
+    text-decoration: none;
+}
+
+.google_maps .gradient {
+    background: #fff;
+    background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eaeaea));
+    background: -moz-linear-gradient(top, #fff, #eaeaea);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr = #ffffff, endColorstr = #eaeaea);
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#ffffff, endColorstr=#eaeaea)";
+}
+
+#visualdesign-options-values .map {
+    width: 100%;
+    height: 400px;
+}
+
+.google_maps .streetview {
+    width: 100%;
+    height: 300px;
+}
+
+.google_maps .lt {
+    float: left;
+}
+
+.google_maps .rt {
+    float: right;
+}
+
+.google_maps .txt-shadow-w {
+    text-shadow: 1px 1px 1px #fff;
+}
+
+.google_maps .txt-shadow-b {
+    text-shadow: 1px 1px 1px #222;
+}
+
+.google_maps.rounded {
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -khtml-border-radius: 8px;
+}
+
+.google_maps .shadow {
+    -moz-box-shadow: 0px 2px 4px #999;
+    -webkit-box-shadow: 0px 2px 4px #999;
+    box-shadow: 0px 2px 4px #999;
+}
+
+.google_maps .item {
+    padding: 1em;
+    margin: 0 0 2em;
+}
+
+/** Benchmark */
+.google_maps div.benchmark {
+    clear: both;
+    overflow: auto;
+    color: #fff;
+    background: #02748c;
+    padding: 1em;
+    margin: 0 0 1em;
+}
+
+.google_maps div.benchmark .benchmark-result {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 1em 0 0;
+    line-height: 35px;
+}
+
+.google_maps div.benchmark .benchmark-iteration {
+    font-weight: bold;
+    margin: 0;
+}
+
+.google_maps div.benchmark .benchmark-title {
+    margin: 0;
+}
+
+/** Syntax highlighter */
+.google_maps pre.prettyprint {
+    background: #f4f4f4;
+    padding: 1.5em;
+    border: none;
+    margin: 0 0 1em;
+}
+
+.google_maps .summary {
+    font-size: 1.3em;
+    cursor: pointer;
+    color: #EE2C74;
+}
+
+.google_maps .ui-dialog-vevent .summary {
+    margin: 0.5em 0 0 0;
+    display: block;
+}
+
+.google_maps .ui-dialog-vevent .dtstart {
+    display: none;
+}
+
+.google_maps .ui-dialog-vevent .website {
+    margin: 0 0 1em;
+}
+
+.google_maps img {
+    max-width: none;
+}
+
+.google_maps .gm-style-iw .thumbnail img {
+    max-width: 105px;
+    max-height: 105px;
+    float: right;
+}
+
+.google_maps .gm-style-iw {
+    max-width: 350px;
+    max-height: 200px;
+}
+
+#submissions-list .jsn-bootstrap strong,
+#submission-settings.jsn-bootstrap strong {
+    margin-right: 5px;
+}
+
+.jsn-uniform .jsn-bootstrap .text-center {
+    text-align: center;
+}
+
+.google_maps .gm-style-iw>div {
+    overflow: visible !important;
+}
+
+.google_maps .gm-style-cc {
+    display: none;
+}
+
+.daterangepicker select.yearselect {
+    width: 45% !important;
+}
+
+.daterangepicker select.monthselect {
+    width: 65% !important;
+}
+
+.ui-timepicker-div select {
+    width: auto;
+}
+.jsn-master .jsn-input-medium-fluid {
+	width: 50%;
+}
+
+.jsn-bootstrap .gm-style-iw .thumbnail .caption h4 {
+    clear: none;
+}
+
+.jsn-uniform .jsn-bootstrap .form-horizontal .control-label {
+    width: 173px;
+	text-align: left;
+}
+
+.jsn-bootstrap .jsn-form-content .control-group {
+    width: 100%;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+#form-design-content .jsn-element-content .control-label .icon-question-sign{
+    font-weight: normal;
+}
+.jsn-uniform .alert-message{color: #666 !important;background:#dff0d8 !important;}
+.jsn-uniform .alert-heading{color: #666 !important;}
+
+.jsn-bootstrap select,
+.jsn-bootstrap textarea,
+.jsn-bootstrap input[type="text"],
+.jsn-bootstrap input[type="password"],
+.jsn-bootstrap input[type="datetime"],
+.jsn-bootstrap input[type="datetime-local"],
+.jsn-bootstrap input[type="date"],
+.jsn-bootstrap input[type="month"],
+.jsn-bootstrap input[type="time"],
+.jsn-bootstrap input[type="week"],
+.jsn-bootstrap input[type="number"],
+.jsn-bootstrap input[type="email"],
+.jsn-bootstrap input[type="url"],
+.jsn-bootstrap input[type="search"],
+.jsn-bootstrap input[type="tel"],
+.jsn-bootstrap input[type="color"],
+.jsn-bootstrap .uneditable-input {
+	font-size: 16px !important;
+	color: #908778 !important;
+	font-family: Tahoma, Verdana, sans-serif !important;
+}
+
+.jsn-bootstrap input[type="text"],
+.jsn-bootstrap input[type="email"],
+.jsn-bootstrap input[type="number"],
+.jsn-bootstrap input[type="tel"] {
+	width: 317px !important;
+	height: 39px !important;
+	border: 0;
+	background: #f5f2eb !important;
+	border-left: 1px solid #8a8571;
+	border-right: 1px solid #8a8571;
+	outline: 1px solid #b8b2a6;
+	border-bottom-left-radius: 0 !important;
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+	-webkit-border-radius: 0;
+	   -moz-border-radius: 0;
+			border-radius: 0;
+	-webkit-box-shadow: none;
+	   -moz-box-shadow: none;
+			box-shadow: none;
+}
+
+.jsn-bootstrap input[type="text"]:focus,
+.jsn-bootstrap input[type="email"]:focus,
+.jsn-bootstrap input[type="number"]:focus,
+.jsn-bootstrap input[type="tel"]:focus {
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15) inset, 0px 1px 2px rgba(0, 0, 0, 0.05);
+	background: #f5f2eb !important;
+	border-left: 1px solid #8a8571 !important;
+	border-right: 1px solid #8a8571 !important;
+	outline: 1px solid #b8b2a6 !important;
+	border-bottom-left-radius: 0 !important;
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+	-webkit-border-radius: 0;
+	   -moz-border-radius: 0;
+			border-radius: 0;
+	-webkit-box-shadow: none;
+	   -moz-box-shadow: none;
+			box-shadow: none;
+}
+
+/* Opera Hacks */
+doesnotexist:-o-prefocus, jsn-bootstrap input[type="text"],
+.jsn-bootstrap input[type="email"],
+.jsn-bootstrap input[type="number"],
+.jsn-bootstrap input[type="tel"],
+.jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group-area textarea,
+.jsn-bootstrap input[type="text"]:focus,
+.jsn-bootstrap input[type="email"]:focus,
+.jsn-bootstrap input[type="number"]:focus,
+.jsn-bootstrap input[type="tel"]:focus,
+.jsn-bootstrap input.jsn-daterangepicker {
+	outline: 0 !important;
+}
+
+.jsn-bootstrap input.hasDatepicker {
+	width: 271px !important;
+	border-right: 0 !important;
+}
+
+.jsn-bootstrap input.hasDatepicker:focus {
+	border-right: 0 !important;
+}
+
+.ui-datepicker-trigger {
+	width: 48px !important;
+	height: 47px !important;
+	padding: 0 !important;
+	border: 0 !important;
+	border-bottom-left-radius: 0 !important;
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+	border-right: 1px solid #8a8571 !important;
+	margin-right: 1px !important;
+	margin: 0 !important;
+	background: url(../images/zamowienia_calendar.png) 15px 15px no-repeat !important;
+	background-color: #fbfaf6 !important;
+}
+
+.jsn-bootstrap .icon-calendar:before {
+	content: "" !important;
+}
+
+.jsn-bootstrap .imi_i_nazwisko input.jsn-input-mini-fluid,
+.jsn-bootstrap .name input.jsn-input-mini-fluid {
+	width: 96px !important;
+	margin-top: -1px;
+}
+
+.control-group .controls .row-fluid {
+	display: inline !important;
+	width: 200px !important;
+	clear: none;
+	float: left;
+	margin-left: 20px;
+}
+.control-group .controls .row-fluid:after {
+	clear: none;
+}
+
+.control-group.e_mail .controls .row-fluid {
+	display: inline;
+	width: 331px !important;
+	margin-left: 15px;
+}
+
+.jsn-bootstrap input#jsn-captcha {
+	width: 200px !important;
+	float: right;
+	margin-right: 15px;
+}
+
+.static_content {
+	color: #39372a !important;
+	font-family: 'MadisonAntiquaPro-Italic', sans-serif !important;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 15px !important;
+	text-shadow: none !important;
+	padding-top: 10px;
+	height: 66px !important;
+}
+
+.btn.next, .btn.prev, .btn.next:focus, .btn.prev:focus {
+	padding: 13px 45px 15px 45px;
+	margin: 15px;
+	background: #484631;
+	background: -webkit-gradient(linear, left top, left bottom, from(#484631), to(#39372a));
+	background: -webkit-linear-gradient(top, #484631, #39372a);
+	background: -moz-linear-gradient(top, #484631, #39372a);
+	background: -ms-linear-gradient(top, #484631, #39372a);
+	background: -o-linear-gradient(top, #484631, #39372a);
+	background: linear-gradient(top, #484631, #39372a);
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#484631', endColorstr='#39372a');
+	background-position: 0 0;
+	border-color: #54523b;
+	text-shadow: none;
+	color: #eeebe5;
+	font-size: 21px;
+	font-family: 'MadisonAntiquaPro-Italic', sans-serif !important;
+	font-weight: normal;
+	font-style: normal;
+	border-radius: 7px;
+	box-shadow: none;
+}
+
+.btn.next:hover, .btn.prev:hover {
+	background: #39372a;
+	background: -webkit-gradient(linear, left top, left bottom, from(#39372a), to(#484631));
+	background: -webkit-linear-gradient(top, #39372a, #484631);
+	background: -moz-linear-gradient(top, #39372a, #484631);
+	background: -ms-linear-gradient(top, #39372a, #484631);
+	background: -o-linear-gradient(top, #39372a, #484631);
+	background: linear-gradient(top, #39372a, #484631);
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#39372a', endColorstr='#484631');
+	background-position: 0 0;
+	color: #eeebe5;
+}
+
+.btn.jsn-form-submit, .btn.jsn-form-submit:focus {
+	margin: 15px;
+	padding: 13px 45px 15px 45px;
+	background: #747055;
+	background: -webkit-gradient(linear, left top, left bottom, from(#747055), to(#4f4d3e));
+	background: -webkit-linear-gradient(top, #747055, #4f4d3e);
+	background: -moz-linear-gradient(top, #747055, #4f4d3e);
+	background: -ms-linear-gradient(top, #747055, #4f4d3e);
+	background: -o-linear-gradient(top, #747055, #4f4d3e);
+	background: linear-gradient(top, #747055, #4f4d3e);
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#747055', endColorstr='#4f4d3e');
+	background-position: 0 0;
+	border-color: #7c785d;
+	text-shadow: none;
+	color: #eeebe5;
+	font-size: 21px;
+	font-family: 'MadisonAntiquaPro-Italic', sans-serif !important;
+	font-weight: normal;
+	font-style: normal;
+	border-radius: 7px;
+	box-shadow: none;
+}
+
+.btn.jsn-form-submit:hover {
+	background: #4f4d3e;
+	background: -webkit-gradient(linear, left top, left bottom, from(#4f4d3e), to(#747055));
+	background: -webkit-linear-gradient(top, #4f4d3e, #747055);
+	background: -moz-linear-gradient(top, #4f4d3e, #747055);
+	background: -ms-linear-gradient(top, #4f4d3e, #747055);
+	background: -o-linear-gradient(top, #4f4d3e, #747055);
+	background: linear-gradient(top, #4f4d3e, #747055);
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#4f4d3e', endColorstr='#747055');
+	background-position: 0 0;
+	color: #eeebe5;
+}
+
+.prze_lij_wz_r .controls,
+.send_a_model .controls {
+	overflow: hidden;
+	width: 333px;
+	height: 48px;
+	background: url(../images/zamowienia_pobierz.png) 0 -1px no-repeat;
+	float: right;
+	margin-top: -1px;
+	margin-right: 15px;
+	position: relative;
+}
+
+.file_text {
+	position: absolute;
+	top: 13px;
+	left: 10px;
+	width: 260px;
+	overflow: hidden;
+	text-align: left;
+	font-size: 16px !important;
+	line-height: 20px;
+	height: 20px;
+	color: #908778 !important;
+	font-family: Tahoma, Verdana, sans-serif !important;
+}
+
+.prze_lij_wz_r .controls input[type="file"],
+.send_a_model .controls input[type="file"] {
+	opacity: 0;
+	height: 49px !important;
+	width: 333px;
+	cursor: pointer;
+}
+/************************************************************************************
+smartphone layout (320 - 480): everything is layout in single column
+*************************************************************************************/
+@media only screen and (max-width: 480px), (max-device-width: 480px) {
+	.jsn-uniform .table-striped{
+		font-size: 9px !important;
+	}
+	.jsn-bootstrap .form-horizontal .controls{
+        margin-left: 0px !important;
+    }
+    .jsn-master .jsn-input-mini-fluid,
+    .jsn-master .jsn-input-small-fluid,
+    .jsn-master .jsn-input-medium-fluid,
+    .jsn-master .jsn-input-xlarge-fluid,
+    .jsn-master .jsn-input-fluid,
+    .jsn-master .jsn-columns-container.jsn-columns-count-two .jsn-column-item,
+    .jsn-master .jsn-columns-container.jsn-columns-count-three .jsn-column-item,
+    .jsn-master .jsn-columns-container.jsn-columns-count-no .jsn-column-item,
+    .jsn-master .jsn-bootstrap .input-small,
+    .jsn-master .jsn-bootstrap .input-medium,
+    .jsn-master .jsn-bootstrap .input-file,
+    .jsn-master .jsn-bootstrap .jsn-column-item.jsn-uniform-others textarea.jsn-value-Others {
+        width: 95% !important;
+    }
+	.jsn-uniform #jsn-captcha{
+		width: 136px !important;
+	}
+    .jsn-master .jsn-row-container label {
+        display: block;
+        float: none !important;
+        text-align: left !important;
+    }
+
+    .jsn-master .jsn-row-container label + .controls {
+        margin-left: 0;
+    }
+
+    .jsn-master .jsn-daterangepicker.hasDatepicker {
+        width: 40% !important;
+    }
+
+    .jsn-master .jsn-bootstrap .jsn-column-item.jsn-uniform-others {
+        clear: both;
+    }
+
+    .jsn-master .jsn-bootstrap .control-group .row-fluid .span6 {
+        clear: both;
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .jsn-master .jsn-bootstrap .control-group .currency-value {
+        width: 50%;
+        float: left;
+    }
+
+    .jsn-master .jsn-bootstrap .control-group .currency-cents {
+        float: left;
+        width: 48%;
+        margin-left: 0;
+    }
+
+    .jsn-master .jsn-bootstrap .control-group .currency-cents:before {
+        margin-left: -7px;
+    }
+
+    .jsn-master .jsn-bootstrap .control-group .currency-value input,
+    .jsn-master .jsn-bootstrap .control-group .currency-cents input {
+        width: 50% !important;
+    }
+
+}
+#submissions-list table th a.hasTooltip {
+    display: block !important;
+}
+.jsn-master .jsn-bootstrap .control-group tr td.likert_data_hidden
+{
+    display: none;
+}
+#submission-data .no-data{
+    text-align: center;
+    padding: 10px;
+}
+#submission-data .no-data span
+{
+    text-align: center;
+    font-weight: bold;
+}
+.dropdown-randomize
+{
+    position: relative !important;
+}
+.dropdown-randomize.select2-offscreen
+{
+    display: none;
+}
+.jsn-master .jsn-bootstrap .control-group .select2-container.jsn-input-mini-fluid{
+    width: 15%;
+}
+.jsn-master .jsn-bootstrap .control-group .select2-container.jsn-input-xlarge-fluid
+{
+    width: 90%;
+}
+.jsn-master .jsn-bootstrap .control-group .select2-container.jsn-input-small-fluid
+{
+    width: 30%;
+}
+.jsn-master .jsn-bootstrap .control-group .select2-container.jsn-input-medium-fluid
+{
+    width: 333px;
+}
+
+.jsn-refresh-captcha span{
+	padding-left:5px;
+}
+
+.static_content .control-label {
+	display: none !important;
+}
+
+.jsn-captcha-image {
+	height: 48px !important;
+}
