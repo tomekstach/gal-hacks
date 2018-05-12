@@ -67,7 +67,7 @@ class JSNUniformViewSubmission extends JSNBaseView
 		{
 			$msgs = JSNUtilsMessage::getList('SUBMISSION');
 			$msgs = count($msgs)?JSNUtilsMessage::showMessages($msgs):'';
-		}
+			}
 
 		// Hide main menu
 		$input->set('hidemainmenu', true);
@@ -78,14 +78,14 @@ class JSNUniformViewSubmission extends JSNBaseView
 		// Assign variables for rendering
 		$this->assignRef('msgs', $msgs);
 
-		// Display the template
-		parent::display($tpl);
+			// Display the template
+			parent::display($tpl);
 
 		// Load assets
 		JSNUniformHelper::addAssets();
-		$this->addAssets();
+			$this->addAssets();
 
-	}
+		}
 
 	/**
 	 * Add the libraries css and javascript
@@ -114,7 +114,7 @@ class JSNUniformViewSubmission extends JSNBaseView
 
 		echo JSNHtmlAsset::loadScript('uniform/submission', array('nextAndPreviousForm' => $this->nextAndPreviousForm), true);
 		JSNHtmlAsset::addScript(JSN_UNIFORM_ASSETS_URI . '/js/jsn.jquery.noconflict.js');
-	}
+		}
 
 	/**
 	 * Add the page title and toolbar.
@@ -125,7 +125,7 @@ class JSNUniformViewSubmission extends JSNBaseView
 	 */
 
 	protected function initToolbar()
-	{
+		{
 		$bar = JToolBar::getInstance('toolbar');
 		$bar->appendButton('Custom', '<button id="previous-submission" class="btn btn-small hide" ><i class="icon-arrow-left"></i>' . JText::_('JSN_UNIFORM_PREVIOUS') . '</button>');
 		$bar->appendButton('Custom', '<button id="next-submission" class="btn btn-small hide" >' . JText::_('JSN_UNIFORM_NEXT') . '<i class="icon-arrow-right"></i></button>');
@@ -135,6 +135,6 @@ class JSNUniformViewSubmission extends JSNBaseView
 
 		JToolBarHelper::cancel('submission.cancel', 'JTOOLBAR_CLOSE');
 		JSNUniformHelper::initToolbar('JSN_UNIFORM_SUBMISSIONS_DETAIL', 'uniform-submission');
-	}
+		}
 
 }

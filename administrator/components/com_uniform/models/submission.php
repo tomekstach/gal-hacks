@@ -456,7 +456,7 @@ class JSNUniformModelSubmission extends JModelAdmin
 				$table->bind(array('log_id' => null, 'submission_id' => (int) $_POST['cid'], 'form_id' => (int) $_POST['filter_form_id'], 'user_id' => $user->id, 'date' => date('Y-m-d H:i:s')));
 				if (!$table->store()) {
 					$this->setError($table->getError());
-			}
+		}
 				$log_id = $table->log_id;
 
 				foreach ($dataChanged as $field_id => $value) {

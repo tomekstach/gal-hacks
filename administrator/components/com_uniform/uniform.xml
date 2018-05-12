@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.0" method="upgrade">
 	<name>UniForm</name>
-	<version>4.0.5</version>
-	<creationDate>12/13/2016</creationDate>	
+	<version>4.1.6</version>
+	<creationDate>12/07/2017</creationDate>	
 	<author>JoomlaShine.com</author>
 	<authorEmail>support@joomlashine.com</authorEmail>
 	<authorUrl>http://www.joomlashine.com</authorUrl>
@@ -46,7 +46,10 @@
 		<schemas>
 			<schemapath type="mysql">database/mysql/updates</schemapath>
 		</schemas>
-	</update>	
+	</update>
+    <updateservers>
+        <server type="collection" name="uniform">http://www.joomlashine.com/versioning/extensions/com_uniform.xml</server>
+    </updateservers>
 	<uninstallfile>uninstall.uniform.php</uninstallfile>
     <languages folder="admin">
         <language tag="bg-BG">language/site/bg-BG/bg-BG.com_uniform.ini</language>
@@ -112,6 +115,14 @@
         <language tag="sv-SE">language/site/sv-SE/sv-SE.com_uniform.ini</language>
         <language tag="sv-SE">language/site/sv-SE/sv-SE.mod_uniform.ini</language>
         <language tag="sv-SE">language/site/sv-SE/sv-SE.mod_uniform.sys.ini</language>
+        
+        <language tag="hu-HU">language/site/hu-HU/hu-HU.com_uniform.ini</language>
+        <language tag="hu-HU">language/site/hu-HU/hu-HU.mod_uniform.ini</language>
+        <language tag="hu-HU">language/site/hu-HU/hu-HU.mod_uniform.sys.ini</language>
+
+        <language tag="el-GR">language/site/el-GR/el-GR.com_uniform.ini</language>
+        <language tag="el-GR">language/site/el-GR/el-GR.mod_uniform.ini</language>
+        <language tag="el-GR">language/site/el-GR/el-GR.mod_uniform.sys.ini</language>
     </languages>
 	<administration>		
 		<menu link="option=com_uniform" option="com_uniform" img="components/com_uniform/assets/images/icons-16/icon-uniform.png" alt="JSN_UNIFORM_MENU_TEXT">JSN_UNIFORM_MENU_TEXT</menu>
@@ -153,7 +164,7 @@
             <language tag="bg-BG">language/admin/bg-BG/bg-BG.plg_editors-xtd_uniform.sys.ini</language>
             <language tag="bg-BG">language/admin/bg-BG/bg-BG.plg_uniform_payment_paypal.ini</language>
             <language tag="bg-BG">language/admin/bg-BG/bg-BG.plg_uniform_payment_paypal.sys.ini</language>
-            
+
             <language tag="da-DK">language/admin/da-DK/da-DK.com_uniform.ini</language>
             <language tag="da-DK">language/admin/da-DK/da-DK.com_uniform.sys.ini</language>
             <language tag="da-DK">language/admin/da-DK/da-DK.plg_content_uniform.ini</language>
@@ -198,7 +209,7 @@
             <language tag="fi-FI">language/admin/fi-FI/fi-FI.plg_editors-xtd_uniform.sys.ini</language>
             <language tag="fi-FI">language/admin/fi-FI/fi-FI.plg_uniform_payment_paypal.ini</language>
             <language tag="fi-FI">language/admin/fi-FI/fi-FI.plg_uniform_payment_paypal.sys.ini</language>
-            
+
             <language tag="fr-FR">language/admin/fr-FR/fr-FR.com_uniform.ini</language>
             <language tag="fr-FR">language/admin/fr-FR/fr-FR.com_uniform.sys.ini</language>
             <language tag="fr-FR">language/admin/fr-FR/fr-FR.plg_content_uniform.ini</language>
@@ -288,6 +299,24 @@
             <language tag="sv-SE">language/admin/sv-SE/sv-SE.plg_editors-xtd_uniform.sys.ini</language>
             <language tag="sv-SE">language/admin/sv-SE/sv-SE.plg_uniform_payment_paypal.ini</language>
             <language tag="sv-SE">language/admin/sv-SE/sv-SE.plg_uniform_payment_paypal.sys.ini</language>
+
+            <language tag="hu-HU">language/admin/hu-HU/hu-HU.com_uniform.ini</language>
+            <language tag="hu-HU">language/admin/hu-HU/hu-HU.com_uniform.sys.ini</language>
+            <language tag="hu-HU">language/admin/hu-HU/hu-HU.plg_content_uniform.ini</language>
+            <language tag="hu-HU">language/admin/hu-HU/hu-HU.plg_content_uniform.sys.ini</language>
+            <language tag="hu-HU">language/admin/hu-HU/hu-HU.plg_editors-xtd_uniform.ini</language>
+            <language tag="hu-HU">language/admin/hu-HU/hu-HU.plg_editors-xtd_uniform.sys.ini</language>
+            <language tag="hu-HU">language/admin/hu-HU/hu-HU.plg_uniform_payment_paypal.ini</language>
+            <language tag="hu-HU">language/admin/hu-HU/hu-HU.plg_uniform_payment_paypal.sys.ini</language>
+
+            <language tag="el-GR">language/admin/el-GR/el-GR.com_uniform.ini</language>
+            <language tag="el-GR">language/admin/el-GR/el-GR.com_uniform.sys.ini</language>
+            <language tag="el-GR">language/admin/el-GR/el-GR.plg_content_uniform.ini</language>
+            <language tag="el-GR">language/admin/el-GR/el-GR.plg_content_uniform.sys.ini</language>
+            <language tag="el-GR">language/admin/el-GR/el-GR.plg_editors-xtd_uniform.ini</language>
+            <language tag="el-GR">language/admin/el-GR/el-GR.plg_editors-xtd_uniform.sys.ini</language>
+            <language tag="el-GR">language/admin/el-GR/el-GR.plg_uniform_payment_paypal.ini</language>
+            <language tag="el-GR">language/admin/el-GR/el-GR.plg_uniform_payment_paypal.sys.ini</language>
         </languages>
 	</administration>
 </extension>

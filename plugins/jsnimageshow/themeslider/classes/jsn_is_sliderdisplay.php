@@ -18,7 +18,7 @@ class JSNISSliderDisplay extends JObject
 	var $_themename 	= 'themeslider';
 	var $_themetype 	= 'jsnimageshow';
 	var $_assetsPath 	= 'plugins/jsnimageshow/themeslider/assets/';
-	function JSNISSliderDisplay() {}
+	function __construct() {}
 
 	function standardLayout($args)
 	{
@@ -83,9 +83,9 @@ class JSNISSliderDisplay extends JObject
 				$openLinkIn = '';
 				$href = 'href="javascript:void(0);"';
 			}
-			
+
 			$alt = htmlentities($image->title, ENT_QUOTES, 'UTF-8', false);
-				
+
 			if (isset($image->alt_text))
 			{
 				if ($image->alt_text != '')
@@ -93,7 +93,7 @@ class JSNISSliderDisplay extends JObject
 					$alt = htmlentities($image->alt_text, ENT_QUOTES, 'UTF-8', false);
 				}
 			}
-			// AstoSoft start		
+			// AstoSoft start
 			$html .= '<li>
 			   			<a '.$href.' '.$openLinkIn.'>
 			   				<img src="" longdesc="'.$image->image.'" alt="'.$alt.'"/>
@@ -101,7 +101,7 @@ class JSNISSliderDisplay extends JObject
 			   			<div class="label_text">';
 			// AstoSoft end
 			$html .= ($image->title != '' && $themeData->caption_title_show) ? '<p class="'.$titleCaptionClass.'">'.htmlentities($image->title, ENT_QUOTES, 'UTF-8', false).'</p>' : '';
-			$html .= ($image->description != '' && $themeData->caption_description_show) ? '<p class="'.$descCaptionClass.'">'.strip_tags($image->description, '<b><i><s><strong><em><strike><u><br>').'</p>' : '';
+			$html .= ($image->description != '' && $themeData->caption_description_show) ? '<p class="'.$descCaptionClass.'">'.strip_tags($image->description, '<b><i><s><strong><em><strike><u><br><span>').'</p>' : '';
 			$html .= ($image->link != '' && $themeData->caption_link_show) ? '<p><a class="'.$linkCaptionClass.'" href="'.$image->link.'" target="_blank">'.$image->link.'</a></p>' : '';
 
 			$html .=	'</div>
@@ -141,6 +141,24 @@ class JSNISSliderDisplay extends JObject
 									}, 500);
 									jsn_'.$args->random_number.' = jsnThemeSliderjQuery(window).width();
 								}
+							});
+							jQuery("#'.$wrapClass.'").parents("div.jsn-pagebuilder.pb-element-container.pb-element-tab").find("ul.nav-tabs li a").on("click", function (e) {
+								//if (jsn_'.$args->random_number.' != jsnThemeSliderjQuery(window).width())
+								//{
+									clearTimeout(cacheResize);
+									cacheResize = "";
+									var oldCacheIndex = jsnThemeSliderjQuery(\'#'.$wrapClass.' .cache_skitter_index\').attr(\'value\');
+									jsnThemeSliderjQuery(\'#'.$wrapClass.'\').html(oldHTML);
+									'.$jsResize.'
+									jsnThemeSliderjQuery(\'#'.$wrapClass.' .cache_skitter_index\').attr(\'value\', oldCacheIndex);
+									var options = '.$themeDataJson.';
+									options.base_height = '.$args->height.';
+									cacheResize = setTimeout(function () {
+										jsnThemeSliderjQuery(\'.'.$wrapClass.'\').skitter(options);
+										jsnThemeSliderjQuery(\'.'.$wrapClass.' .image_main\').css("max-width", "");
+									}, 500);
+									jsn_'.$args->random_number.' = jsnThemeSliderjQuery(window).width();
+								//}
 							});
 						})});
 				</script>';
@@ -371,6 +389,8 @@ class JSNISSliderDisplay extends JObject
 				$sliderOptions->img_transparent_background	= false;
 			}
 
+			$sliderOptions->velocity = $themeData->transition_speed;
+
 			return $sliderOptions;
 		}
 
@@ -379,16 +399,25 @@ class JSNISSliderDisplay extends JObject
 
 	function loadjQuery()
 	{
-		$objUtils = JSNISFactory::getObj('classes.jsn_is_utils');
+		$loadJoomlaDefaultJQuery = true;
+		if (class_exists('JSNConfigHelper')) {
+			$objConfig = JSNConfigHelper::get('com_imageshow');
+			if ($objConfig->get('jquery_using') != 'joomla_default') {
+				$objUtils = JSNISFactory::getObj('classes.jsn_is_utils');
 
-		if (method_exists($objUtils, 'loadJquery'))
-		{
-			$objUtils->loadJquery();
+				if (method_exists($objUtils, 'loadJquery')) {
+					$objUtils->loadJquery();
+				}
+				else {
+					JHTML::script($this->_assetsPath . 'js/jsn_is_jquery_safe.js');
+					JHTML::script('https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js');
+				}
+				$loadJoomlaDefaultJQuery = false;
+			}
 		}
-		else
-		{
+		if ($loadJoomlaDefaultJQuery) {
 			JHTML::script($this->_assetsPath . 'js/jsn_is_jquery_safe.js');
-			JHTML::script('https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js');
+			JHtml::_('jquery.framework');
 		}
 	}
 }

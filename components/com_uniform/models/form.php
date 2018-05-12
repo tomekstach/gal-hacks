@@ -631,6 +631,10 @@ class JSNUniformModelForm extends JModelItem
 	{
 		$input = JFactory::getApplication()->input;
 		$postData = $input->getArray($_POST);
+		if (!count($postData))
+		{
+		    $postData = $input->post->getArray();
+		}
 		$return = new stdClass;
 		$submissionsData = array();
 		$validationForm = array();
@@ -669,10 +673,10 @@ class JSNUniformModelForm extends JModelItem
 		}
 
 		$emptyField = '';
-		$dataContentEmail = '';
-		$fileAttach = "";
-		$recepientEmail = "";
-		$nameFileByIndentifier = '';
+		$dataContentEmail 	=	 array();
+		$fileAttach 			= array();
+		$recepientEmail 		= array();
+		$nameFileByIndentifier 	= array();
 		$dataArray = $this->_validData($post);
 		if (!empty($dataForms->form_captcha))
 		{
@@ -1055,7 +1059,7 @@ class JSNUniformModelForm extends JModelItem
 								}
 								break;
 							case "file-upload":
-								if (empty($_FILES[$fieldName]['name']))
+								if (empty($_FILES[$fieldName]['name']) && ! (int) $postData['ajax_upload_file'])
 								{
 									$validationForm[$fieldName] = JText::_('JSN_UNIFORM_CONFIRM_FIELD_CANNOT_EMPTY');
 								}
@@ -1158,7 +1162,9 @@ class JSNUniformModelForm extends JModelItem
 		if (!$validationForm)
 		{
 			$_save = $this->_save($dataForms, $return, $post, $submissionsData, $dataContentEmail, $nameFileByIndentifier, $requiredField, $fileAttach, $recepientEmail);
-
+            //Add submission ID to session for Ajax Upload File
+            $session = JFactory::getSession();
+            $session->set('jsn_submission_form_' . $post['form_id'], $_save);
 			//Run Script on Form Processed
 			$formScriptOnProcessed = trim($dataForms->form_script_on_processed);
 			if ($formScriptOnProcessed != '')
@@ -1219,9 +1225,14 @@ class JSNUniformModelForm extends JModelItem
 	 */
 	private function _save($dataForms, &$return, $post, $submissionsData, $dataContentEmail, $nameFileByIndentifier, $requiredField, $fileAttach, $recepientEmail)
 	{
+		$isAjaxUploadFile 		= false;
 		$isSent		= true;
 		$input = JFactory::getApplication()->input;
 		$postData = $input->getArray($_POST);
+		if (!count($postData))
+		{
+		    $postData = $input->post->getArray();
+		}
 		$user = JFactory::getUser();
 		$ip = getenv('REMOTE_ADDR');
 		$country = $this->countryCityFromIP($ip);
@@ -1246,9 +1257,9 @@ class JSNUniformModelForm extends JModelItem
 					$data[$v['value']] = $formSettings->$name;
 					$data['post'] = $post;
 					$data['sub'] = $submissionsData;
+                    $data['dataContentEmail'] = $dataContentEmail;
 					if($v['value'] == 'mailchimp')
 					{
-
 						if(isset($post['mailchimp_subcriber']) && $post['mailchimp_subcriber'] == 'on')
 						{
 							JPluginHelper::importPlugin('uniform', $v['value']);
@@ -1324,6 +1335,28 @@ class JSNUniformModelForm extends JModelItem
 		}
 		// AstoSoft
 		$submission_id = $table->submission_id;
+
+		$this->_db->setQuery($this->_db->getQuery(true)->select('COUNT(*)')->from('#__jsn_uniform_fields')->where("form_id = " . (int) $dataForms->form_id . " AND field_type = 'file-upload'"));
+		$totalFileFields = $this->_db->loadResult();
+
+	    if ($totalFileFields && (int) $dataForms->form_ajax_upload && (int) $post['ajax_upload_file'])
+        {
+        	if (count($_FILES))
+        	{
+        		foreach ($_FILES as $itemFiles)
+        		{
+        			if (!empty($itemFiles['name'][0]))
+        			{
+        				$isAjaxUploadFile = true;
+        				break;
+        			}
+        		}
+        	}
+        	else
+        	{
+        		$isAjaxUploadFile = true;
+        	}
+        }
 
 		$this->_db->setQuery($this->_db->getQuery(true)->select('*')->from('#__jsn_uniform_templates')->where("form_id = " . (int) $dataForms->form_id));
 		$dataTemplates = $this->_db->loadObjectList();
@@ -1446,25 +1479,33 @@ class JSNUniformModelForm extends JModelItem
 
 					if ($isSent)
 					{
-						$sent = $this->_sendEmailList($emailTemplate, $listEmailSubmitter, $fileAttach);
+						if (!$isAjaxUploadFile)
+						{
+							$sent = $this->_sendEmailList($emailTemplate, $listEmailSubmitter, $fileAttach);
+							// Set the success message if it was a success
+							if (! ($sent instanceof Exception))
+							{
+								$msg = JText::_('JSN_UNIFORM_EMAIL_THANKS');
+							}
+						}
 					}
-					// Set the success message if it was a success
-					if (! ($sent instanceof Exception))
-					{
-						$msg = JText::_('JSN_UNIFORM_EMAIL_THANKS');
-					}
+
 				}
 				if ($emailTemplate->template_notify_to == 1)
 				{
 					if ($isSent)
 					{
-						$sent = $this->_sendEmailList($emailTemplate, $dataEmails, $fileAttach);
+						if (!$isAjaxUploadFile)
+						{
+							$sent = $this->_sendEmailList($emailTemplate, $dataEmails, $fileAttach);
+							// Set the success message if it was a success
+							if (! ($sent instanceof Exception))
+							{
+								$msg = JText::_('JSN_UNIFORM_EMAIL_THANKS');
+							}
+						}
 					}
-					// Set the success message if it was a success
-					if (! ($sent instanceof Exception))
-					{
-						$msg = JText::_('JSN_UNIFORM_EMAIL_THANKS');
-					}
+
 				}
 			}
 		}
@@ -1496,12 +1537,15 @@ class JSNUniformModelForm extends JModelItem
 
 			if ($isSent)
 			{
-				$sent = $this->_sendEmailList($emailTemplate, $listEmailSubmitter);
-			}
-			// Set the success message if it was a success
-			if (! ($sent instanceof Exception))
-			{
-				$msg = JText::_('JSN_UNIFORM_EMAIL_THANKS');
+				if (!$isAjaxUploadFile)
+				{
+					$sent = $this->_sendEmailList($emailTemplate, $listEmailSubmitter);
+					// Set the success message if it was a success
+					if (! ($sent instanceof Exception))
+					{
+						$msg = JText::_('JSN_UNIFORM_EMAIL_THANKS');
+					}
+				}
 			}
 		}
 
@@ -1828,6 +1872,8 @@ class JSNUniformModelForm extends JModelItem
 			$objUniformConfig 	= JSNConfigHelper::get('com_uniform');
 			$mailfromDefault 	= (string) $objUniformConfig->form_set_mail_from_default;
 			$mailfrom 			= $jconfig->get('mailfrom');
+			$isBBC              = (int) $objUniformConfig->form_set_email_recipients_as_bbc;
+
 
 			if ($mailfromDefault != '' && JMailHelper::isEmailAddress($mailfromDefault))
 			{
@@ -1909,7 +1955,15 @@ class JSNUniformModelForm extends JModelItem
 
 			if (count($recipient))
 			{
-				$mail->addRecipient(array_unique($recipient));
+			    if ($isBBC)
+			    {
+			        $mail->addBcc(array_unique($recipient));
+			    }
+			    else
+			    {
+			        $mail->addRecipient(array_unique($recipient));
+			    }
+
 				$sent = $mail->Send();
 				return $sent;
 			}
@@ -1969,4 +2023,112 @@ class JSNUniformModelForm extends JModelItem
 		return $this->_db->loadObject();
 	}
 
+    public function preview($post)
+    {
+        $dataArray = $this->_validData($post);
+        $postFormId = $post['form_id'];
+        $submissionsData = new stdClass();
+        $db = JFactory::getDBO();
+        //Get ColumnnsSubmisstion
+        $db->setQuery( $db->getQuery(true)->select('count(*)')->from('#__jsn_uniform_form_pages')->where("form_id = " . (int) $postFormId));
+        $countPages =  $db->loadResult();
+        if((int) $countPages > 1)
+        {
+            $fieldOrderId = array('field_id');
+            $db->setQuery($db->getQuery(true)->select('*')->from('#__jsn_uniform_form_pages')->where("form_id = " . (int) $postFormId)->order("page_id ASC"));
+            $columnsPageData = $db->loadObjectList();
+            foreach($columnsPageData as $columnData)
+            {
+                $pageContents = json_decode($columnData->page_content);
+                foreach ( $pageContents as $pageContent)
+                {
+                    $fieldOrderId[] = $pageContent->id;
+                }
+            }
+            $fieldOrderId = array_unique($fieldOrderId);
+            $fieldOrderId = implode(',', $fieldOrderId);
+
+            $db->setQuery($db->getQuery(true)->select('*')->from('#__jsn_uniform_fields')->where("form_id = " . (int) $postFormId)->order("FIELD(" . $fieldOrderId . ")"));
+            $columnsSubmission =$db->loadObjectList();
+        }
+        else
+        {
+            $db->setQuery($db->getQuery(true)->select('*')->from('#__jsn_uniform_fields')->where("form_id = " . (int) $postFormId)->order("field_ordering  ASC"));
+            $columnsSubmission = $db->loadObjectList();
+        }
+
+        foreach ($columnsSubmission as $column)
+        {
+            $fieldName = $column->field_id;
+            $fieldSettings = isset($column->field_settings) ? json_decode($column->field_settings) : "";
+            if ($column->field_type != 'static-content' && $column->field_type != 'google-maps')
+            {
+                if (in_array($column->field_type, array("single-line-text", "website", "paragraph-text", "country")))
+                {
+                    $postFieldName = isset($post[$fieldName]) ? $post[$fieldName] : '';
+                    $postName = (get_magic_quotes_gpc() == true || get_magic_quotes_runtime() == true) ? stripslashes($postFieldName) : $postFieldName;
+                    $value = $postName ? $postName : "";
+                }
+                elseif ($column->field_type == "choices" || $column->field_type == "dropdown")
+                {
+                    $value = $this->_fieldOthers($post, $fieldSettings, $fieldName);
+                }
+                elseif (in_array($column->field_type, array("address", "checkboxes", "name", "list", "likert", 'recepient-email')))
+                {
+                    $value = $this->_fieldJson($post, $column->field_type, $fieldName, true);
+                }
+                elseif ($column->field_type == "file-upload") {
+
+                    if (is_array($post[$fieldName]))
+                    {
+                        $value = '';
+                        foreach ($post[$fieldName] AS $name)
+                        {
+                            $value .= basename($name).' ';
+                        }
+                    }
+                    else
+                    {
+                        $value = $post[$fieldName];
+                    }
+                }
+                elseif ($column->field_type == "email")
+                {
+                    $value = $this->_fieldEmail($post, $fieldName, $column->field_title, $validationForm);
+                }
+                elseif ($column->field_type == "number")
+                {
+                    $value = $this->_fieldNumber($post, $fieldName, $column->field_title, $validationForm);
+                }
+                else if ($column->field_type == "date")
+                {
+                    $value = $this->_fieldDate($post, $fieldName, $column->field_title, $validationForm);
+                }
+                else if ($column->field_type == "phone") {
+                    $value = $this->_fieldPhone($post, $fieldName, $column->field_title, $validationForm);
+                }
+                else if ($column->field_type == "currency")
+                {
+                    $value = $this->_fieldCurrency($post, $fieldName, $column->field_title, $validationForm);
+                }
+                else if ($column->field_type == "password")
+                {
+                    $value = $this->_fieldPassword($post, $fieldName, $column->field_title, $fieldSettings, $validationForm);
+                }
+                elseif ($column->field_type == "identification-code")
+                {
+                    $value = !empty($post['identification-code'][$fieldName]) ? $post['identification-code'][$fieldName] : '';
+                }
+                else
+                {
+                    $value = $post[$fieldName];
+                }
+                if (in_array($column->field_id, $dataArray))
+                {
+                    $submissionsData->{'sd_'.$column->field_id} = $value;
+                }
+            }
+        }
+        return $submissionsData;
+    }
 }

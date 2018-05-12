@@ -109,6 +109,7 @@ class JSNUniformViewForms extends JSNBaseView
 				JToolBarHelper::addNew('form.add', 'JTOOLBAR_NEW');
 				JToolBarHelper::editList('form.edit', 'JTOOLBAR_EDIT');
 				JToolBarHelper::custom('forms.duplicate', 'copy.png', 'copy_f2.png', 'JTOOLBAR_DUPLICATE', true);
+
 				JFactory::getApplication()->enqueueMessage($msg);
 			}
 			else
@@ -139,6 +140,8 @@ class JSNUniformViewForms extends JSNBaseView
 			JToolBarHelper::custom('forms.duplicate', 'copy.png', 'copy_f2.png', 'JTOOLBAR_DUPLICATE', true);
 		}
 
+        JToolBarHelper::custom('forms.export', 'upload.png', 'upload_f2.png', 'JTOOLBAR_EXPORT', true);
+        JToolBarHelper::modal('jsn-uniform-import-modal', 'icon-download', 'JSN_TOOLBAR_IMPORT');
 		JToolBarHelper::publish('forms.publish', 'JSN_UNIFORM_PUBLISH', true);
 		JToolBarHelper::unpublish('forms.unpublish', 'JSN_UNIFORM_UNPUBLISH', true);
 		JToolBarHelper::deleteList('JSN_UNIFROM_CONFIRM_DELETE', 'forms.delete', 'JTOOLBAR_DELETE');
