@@ -1667,7 +1667,7 @@ class JSNFormGenerateHelper
 				$dataSettings = str_replace($matche[0], '|' .$matche[1], $dataSettings);
 			}
 		}
-		$html = "<div class='control-group {$customClass} {$identify} {$hideField}' data-settings='" . htmlentities($dataSettings, ENT_QUOTES, "UTF-8") . "' data-id='{$data->id}'><label class='control-label'>" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class='controls'>";
+		$html = "<div class='control-group {$customClass} {$identify} {$hideField}' data-settings='" . htmlentities($dataSettings, ENT_QUOTES, "UTF-8") . "' data-id='{$data->id}'><label class='control-label'>" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class='controls jsnuf-table-responsive'>";
 
 		if (isset($data->options->rows) && is_array($data->options->rows) && isset($data->options->columns) && is_array($data->options->columns))
 		{
@@ -1795,10 +1795,13 @@ class JSNFormGenerateHelper
 		$identify = !empty($data->identify) ? $data->identify : "";
 		$title = $data->label != 'Identification Code' ? $data->label : 'JSN_UNIFORM_DEFAULT_LABEL_IDENTIFICATION_CODE';
 		$hideField = !empty($data->options->hideField) ? 'hide' : '';
+		$type = !empty($data->options->identificationCodeType) ? $data->options->identificationCodeType : "Both";
+		$length = !empty($data->options->identificationCodeLength) ? $data->options->identificationCodeLength : "16";
+
 		$customClass = !empty($data->options->customClass) ? $data->options->customClass : "";
 		$instruction = !empty($data->options->instruction) ? " <i original-title=\"" . htmlentities(JText::_($data->options->instruction), ENT_QUOTES, "UTF-8") . "\" class=\"icon-question-sign\"></i>" : '';
 		$value = !empty($data->options->identificationCode) ? JText::_($data->options->identificationCode) : "";
-		$value .= JSNUniformHelper::generateIdentificationCode();
+		$value .= JSNUniformHelper::generateIdentificationCode($length, $type);
 		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$instruction}</label><div class=\"controls \"><span>$value</span><input type=\"hidden\" name=\"identification-code[{$data->id}]\" value=\"{$value}\"></div></div>";
 		return $html;
 	}

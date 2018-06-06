@@ -65,6 +65,13 @@
 	background: url(../images/zamowienia_area.png) 0 0 no-repeat;
 	margin: 0 !important;
 }
+.jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group-rodo {
+	width: 526px;
+	height: 130px;
+	background: url(../images/zamowienia_area.png) 0 0 no-repeat;
+	margin: 0 !important;
+  padding: 20px;
+}
 .jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group-area textarea {
 	width: 317px !important;
 	height: 122px !important;
@@ -130,7 +137,9 @@
 .jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group .radio,
 .jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group .checkbox {
 	display: inline-block;
-	width: 100%;
+	width: 90%;
+  font-family: 'MadisonAntiquaPro-Italic', sans-serif !important;
+  text-align: left;
 }
 .jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group .jsn-value-Others {
     display: block;
