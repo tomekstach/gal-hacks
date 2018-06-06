@@ -341,4 +341,6 @@ if (JFactory::getApplication()->input->getInt('ajax') != 1)
 <?php echo JHtml::_('form.token'); ?>
 </form>
 <?php
-JSNHtmlGenerate::footer();
+$products = JSNUniformHelper::getDependentExtensions();
+// Display footer
+JSNHtmlGenerate::footer($products);

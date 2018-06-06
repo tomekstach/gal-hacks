@@ -3,7 +3,7 @@
 /**
  * @version     $Id: view.html.php 19013 2012-11-28 04:48:47Z thailv $
  * @package     JSNUniform
- * @subpackage  View
+ * @subpackage  Submissions
  * @author      JoomlaShine Team <support@joomlashine.com>
  * @copyright   Copyright (C) 2016 JoomlaShine.com. All Rights Reserved.
  * @license     GNU/GPL v2 or later http://www.gnu.org/licenses/gpl-2.0.html
@@ -43,24 +43,24 @@ class JSNUniformViewSubmissions extends JSNBaseView
 	function display($tpl = null)
 	{
 		$limit = array (
-				'0' => array ('value' => 5,
-					 'text'  => 5),
-				'1' => array ('value' => 10,
-					 'text'  => 10),
-				'2'	  => array ('value' => 15,
-					 'text'  => 15),
-				'3'	  => array ('value' => 20,
-					 'text'  => 20),
-				'4'	  => array ('value' => 25,
-					 'text'  => 25),
-				'5'	  => array ('value' => 30,
-					 'text'  => 30),
-				'6'	  => array ('value' => 50,
-					 'text'  => 50),
-				'7'	  => array ('value' => 100,
-					 'text'  => 100),
-				'8'	  => array ('value' => 0,
-					 'text'  => JText::_('JALL')));
+		'0' => array ('value' => 5,
+			 'text'  => 5),
+		'1' => array ('value' => 10,
+			 'text'  => 10),
+		'2'	  => array ('value' => 15,
+			 'text'  => 15),
+		'3'	  => array ('value' => 20,
+			 'text'  => 20),
+		'4'	  => array ('value' => 25,
+			 'text'  => 25),
+		'5'	  => array ('value' => 30,
+			 'text'  => 30),
+		'6'	  => array ('value' => 50,
+			 'text'  => 50),
+		'7'	  => array ('value' => 100,
+			 'text'  => 100),
+		'8'	  => array ('value' => 0,
+			 'text'  => JText::_('JALL')));
 
 		$this->_document = JFactory::getDocument();
 		$this->_state = $this->get('State');
@@ -72,6 +72,7 @@ class JSNUniformViewSubmissions extends JSNBaseView
 			$this->_pagination = $this->get('Pagination');
 			$this->_viewField = $this->getViewField();
 			$this->_formId = $this->_state->get('filter.filter_form_id');
+			$this->_formInfo = $this->get('InfoForm');
 			$edition = defined('JSN_UNIFORM_EDITION') ? strtolower(JSN_UNIFORM_EDITION) : "free";
 			if ($edition == "free")
 			{
@@ -81,11 +82,11 @@ class JSNUniformViewSubmissions extends JSNBaseView
 				if ($this->_countSubmission <= 300)
 				{
 					JFactory::getApplication()->enqueueMessage($msg);
-			}
-		else
-		{
+				}
+				else
+				{
 					JError::raiseNotice(100, $msg);
-		}
+				}
 			}
 
 		}
@@ -100,7 +101,7 @@ class JSNUniformViewSubmissions extends JSNBaseView
 		{
 			$msgs = JSNUtilsMessage::getList('SUBMISSIONS');
 			$msgs = count($msgs) ? JSNUtilsMessage::showMessages($msgs) : '';
-			}
+		}
 
 		// Initialize toolbar
 		$this->initToolbar();
@@ -108,16 +109,16 @@ class JSNUniformViewSubmissions extends JSNBaseView
 		// Assign variables for rendering
 		$this->assignRef('msgs', $msgs);
 
-			$listLimit = $this->_state->get('list.limit');
-			$defaultLimit = isset($listLimit) ? $listLimit : JFactory::getApplication()->get('list_limit', 20);
+		$listLimit = $this->_state->get('list.limit');
+		$defaultLimit = isset($listLimit) ? $listLimit : JFactory::getApplication()->get('list_limit', 20);
 		$this->limitBox		= JHTML::_('select.genericList', $limit, 'limit', 'class="input-small" onchange="this.form.submit();"', 'value', 'text', $defaultLimit);
 
-			parent::display($tpl);
+		parent::display($tpl);
 
 		// Load assets
 		JSNUniformHelper::addAssets();
-			$this->addAssets();
-		}
+		$this->addAssets();
+	}
 
 
 	/**
@@ -136,7 +137,7 @@ class JSNUniformViewSubmissions extends JSNBaseView
 		{
 			JSNHtmlAsset::addScript(JSN_UNIFORM_ASSETS_URI . '/js/jsn.jquery.noconflict.js');
 		}
-		}
+	}
 
 
 	/**
@@ -145,14 +146,14 @@ class JSNUniformViewSubmissions extends JSNBaseView
 	 * @return void
 	 */
 	protected function initToolbar()
-		{
+	{
 		$bar = JToolBar::getInstance('toolbar');
 
 		if (!empty($this->_formId))
-			{
+		{
 
 			if (!empty($this->_items))
-		{
+			{
 				// Create a toolbar button that drop-down a sub-menu when clicked
 				JSNMenuHelper::addEntry(
 					'toolbar-export', 'JSN_UNIFORM_EXPORT', '', false, 'jsn-icon16 jsn-icon-download', 'toolbar'
@@ -177,9 +178,19 @@ class JSNUniformViewSubmissions extends JSNBaseView
 					'toolbar-export',
 					'jsn-export'
 				);
-		}
+
+                JSNMenuHelper::addEntry(
+                    'pdf',
+                    'JSN_UNIFORM_EXPORT_TO_PDF',
+                    'index.php?option=com_uniform&view=submissions&layout=export&format=raw&e=pdf&form_id='.$this->_formId,
+                    false,
+                    'administrator/components/com_uniform/assets/images/icons-24/pdf_file.png',
+                    'toolbar-export',
+                    'jsn-export'
+                );
+			}
 			else
-		{
+			{
 				// Create a toolbar button that drop-down a sub-menu when clicked
 				JSNMenuHelper::addEntry(
 					'toolbar-export', 'JSN_UNIFORM_EXPORT', '', false, 'jsn-icon16 jsn-icon-download', 'toolbar'
@@ -204,10 +215,20 @@ class JSNUniformViewSubmissions extends JSNBaseView
 					'toolbar-export',
 					'jsn-no-export'
 				);
-		}
+
+				JSNMenuHelper::addEntry(
+						'pdf',
+						'JSN_UNIFORM_EXPORT_TO_PDF',
+						'',
+						false,
+						'administrator/components/com_uniform/assets/images/icons-24/pdf_file.png',
+						'toolbar-export',
+						'jsn-no-export'
+				);
+			}
 
 			JToolBarHelper::deleteList('JSN_UNIFROM_CONFIRM_DELETE', 'submissions.delete', 'JTOOLBAR_DELETE');
-	}
+		}
 		JSNUniformHelper::initToolbar('JSN_UNIFORM_SUBMISSIONS_MANAGER', 'uniform-submission');
 	}
 
@@ -271,7 +292,7 @@ class JSNUniformViewSubmissions extends JSNBaseView
 			$configGetPosition = json_decode($configGetPosition->value);
 		}
 		// AstoSoft Start
-			$positionField = explode(",", $positionField);
+		$positionField = explode(",", $positionField);
 		$ok = true;
 		foreach ($positionField as $key => $value) {
 			if (!in_array($value, $resultFields['identifier'])) $ok = false;
@@ -303,6 +324,7 @@ class JSNUniformViewSubmissions extends JSNBaseView
 		}
 		if (!$listViewField)
 		{
+		    $listViewField = array();
 			$check = true;
 			$i = 0;
 			while ($check)
@@ -365,4 +387,4 @@ class JSNUniformViewSubmissions extends JSNBaseView
 
 		return $result;
 	}
-			}
+}

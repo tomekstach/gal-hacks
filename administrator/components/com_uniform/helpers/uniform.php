@@ -1820,9 +1820,9 @@ class JSNUniformHelper
 						$ajaxUpload = $items->form_ajax_upload;
 					}
                 }
-                $html .= "<form data-token='{$ftoken}' data-ajaxupload='{$ajaxUpload}' id='form_{$formName}' action=\"" . $url . '/index.php?option=com_uniform&amp;view=form&amp;task=form.save&amp;form_id=' . $items->form_id . "\" method=\"post\" class=\"form-validate {$classForm} \" enctype=\"multipart/form-data\" autocomplete=\"off\">";
+                $html .= "<form data-token='{$ftoken}' data-ajaxupload='{$ajaxUpload}' id='form_{$formName}' action=\"" . 'JSN_UNIFORM_ROOT_URL' . '/index.php?option=com_uniform&amp;view=form&amp;task=form.save&amp;form_id=' . $items->form_id . "\" method=\"post\" class=\"form-validate {$classForm} \" enctype=\"multipart/form-data\" autocomplete=\"off\">";
                 $html .= "<span class=\"hide jsn-language\" style=\"display:none;\" data-value='" . json_encode(JSNUniformHelper::getTranslated($arrayTranslated)) . "'></span>";
-                $html .= "<span class=\"hide jsn-base-url\" style=\"display:none;\" data-value=\"" . $url . "\"></span>";
+                $html .= "<span class=\"hide jsn-base-url\" style=\"display:none;\" data-value=\"JSN_UNIFORM_ROOT_URL\"></span>";
                 $html .= "<div id=\"page-loading\" class=\"jsn-bgloading\"><i class=\"jsn-icon32 jsn-icon-loading\"></i></div>";
                 $html .= "<div class=\"jsn-row-container {$formTheme} {$layout}\">";
             }
@@ -2279,12 +2279,33 @@ class JSNUniformHelper
      *
      * @return string
      */
-    public static function generateIdentificationCode( $length = 16) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $randomString = '';
-        for ( $i = 0; $i < $length; $i++ ) {
-            $randomString .= $characters[rand( 0, strlen( $characters ) - 1 )];
+    public static function generateIdentificationCode( $length = 16, $type = 'Both')
+    {
+
+        if ($type == 'Number')
+        {
+            $characters = '0123456789';
         }
+        elseif ($type == 'Characters')
+        {
+            $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        }
+        else
+        {
+            $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        }
+
+        $base          = strlen($characters);
+        $randomString  = '';
+        $random        = JCrypt::genRandomBytes($length + 1);
+        $shift         = ord($random[0]);
+
+        for ($i = 1; $i <= $length; ++$i)
+        {
+            $randomString .= $characters[($shift + ord($random[$i])) % $base];
+            $shift += ord($random[$i]);
+        }
+
         return $randomString;
     }
 

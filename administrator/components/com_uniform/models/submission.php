@@ -456,7 +456,7 @@ class JSNUniformModelSubmission extends JModelAdmin
 				$table->bind(array('log_id' => null, 'submission_id' => (int) $_POST['cid'], 'form_id' => (int) $_POST['filter_form_id'], 'user_id' => $user->id, 'date' => date('Y-m-d H:i:s')));
 				if (!$table->store()) {
 					$this->setError($table->getError());
-		}
+				}
 				$log_id = $table->log_id;
 
 				foreach ($dataChanged as $field_id => $value) {
@@ -467,7 +467,7 @@ class JSNUniformModelSubmission extends JModelAdmin
 					$table->bind(array('log_data_id' => null, 'log_id' => (int) $log_id, 'field_id' => (int) $field_id, 'field_name' => $field_name, 'field_value_new' => $dataSubmission[$field_id], 'field_value_old' => $dataChanged[$field_id]));
 					if (!$table->store()) {
 						$this->setError($table->getError());
-		}
+					}
 				}
 			}
 
@@ -573,7 +573,7 @@ class JSNUniformModelSubmission extends JModelAdmin
 					if (!empty($dataTemplates->template_reply_to) && preg_match($regex, $dataTemplates->template_reply_to))
 					{
 						$mail->addReplyTo(array($dataTemplates->template_reply_to, ''));
-}
+					}
 					if (!empty($dataTemplates->template_attach) && !empty($fileAttach))
 					{
 						$attach = json_decode($dataTemplates->template_attach);
