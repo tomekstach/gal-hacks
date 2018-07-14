@@ -1039,7 +1039,7 @@ doesnotexist:-o-prefocus, jsn-bootstrap input[type="text"],
 /************************************************************************************
 smartphone layout (320 - 480): everything is layout in single column
 *************************************************************************************/
-@media only screen and (max-width: 480px), (max-device-width: 480px) {
+@media only screen and (max-width: 480px) {
 	.jsn-uniform .table-striped{
 		font-size: 9px !important;
 	}

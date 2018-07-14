@@ -7312,3 +7312,12 @@ div.mod-languages li {
 	width: auto;
 	margin-right: 10px;
 }
+
+.control-group.static_content p {
+	margin: 0;
+}
+
+.control-group.control-group-rodo .control-label,
+.control-group.control_rodo_cd .control-label {
+	display: none !important;
+}
