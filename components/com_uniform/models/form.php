@@ -629,7 +629,8 @@ class JSNUniformModelForm extends JModelItem
 	 */
 	public function save($post)
 	{
-		$input = JFactory::getApplication()->input;
+	    $user	  	= JFactory::getUser();
+	    $input = JFactory::getApplication()->input;
 		$postData = $input->getArray($_POST);
 		if (!count($postData))
 		{
@@ -678,7 +679,7 @@ class JSNUniformModelForm extends JModelItem
 		$recepientEmail 		= array();
 		$nameFileByIndentifier 	= array();
 		$dataArray = $this->_validData($post);
-		if (!empty($dataForms->form_captcha))
+		if (!empty($dataForms->form_captcha) && (! (int) $dataForms->form_hide_captcha_if_logged_in || ! (int) $user->get('id')))
 		{
 			if ($dataForms->form_captcha == 1)
 			{
@@ -744,7 +745,7 @@ class JSNUniformModelForm extends JModelItem
 		if((int) $countPages > 1)
 		{
 			$fieldOrderId = array('field_id');
-			$this->_db->setQuery($this->_db->getQuery(true)->select('*')->from('#__jsn_uniform_form_pages')->where("form_id = " . (int) $postFormId)->order("page_id ASC"));
+			$this->_db->setQuery($this->_db->getQuery(true)->select('*')->from('#__jsn_uniform_form_pages')->where("form_id = " . (int) $postFormId)->order("ordering, page_id ASC"));
 			$columsPageData = $this->_db->loadObjectList();
 			foreach($columsPageData as $columData)
 			{
@@ -2035,7 +2036,7 @@ class JSNUniformModelForm extends JModelItem
         if((int) $countPages > 1)
         {
             $fieldOrderId = array('field_id');
-            $db->setQuery($db->getQuery(true)->select('*')->from('#__jsn_uniform_form_pages')->where("form_id = " . (int) $postFormId)->order("page_id ASC"));
+            $db->setQuery($db->getQuery(true)->select('*')->from('#__jsn_uniform_form_pages')->where("form_id = " . (int) $postFormId)->order("ordering, page_id ASC"));
             $columnsPageData = $db->loadObjectList();
             foreach($columnsPageData as $columnData)
             {

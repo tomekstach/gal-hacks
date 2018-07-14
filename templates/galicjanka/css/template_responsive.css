@@ -948,4 +948,7 @@
 	.file_text {
 		width: 160px!important;
 	}
+	.select2-drop {
+		width: auto!important;
+	}
 }

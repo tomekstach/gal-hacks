@@ -1407,6 +1407,7 @@ class JSNFormGenerateHelper
 		$hideField = !empty($data->options->hideField) ? 'hide' : '';
 		$customClass = !empty($data->options->customClass) ? $data->options->customClass : "";
 		$requiredBlank = !empty($data->options->required) ? 'group-blank-required' : '';
+		$requiredBlankItem = !empty($data->options->required) ? 'item-blank-required' : '';
 		$required = !empty($data->options->required) ? '<span class="required">*</span>' : '';
 		$instruction = !empty($data->options->instruction) ? " <i original-title=\"" . htmlentities(JText::_($data->options->instruction), ENT_QUOTES, "UTF-8") . "\" class=\"icon-question-sign\"></i>" : '';
 		$listField = !empty($data->options->sortableField) ? json_decode($data->options->sortableField) : array("vstreetAddress", "vstreetAddress2", "vcity", "vstate", "vcode", "vcountry");
@@ -1431,16 +1432,16 @@ class JSNFormGenerateHelper
 			switch($val)
 			{
 				case "vstreetAddress":
-					$field[$val] = "<input type=\"text\" value='" . htmlentities($valueStreet, ENT_QUOTES, "UTF-8") . "' name=\"address[{$data->id}][street]\" placeholder=\"" . htmlentities(JText::_("Street_Address"), ENT_QUOTES, "UTF-8") . "\" class=\"jsn-input-xxlarge-fluid\" />";
+					$field[$val] = "<input type=\"text\" value='" . htmlentities($valueStreet, ENT_QUOTES, "UTF-8") . "' name=\"address[{$data->id}][street]\" placeholder=\"" . htmlentities(JText::_("Street_Address"), ENT_QUOTES, "UTF-8") . "\" class=\"jsn-input-xxlarge-fluid {$requiredBlankItem}\" />";
 					break;
 				case "vstreetAddress2":
-					$field[$val] = "<input type=\"text\" value='" . htmlentities($valueLine2, ENT_QUOTES, "UTF-8") . "' name=\"address[{$data->id}][line2]\" placeholder=\"" . htmlentities(JText::_("Address_Line_2"), ENT_QUOTES, "UTF-8") . "\" class=\"jsn-input-xxlarge-fluid\" />";
+					$field[$val] = "<input type=\"text\" value='" . htmlentities($valueLine2, ENT_QUOTES, "UTF-8") . "' name=\"address[{$data->id}][line2]\" placeholder=\"" . htmlentities(JText::_("Address_Line_2"), ENT_QUOTES, "UTF-8") . "\" class=\"jsn-input-xxlarge-fluid {$requiredBlankItem}\" />";
 					break;
 				case "vcity":
-					$field[$val] = "<input value='" . htmlentities($valueCity, ENT_QUOTES, "UTF-8") . "' type=\"text\" name=\"address[{$data->id}][city]\" class=\"jsn-input-xlarge-fluid\" placeholder=\"" . htmlentities(JText::_("City"), ENT_QUOTES, "UTF-8") . "\" />";
+					$field[$val] = "<input value='" . htmlentities($valueCity, ENT_QUOTES, "UTF-8") . "' type=\"text\" name=\"address[{$data->id}][city]\" class=\"jsn-input-xlarge-fluid {$requiredBlankItem}\" placeholder=\"" . htmlentities(JText::_("City"), ENT_QUOTES, "UTF-8") . "\" />";
 					break;
 				case "vstate":
-					$field[$val] = "<input value='" . htmlentities($valueState, ENT_QUOTES, "UTF-8") . "'  name=\"address[{$data->id}][state]\" type=\"text\" placeholder=\"" . htmlentities(JText::_("State_Province_Region"), ENT_QUOTES, "UTF-8") . "\" class=\"jsn-input-xlarge-fluid\" />";
+					$field[$val] = "<input value='" . htmlentities($valueState, ENT_QUOTES, "UTF-8") . "'  name=\"address[{$data->id}][state]\" type=\"text\" placeholder=\"" . htmlentities(JText::_("State_Province_Region"), ENT_QUOTES, "UTF-8") . "\" class=\"jsn-input-xlarge-fluid {$requiredBlankItem}\" />";
 					break;
 				case "vcode":
 					$field[$val] = "<input value='" . htmlentities($valueCode, ENT_QUOTES, "UTF-8") . "'  type=\"text\" name=\"address[{$data->id}][code]\" class=\"jsn-input-xlarge-fluid\" placeholder=\"" . htmlentities(JText::_("Postal_Zip_code"), ENT_QUOTES, "UTF-8") . "\" />";

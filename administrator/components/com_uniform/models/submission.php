@@ -319,7 +319,8 @@ class JSNUniformModelSubmission extends JModelAdmin
 				$this->_db->getQuery(true)
 					->select('*')
 					->from("#__jsn_uniform_form_pages")
-					->where('form_id=' . intval($this->_formId))
+			        ->where('form_id=' . intval($this->_formId))
+			        ->order("ordering, page_id ASC")
 			);
 			return $this->_db->loadObjectList();
 		}
@@ -370,6 +371,10 @@ class JSNUniformModelSubmission extends JModelAdmin
 		// AstoSoft End
 		$input = JFactory::getApplication()->input;
 		$postData = $input->getArray($_POST);
+		if (!count($postData))
+		{
+		    $postData = $input->post->getArray();
+		}
 		if (isset($postData['submission']) && is_array($postData['submission']) && isset($postData['filter_form_id']) && isset($postData['cid']))
 		{
 			foreach ($postData['submission'] as $key => $value)
