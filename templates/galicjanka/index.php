@@ -44,8 +44,8 @@ $doc->addScript('/media/system/js/mootools-more.js');
 $doc->addScript('/media/system/js/modal.js');
 
 // Add Stylesheets
-$doc->addStyleSheet('templates/'.$this->template.'/css/template.css?v=2018052901');
-$doc->addStyleSheet('templates/'.$this->template.'/css/template_responsive.css');
+$doc->addStyleSheet('templates/'.$this->template.'/css/template.css?v=2018071401');
+$doc->addStyleSheet('templates/'.$this->template.'/css/template_responsive.css?v=2018071401');
 $doc->addStyleSheet('/media/system/css/modal_zabki.css');
 
 // Load optional RTL Bootstrap CSS

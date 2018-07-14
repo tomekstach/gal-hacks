@@ -1,7 +1,7 @@
 .gallery-vertical {
 	display: none;
 }
-	
+
 .gallery-horizontal {
 	display: block;
 }
@@ -27,7 +27,7 @@
 	.hidden-phone {
 		display: none !important;
 	}
-	
+
 	div.mod-languages {
 		width: 320px;
 		height: 33px;
@@ -39,89 +39,89 @@
 		top: 0;
 		z-index: 99999;
 	}
-	
+
 	div.mod-languages ul.lang-inline {
 		float: right;
 	}
-	
+
 	div.mod-languages li {
 		float: left;
 	}
-	
-	.banner-cont, .banner-cont-inner, .main-top, .main-top-inner, 
-	#content, .main-bottom, .header-cont, .container-front, .contact-comp, 
+
+	.banner-cont, .banner-cont-inner, .main-top, .main-top-inner,
+	#content, .main-bottom, .header-cont, .container-front, .contact-comp,
 	.naglowek, .naglowek-sep, .produkty, .wydarzenia, .contact-comp {
 		min-width: 320px !important;
 	}
-	
+
 	.naglowek-sep-phone {
 		margin: 0;
 	}
-	
+
 	.main-bottom-cont, .arrow_men, .categories-cont, .items-leading, .route_events {
 		width: 320px !important;
 	}
-	
+
 	.cont, .produkty-cont {
 		width: 320px !important;
 	}
-	
+
 	.produkty {
 		background: #fff;
 		padding-top: 20px;
 	}
-	
+
 	.cont p, .cont h1, .cont h2, .cont h3, .cont h4 {
 		padding-left: 10px;
 		padding-right: 10px;
 	}
-	
-	.map-cont, .map-cont-inner, .category-sep-top, 
+
+	.map-cont, .map-cont-inner, .category-sep-top,
 	.category-sep-bottom, .category-front, .contact, .footer,
-	#promocje, .facebook, .banners-front, .banner-cont, 
-	.header-pc, .container-front, .main-bottom, .main-top-inner, 
+	#promocje, .facebook, .banners-front, .banner-cont,
+	.header-pc, .container-front, .main-bottom, .main-top-inner,
 	.phone-no, .category-cont {
 		display: none !important;
 	}
-	
+
 	.header-phone, .navigation-bottom {
 		display: block;
 	}
-	
+
 	.body {
 		background: transparent;
 	}
-	
+
 	body {
 		background-color: #fff !important;
 	}
-	
+
 	body.itemid-101,
 	body.itemid-194,
 	body.itemid-199 {
 		background: url(../images/back_phone.jpg) center center no-repeat;
 		background-attachment: fixed;
 	}
-	
+
 	body.error-site {
 		background: #eeece9;
 	}
-	
+
 	header-cont-inner {
 		text-align: center;
 	}
-	
+
 	header.header {
 		float: none;
 		margin-left: auto;
 		margin-right: auto;
 		width: 171px;
 	}
-	
+
 	nav.navigation {
 		display: none;
 	}
-	
+
 	nav.navigation-bottom {
 		position: fixed;
 		width: 100%;
@@ -132,43 +132,43 @@
 		border-top: 1px solid #cdc2ac;
 		z-index: 99999;
 	}
-	
+
 	.bottom-cont {
 		margin: 0 auto;
 		position: relative;
 		width: 198px;
 	}
-	
+
 	img.phone-bot-sep {
 		position: absolute;
 		bottom: -4px;
 		left: 80px;
 	}
-	
+
 	.button-home {
 		display: block;
 		float: left;
 	}
-	
+
 	.menu-top, .menu-top2, .menu-top3 {
 		width: 100%;
 		height: 100%;
 		background: transparent;
-		text-align: center;   
+		text-align: center;
 		position: fixed;
 		z-index: 99998;
 	}
-	
+
 	.menu-top li, .menu-top2 li, .menu-top3 li {
 		list-style: none;
 		padding: 0;
 		margin: 0;
 	}
-	
+
 	.menu-top li:first-child, .menu-top3 li:first-child {
 		padding-top: 80px;
 	}
-	
+
 	.menu-top2 li:first-child {
 		padding-top: 10px;
 	}
@@ -184,7 +184,7 @@
 		height: 100%;
 		text-align: center;
 	}
-	
+
 	.menu-top a, .menu-top3 a {
 		display: block;
 		width: 160px;
@@ -199,9 +199,9 @@
 		font-style: normal;
 		font-size: 30px;
 		line-height: 60px;
-		letter-spacing: 1px; 
+		letter-spacing: 1px;
 	}
-	
+
 	.menu-top2 a {
 		display: block;
 		width: 160px;
@@ -216,28 +216,28 @@
 		font-style: normal;
 		font-size: 21px;
 		line-height: 32px;
-		letter-spacing: 1px; 
+		letter-spacing: 1px;
 	}
-	
+
 	.phone-produkty, .phone-home, .phone-menu, .phone-gallery {
 		display: block;
 		float: left;
 		margin: 10px 20px 0 20px;
 		cursor: pointer;
 	}
-	
+
 	.phone-menu {
 		margin: 10px 22px 0 22px;
 	}
-	
+
 	.phone-gallery {
 		margin: 10px 19px 0 20px;
 	}
-	
+
 	.phone-home {
 		margin: 10px 21px 0 21px;
 	}
-	
+
 	.container-front-phone {
 		display: block;
 		min-width: 320px;
@@ -246,7 +246,7 @@
 		position: fixed;
 		bottom: 41px;
 	}
-	
+
 	.container-front-phone-sep {
 		width: 100%;
 		height: 6px;
@@ -259,83 +259,83 @@
 		width: 100% !important;
 		background: url(../images/phone_menu_back.png) top left repeat;
 	}
-	
+
 	.container-front-phone h1 {
 		font-size: 21px;
 	}
-	
+
 	.container-front-phone p,
 	.naglowek-cont p {
 		font-size: 12px;
 		line-height: 18px;
 	}
-	
+
 	.ramka_galeria {
 		width: 100%;
 		height: 100%;
 	}
-	
+
 	.image_galeria_ramka {
-		border: 0; 
+		border: 0;
 		width: 100%;
 		height: 100%;
 	}
-	
+
 	.nspArts .ramka_galeria {
 		height: 320px;
 		width: 320px;
-	} 
-	
+	}
+
 	.main-cont {
 		padding: 0 0 41px 0;
 	}
-	
+
 	.main-cont p {
 		font-size: 18px;
 	}
-	
+
 	.cont.main-cont.main-cont-gallery {
 		width: 100% !important;
 	}
-	
+
 	.wydarzenia .cont {
 		height: 390px;
 	}
-	
+
 	.route_events {
 		height: 340px;
 	}
-	
+
 	ul#under_route_events {
 		height: 340px;
 	}
-	
+
 	ul#under_route_events li.event-item {
 		margin: 0;
 	}
-	
+
 	.event-item a {
 		cursor: text;
 	}
-	
+
 	.wydarzenia_list_galeria {
 		height: 320px;
 		width: 320px;
 	}
-	
+
 	.wydarzenia-list-cont {
 		width: 320px;
 		height: 340px;
 		background: transparent;
 	}
-	
+
 	.mod-articles-category-introtext {
 		font-size: 24px;
 		line-height: 26px;
 		padding: 2px 0 0 0;
 		margin: 0;
 	}
-	
+
 	.wydarzenia-list-cont h4, .mod-articles-category-full, .wydarzenia-godzina {
 		font-family: 'FilmotypeGay', sans-serif;
 		font-style: normal;
@@ -346,30 +346,30 @@
 		padding: 2px 50px 0 50px;
 		margin: 0;
 	}
-	
+
 	.mod-articles-category-full {
 		padding: 2px 20px 0 20px;
 	}
-	
+
 	.wydarzenia-godzina, wydarzenia-list-cont h4 {
 		padding: 0;
 	}
-	
+
 	.wydarzenia-list-cont img {
 		display: none;
 	}
-	
+
 	.arrow_men_event_left, .arrow_men_event_right {
 		z-index: 99999;
 	}
-	
+
 	.arrow_men_event_left {
 		width: 33px;
 		height: 48px;
 		margin-top: -230px;
 		background: url(../images/prev_phone.png) 0 0 no-repeat;
 	}
-	
+
 	.arrow_men_event_right {
 		width: 33px;
 		height: 48px;
@@ -377,31 +377,31 @@
 		margin-right: 0px;
 		background: url(../images/next_phone.png) 0 0 no-repeat;
 	}
-	
+
 	.arrow_men_event_left:hover, .arrow_men_event_right:hover{
 		background-position: 0 0;
 	}
-	
+
 	h1.error {
 		font-size: 28px;
 		line-height: 32px;
 	}
-	
+
 	.contact-comp {
 		padding: 10px 0 0 0;
 	}
-	
+
 	.contact-address {
 		min-width: 320px;
 		padding: 30px 0 60px 0;
 		text-align: center;
 	}
-	
+
 	.center .back {
 		margin-top: 0;
 		cursor: pointer;
 	}
-	
+
 	.contact-form {
 		display: none;
 		width: 320px;
@@ -410,24 +410,24 @@
 		background: transparent;
 		margin-bottom: 47px;
 	}
-	
+
 	.contact-form .contact-right {
 		margin: 0;
 	}
-	
+
 	#contact-form {
 		width: 300px;
 		margin: 0 auto;
 	}
-	
+
 	.control-label {
 		line-height: 15px;
 	}
-	
+
 	label {
 		margin: 0;
 	}
-	
+
 	input[type="text"],
 	input[type="email"] {
 		padding: 2px 6px;
@@ -435,18 +435,18 @@
 		line-height: 13px;
 		height: 15px;
 	}
-	
+
 	.contact-form .controls textarea {
 		padding: 2px 6px;
 		font-size: 11px;
 		line-height: 13px;
 		height: 75px;
 	}
-	
+
 	.control-group {
 		margin-bottom: 3px;
 	}
-	
+
 	.contact-form button.btn-primary {
 		font-family: 'MadisonAntiquaPro-Italic', sans-serif;
 		font-weight: normal;
@@ -465,21 +465,37 @@
 		border-radius: 14px;
 		text-transform:lowercase;
 	}
-	
+
 	.contact-form button.btn-primary:first-letter {
 		text-transform: uppercase;
 	}
-	
+
 	.contact-form .form-actions {
 		border: 0;
 		text-align: center;
+	}
+
+	.jsn-uniform {
+		width: 100%;
+		max-width: 526px;
+		background: transparent;
+		padding-top: 0;
+	}
+
+	.jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group,
+	.form-actions {
+		width: 100%;
+		max-width: 526px;
+	}
+	.nav-galeria {
+		display: none;
 	}
 }
 @media (max-width: 767px) and (max-aspect-ratio:4/5) {
 	.gallery-vertical {
 		display: block;
 	}
-	
+
 	.gallery-horizontal {
 		display: none;
 	}
@@ -497,157 +513,157 @@
 	.hidden-tablet {
 		display: none !important;
 	}
-	
-	.pc-no, .header-phone, .navigation-bottom, .submenu, .container-front-phone, 
+
+	.pc-no, .header-phone, .navigation-bottom, .submenu, .container-front-phone,
 	#promocje, .contact {
 		display: none !important;
 	}
 	.header-pc,  {
 		display: block;
 	}
-	
-	.banner-cont, .banner-cont-inner, .main-top, .main-top-inner, 
-	#content, .main-bottom, .header-cont, .container-front, .contact-comp, 
+
+	.banner-cont, .banner-cont-inner, .main-top, .main-top-inner,
+	#content, .main-bottom, .header-cont, .container-front, .contact-comp,
 	.naglowek-sep, .produkty, .wydarzenia, .contact-comp,
 	.category-front, .category-sep-top, .category-sep-bottom, .banners-front,
 	.footer, .category-cont, .map-cont-inner, .map-cont {
 		min-width: 768px !important;
 	}
-	
+
 	.main-bottom-cont {
 		height: 70px;
 	}
-	
+
 	.podpis {
 		padding-top: 10px;
 	}
-	
+
 	.category-cont {
 		position: relative;
 	}
-	
+
 	.footer {
 		margin-bottom: 0;
 		position: fixed;
 		bottom: 0;
 	}
-	
+
 	.footer p {
 		margin: 0 5px 0 5px;
 	}
-	
+
 	.banners-front .banneritem {
 		width: 215px;
 		margin: -15px 20px 30px 21px;
 	}
-	
+
 	.route_categories {
 		width: 601px;
 	}
-	
+
 	ul#under_route_categories li.category-item {
 		margin: 0px 19px 0px 0px;
 	}
-	
+
 	.arrow_men_left {
 		left: 8px;
 		margin-top: -110px;
 	}
-	
+
 	.arrow_men_right {
 		right: 8px;
 		margin-right: 0;
 		margin-top: -110px;
 	}
-	
+
 	.naglowek-sep-phone {
 		margin: 0;
 	}
-	
+
 	.main-bottom-cont, .arrow_men, .items-leading {
 		width: 768px !important;
 	}
-	
+
 	.cont {
 		width: 768px !important;
 	}
-	
+
 	.produkty-cont, .ramka_galeria {
 		width: 740px !important;
 	}
-	
+
 	.route_events {
 		width: 666px !important;
 	}
-	
+
 	.categories-cont {
 		width: 747px !important;
 	}
-	
+
 	.image_galeria_ramka {
 		width: 718px !important;
 	}
-	
+
 	.banner-cont-inner, .lody, .pieczywo, .ciasta, .ekspres {
 		height: 390px;
 	}
-	
+
 	.banner-cont {
 		height: 295px;
 	}
-	
+
 	.container-front h1 {
 		font-size: 28px;
 	}
-	
+
 	.container-front-inner {
 		padding: 1px 0;
 	}
-	
+
 	.container-front p, .container-front-phone p, .naglowek-cont p {
 		font-size: 14px;
 		line-height: 20px;
 	}
-	
+
 	.facebook {
 		top: 160px;
 	}
-	
+
 	.navigation ul.nav-top {
 		margin: 34px 0px 0px 5px;
 	}
-	
+
 	.navigation ul.nav-top li {
 		margin: 0px 2px;
 	}
-	
+
 	.naglowek {
 		min-width: 668px !important;
 	}
-	
+
 	.naglowek-cont, .main-cont, .main-bottom-cont {
 		width: 708px !important;
 	}
-	
+
 	.main-cont p {
 		font-size: 19px;
 		line-height: 22px;
-	} 
-	
+	}
+
 	.categories-item {
 		margin: 8px 8px 0px;
 	}
-	
+
 	.jsn-gallery .image_galeria_ramka {
 		width: 686px !important;
 		height: 362px !important;
 	}
-	
+
 	.jsn-gallery .ramka_galeria, .jsn-gallery .box_skitter {
 		width: 708px !important;
 		height: 384px !important;
 	}
-	
+
 	.baner_galeria {
 		width: 215px;
 		height: 105px;
@@ -677,128 +693,128 @@
 	.banneritem a:hover .baner_kamera {
 		background-position: 0 0;
 	}
-	
+
 	.kamera-back {
 		width: 697px;
 		height: 529px;
 		background: url(../images/kamera_back_tab.png) 0 0 no-repeat;
 	}
-	
+
 	ul#under_route_events {
 		height: 210px;
 	}
-	
+
 	.route_events, .wydarzenia .cont {
 		height: 230px;
 	}
-	
+
 	.wydarzenia_list_galeria {
 		height: 210px;
 		width: 200px !important;
 	}
-	
+
 	.wydarzenia_list_ramka {
 		height: 188px !important;
 		width: 178px !important;
 	}
-	
+
 	.wydarzenia_galeria .pull-left.item-image {
 		margin-left: -182px;
 	}
-	
+
 	.wydarzenia-cont {
 		width: 350px;
 	}
-	
+
 	.wydarzenia-data {
 		height: 120px;
 		font-size: 45px;
 		line-height: 45px;
 	}
-	
+
 	.wydarzenia-data .wydarzenia-numer {
 		font-size: 65px;
 		line-height: 45px;
 	}
-	
+
 	h1.wydarzenia-title {
 		font-size: 30px;
 		line-height: 34px;
 	}
-	
+
 	.wydarzenia-godzina {
 		font-size: 26px;
 	}
-	
+
 	.mod-articles-category-introtext {
 		padding: 15px 0 0 0;
 		font-size: 24px;
 		line-height: 24px;
 	}
-	
+
 	.mod-articles-category-introtext .wydarzenia-numer {
 		font-size: 36px;
 		line-height: 26px;
 	}
-	
+
 	.wydarzenia-list-cont h4 {
 		font-size: 30px;
 		line-height: 34px;
 		padding: 10px 0px 0px;
 	}
-	
+
 	.arrow_men_event_left, .arrow_men_event_right {
 		margin-top: -130px;
 	}
-	
+
 	.naglowek-cont h1 {
 		font-size: 28px;
 		line-height: 24px;
 	}
-	
+
 	/* ************************************************** */
-	
+
 	.bottom-tab {
 		display: none;
 	}
-	
+
 	.contact-comp {
 		background: transparent;
 		padding: 50px 0 0 0;
 	}
-	
+
 	.contact-comp .cont {
 		width: 640px !important;
 	}
-	
+
 	.contact-address {
 		padding-top: 40px;
 	}
-	
+
 	.contact-form {
 		width: 320px;
 		padding: 20px 10px 50px 10px;
 		text-align: center;
 		background: #fff;
 	}
-	
+
 	.contact-form .contact-right {
 		margin: 0;
 	}
-	
+
 	#contact-form {
 		width: 290px;
 		margin: 0 auto;
 	}
-	
+
 	.control-label {
 		line-height: 15px;
 	}
-	
+
 	label {
 		margin: 0;
 	}
-	
+
 	input[type="text"],
 	input[type="email"] {
 		padding: 2px 6px;
@@ -806,18 +822,18 @@
 		line-height: 13px;
 		height: 15px;
 	}
-	
+
 	.contact-form .controls textarea {
 		padding: 2px 6px;
 		font-size: 11px;
 		line-height: 13px;
 		height: 100px;
 	}
-	
+
 	.control-group {
 		margin-bottom: 3px;
 	}
-	
+
 	.contact-form button.btn-primary {
 		font-family: 'MadisonAntiquaPro-Italic', sans-serif;
 		font-weight: normal;
@@ -836,13 +852,88 @@
 		border-radius: 14px;
 		text-transform:lowercase;
 	}
-	
+
 	.contact-form button.btn-primary:first-letter {
 		text-transform: uppercase;
 	}
-	
+
 	.contact-form .form-actions {
 		border: 0;
 		text-align: center;
+	}
+}
+@media (max-width: 526px) {
+	.jsn-uniform.jsn-master {
+		overflow: hidden;
+	}
+	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group .control-label {
+		float: left!important;
+		width: 100px;
+		margin-left: 15px;
+	}
+	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group .controls {
+		float: right;
+		margin-right: 15px;
+	}
+	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group.data_odbioru .controls {
+		width: 190px!important;
+	}
+	.jsn-master .jsn-bootstrap .control-group .select2-container.jsn-input-medium-fluid {
+		width: 190px !important;
+	}
+	.select2-container .select2-choice {
+		width: 100%;
+	}
+	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group.ilo_poziom_w .control-label {
+		margin-top: 0;
+	}
+	.prze_lij_wz_r .controls {
+		width: 190px;
+		background-position: -143px -1px;
+	}
+	.jsn-master .jsn-bootstrap .jsn-narrow .prze_lij_wz_r .input-file {
+		width: 178px!important;
+	}
+	.jsn-master .jsn-narrow .jsn-daterangepicker.hasDatepicker {
+		width: 60%!important;
+	}
+	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group .controls textarea,
+	.jsn-narrow .ilo_ .jsn-input-medium-fluid,
+	.email.email-required.jsn-input-medium-fluid,
+	.jsn-master .jsn-narrow .phone.jsn-input-medium-fluid {
+		width: 170px!important;
+		margin-bottom: 0;
+	}
+	.form-actions {
+		height: 130px!important;
+	}
+	.jsn-bootstrap .imi_i_nazwisko input.jsn-input-mini-fluid {
+		width: 36px!important;
+	}
+	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group.imi_i_nazwisko .controls {
+		margin-right: 5px;
+	}
+	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group.imi_i_nazwisko .control-label {
+		width: 80px;
+	}
+	.jsn-narrow .imi_i_nazwisko .jsn-input-fluid {
+		width: auto!important;
+	}
+	.control-group p,
+	.jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group .checkbox {
+		font-size: 10px!important;
+	}
+	.control-group .controls .row-fluid {
+		width: 130px!important;
+	}
+	.jsn-bootstrap input#jsn-captcha {
+		width: 110px!important;
+	}
+	.jsn-bootstrap .btn:first-child,
+	.jsn-bootstrap .btn-toolbar .btn+.btn {
+		padding: 14px 25px;
+	}
+	.file_text {
+		width: 160px!important;
 	}
 }
