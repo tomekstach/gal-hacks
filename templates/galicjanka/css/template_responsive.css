@@ -866,16 +866,19 @@
 	.jsn-uniform.jsn-master {
 		overflow: hidden;
 	}
-	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group .control-label {
+	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group .control-label,
+	#jsn_form_2.jsn-master .jsn-bootstrap .jsn-form-content .control-group .control-label {
 		float: left!important;
 		width: 100px;
 		margin-left: 15px;
 	}
-	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group .controls {
+	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group .controls,
+	#jsn_form_2.jsn-master .jsn-bootstrap .jsn-form-content .control-group .controls {
 		float: right;
 		margin-right: 15px;
 	}
-	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group.data_odbioru .controls {
+	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group.data_odbioru .controls,
+	#jsn_form_2.jsn-master .jsn-bootstrap .jsn-form-content .control-group.pick_up_date .controls {
 		width: 190px!important;
 	}
 	.jsn-master .jsn-bootstrap .control-group .select2-container.jsn-input-medium-fluid {
@@ -884,21 +887,26 @@
 	.select2-container .select2-choice {
 		width: 100%;
 	}
-	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group.ilo_poziom_w .control-label {
+	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group.ilo_poziom_w .control-label,
+	#jsn_form_2.jsn-master .jsn-bootstrap .jsn-form-content .control-group.number_of_tiers .control-label {
 		margin-top: 0;
 	}
-	.prze_lij_wz_r .controls {
+	.prze_lij_wz_r .controls,
+	.send_a_model .controls {
 		width: 190px;
 		background-position: -143px -1px;
 	}
-	.jsn-master .jsn-bootstrap .jsn-narrow .prze_lij_wz_r .input-file {
+	.jsn-master .jsn-bootstrap .jsn-narrow .prze_lij_wz_r .input-file,
+	.jsn-master .jsn-bootstrap .jsn-narrow .send_a_model .input-file {
 		width: 178px!important;
 	}
 	.jsn-master .jsn-narrow .jsn-daterangepicker.hasDatepicker {
 		width: 60%!important;
 	}
 	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group .controls textarea,
+	#jsn_form_2.jsn-master .jsn-bootstrap .jsn-form-content .control-group .controls textarea,
 	.jsn-narrow .ilo_ .jsn-input-medium-fluid,
+	.jsn-narrow .number .jsn-input-medium-fluid,
 	.email.email-required.jsn-input-medium-fluid,
 	.jsn-master .jsn-narrow .phone.jsn-input-medium-fluid {
 		width: 170px!important;
@@ -907,16 +915,20 @@
 	.form-actions {
 		height: 130px!important;
 	}
-	.jsn-bootstrap .imi_i_nazwisko input.jsn-input-mini-fluid {
+	.jsn-bootstrap .imi_i_nazwisko input.jsn-input-mini-fluid,
+	.jsn-bootstrap .name input.jsn-input-mini-fluid {
 		width: 36px!important;
 	}
-	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group.imi_i_nazwisko .controls {
+	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group.imi_i_nazwisko .controls,
+	#jsn_form_2.jsn-master .jsn-bootstrap .jsn-form-content .control-group.name .controls {
 		margin-right: 5px;
 	}
-	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group.imi_i_nazwisko .control-label {
+	#jsn_form_1.jsn-master .jsn-bootstrap .jsn-form-content .control-group.imi_i_nazwisko .control-label,
+	#jsn_form_2.jsn-master .jsn-bootstrap .jsn-form-content .control-group.name .control-label {
 		width: 80px;
 	}
-	.jsn-narrow .imi_i_nazwisko .jsn-input-fluid {
+	.jsn-narrow .imi_i_nazwisko .jsn-input-fluid,
+	.jsn-narrow .name .jsn-input-fluid {
 		width: auto!important;
 	}
 	.control-group p,
