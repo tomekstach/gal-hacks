@@ -6537,8 +6537,8 @@ code {
 
 .contact-cont {
 	float: left;
-	width: 205px;
-	margin: 20px 10px 20px 25px;
+	width: 200px;
+	margin: 20px 10px 20px 15px;
 	text-align: left;
 }
 
@@ -6571,7 +6571,7 @@ code {
 }
 
 .social-media {
-	width: 85px;
+	width: 130px;
 	float: left;
 	margin: 20px;
 }
@@ -6591,7 +6591,7 @@ code {
 	display: block;
 	background: url(../images/social_buttons.png) -47px 0 no-repeat;
 	float: left;
-	margin: 0 0 6px 6px;
+	margin: 0 6px 6px 0;
 }
 
 .pinterest {
@@ -6609,7 +6609,25 @@ code {
 	display: block;
 	background: url(../images/social_buttons.png) -47px -47px no-repeat;
 	float: left;
-	margin: 6px 0 0 6px;
+	margin: 6px 6px 0 0;
+}
+
+.tripadvisor {
+	width: 35px;
+	height: 35px;
+	display: block;
+	background: url(../images/social_buttons.png) -92px -47px no-repeat;
+	float: left;
+	margin: 6px 6px 0 0;
+}
+
+.instagram {
+	width: 35px;
+	height: 35px;
+	display: block;
+	background: url(../images/social_buttons.png) -92px 0 no-repeat;
+	float: left;
+	margin: 0 6px 6px 0;
 }
 
 .clr {
@@ -7108,6 +7126,7 @@ ul#under_route_categories li.category-item a:hover img {
 	background: url(../images/promocje.png) 0 0 no-repeat;
 	text-indent: -9999px;
 	z-index: 99998;
+        display: none;
 }
 .promocje:hover {
 	background-position: 0 -70px;

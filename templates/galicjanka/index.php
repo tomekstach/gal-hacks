@@ -44,8 +44,8 @@ $doc->addScript('/media/system/js/mootools-more.js');
 $doc->addScript('/media/system/js/modal.js');
 
 // Add Stylesheets
-$doc->addStyleSheet('templates/'.$this->template.'/css/template.css?v=2018071401');
-$doc->addStyleSheet('templates/'.$this->template.'/css/template_responsive.css?v=2018071401');
+$doc->addStyleSheet('templates/'.$this->template.'/css/template.css?v=2018052901');
+$doc->addStyleSheet('templates/'.$this->template.'/css/template_responsive.css');
 $doc->addStyleSheet('/media/system/css/modal_zabki.css');
 
 // Load optional RTL Bootstrap CSS
@@ -161,23 +161,6 @@ else
 		}
 	});
 	</script>
-	<!-- Facebook Pixel Code -->
-	<script>
-	!function(f,b,e,v,n,t,s)
-	{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-	n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-	if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-	n.queue=[];t=b.createElement(e);t.async=!0;
-	t.src=v;s=b.getElementsByTagName(e)[0];
-	s.parentNode.insertBefore(t,s)}(window,document,'script',
-	'https://connect.facebook.net/en_US/fbevents.js');
-	fbq('init', '1778504398895570');
-	fbq('track', 'PageView');
-	</script>
-	<noscript>
-	 <img height="1" width="1" src="https://www.facebook.com/tr?id=1778504398895570&ev=PageView&noscript=1"/>
-	</noscript>
-	<!-- End Facebook Pixel Code -->
 </head>
 
 <body class="site <?php echo $option
@@ -370,15 +353,17 @@ else
 	<?php if ($this->countModules('promocje')) : ?>
 		<a href="/?tmpl=promocje&amp;layout=modal" id="promocje" class="modal_link promocje" rel="{handler: 'iframe', size: {x: 674, y: 475}}" onfocus="blur()">Promocje</a>
 	<?php endif;?>
+		<!--<div id="mygastrobox" style="width: 100%; height: 100%; display: block; clear: both;"> <iframe style="width: 100%; height: 100%" src="http://ordering.mojegastro.pl/Galicjanka?simple=1"></iframe> </div> -->
+		<div id="mygastrobox" style="display: block; clear: both;"> <a class="mygastrobtn" data-alias="Galicjanka" href="#">Zamówienia online</a> <script type="text/javascript"> (function (d, t, i) { if (d.getElementById(i)) return; var f = d.getElementsByTagName(t)[0], js = d.createElement(t); js.id = i; js.src = 'http://ordering.mojegastro.pl/merchantscripts.ashx?type=button'; f.parentNode.appendChild(js); }(document, 'script', 'myorder-widget')); </script> </div>
 	<?php endif;?>
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  /*(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
   ga('create', 'UA-48899699-1', 'galicjanka.com');
-  ga('send', 'pageview');
+  ga('send', 'pageview');*/
 </script>
 </body>
 </html>

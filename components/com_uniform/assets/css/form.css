@@ -53,7 +53,8 @@
 	background: url(../images/zamowienia_input.png) 0 0 no-repeat;
 	margin: 0 !important;
 }
-.jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group-area {
+.jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group-area,
+.jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group-address {
 	/*border: 1px solid transparent;
 	margin-bottom: 0px;
 	padding: 10px;
@@ -64,6 +65,9 @@
 	height: 130px;
 	background: url(../images/zamowienia_area.png) 0 0 no-repeat;
 	margin: 0 !important;
+}
+.jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group-address {
+  background: url(../images/zamowienia_address.png) 0 0 no-repeat;
 }
 .jsn-uniform.jsn-master .jsn-bootstrap .jsn-form-content .control-group-rodo {
 	width: 526px;
@@ -902,10 +906,27 @@ doesnotexist:-o-prefocus, jsn-bootstrap input[type="text"],
 	width: 200px !important;
 	clear: none;
 	float: left;
-	margin-left: 20px;
+	margin-left: 80px;
+  height: 54px;
 }
 .control-group .controls .row-fluid:after {
 	clear: none;
+}
+
+.control-group .controls .row-fluid:first-child {
+  margin-left: 20px;
+}
+
+.control-group .controls .row-fluid .span6 {
+  float: right;
+}
+
+.control-group .controls .row-fluid .span6 input {
+  width: 80px !important;
+}
+
+.control-group .controls .row-fluid .span6:first-child input {
+  width: 318px !important;
 }
 
 .control-group.e_mail .controls .row-fluid {
