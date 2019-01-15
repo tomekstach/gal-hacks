@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="3.0" method="upgrade">
 	<name>UniForm</name>
-	<version>4.1.8</version>
-	<creationDate>03/14/2018</creationDate>	
+	<version>4.1.15</version>
+	<creationDate>11/29/2018</creationDate>	
 	<author>JoomlaShine.com</author>
 	<authorEmail>support@joomlashine.com</authorEmail>
 	<authorUrl>http://www.joomlashine.com</authorUrl>

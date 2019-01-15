@@ -131,7 +131,7 @@ class JSNFormGenerateHelper
 		$defaultValue = !empty($dataSumbission[$data->id]) ? $dataSumbission[$data->id] : '';
 		$placeholder = !empty($data->options->value) ? JText::_($data->options->value) : "";
 		$title = $data->label != 'Website' ? $data->label : 'JSN_UNIFORM_DEFAULT_LABEL_WEBSITE';
-		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls\"><input class=\"website {$requiredWebsite} {$sizeInput}\" id=\"{$data->id}\" name=\"{$data->id}\" type=\"text\" value=\"{$defaultValue}\" placeholder=\"" . htmlentities($placeholder, ENT_QUOTES, "UTF-8") . "\" /></div></div>";
+		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}-jsn-uf-form-field\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls\"><input class=\"website {$requiredWebsite} {$sizeInput}\" id=\"{$data->id}-jsn-uf-form-field\" name=\"{$data->id}\" type=\"text\" value=\"{$defaultValue}\" placeholder=\"" . htmlentities($placeholder, ENT_QUOTES, "UTF-8") . "\" /></div></div>";
 		return $html;
 	}
 
@@ -176,7 +176,26 @@ class JSNFormGenerateHelper
 		$instruction = !empty($data->options->instruction) ? " <i original-title=\"" . htmlentities(JText::_($data->options->instruction), ENT_QUOTES, "UTF-8") . "\" class=\"icon-question-sign\"></i>" : '';
 		$sizeInput = !empty($data->options->size) ? $data->options->size : '';
 		$placeholder = !empty($data->options->value) ? JText::_($data->options->value) : "";
-		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls {$requiredBlank}\"><input {$limitValue} class=\"{$styleClassLimit} {$sizeInput}\" id=\"{$data->id}\" name=\"{$data->id}\" type=\"text\" value=\"" . htmlentities($defaultValue, ENT_QUOTES, "UTF-8") . "\" placeholder=\"" . htmlentities($placeholder, ENT_QUOTES, "UTF-8") . "\" /></div></div>";
+
+		// Check if a validation rule is defined.
+		$validation = '';
+
+		if (!empty($data->options->validPattern) && !empty($data->options->validSample))
+		{
+			// Check if a placeholder is defined.
+			if (empty($placeholder))
+			{
+				$placeholder = $data->options->validSample;
+			}
+
+			// Pass the validation rule to client via the 'data-validation' attribute.
+			$validation = "data-validation='" . json_encode(array(
+				'pattern' => preg_replace('/(\'|")/', '\\\1', $data->options->validPattern),
+				'sample' => preg_replace('/(\'|")/', '\\\1', $data->options->validSample)
+			)) . "'";
+		}
+
+		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}-jsn-uf-form-field\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls {$requiredBlank}\"><input {$limitValue} class=\"{$styleClassLimit} {$sizeInput}\" id=\"{$data->id}-jsn-uf-form-field\" name=\"{$data->id}\" type=\"text\" value=\"" . htmlentities($defaultValue, ENT_QUOTES, "UTF-8") . "\" placeholder=\"" . htmlentities($placeholder, ENT_QUOTES, "UTF-8") . "\" {$validation} /></div></div>";
 		return $html;
 	}
 
@@ -197,6 +216,7 @@ class JSNFormGenerateHelper
 		$customClass = !empty($data->options->customClass) ? $data->options->customClass : "";
 		$required = !empty($data->options->required) ? '<span class="required">*</span>' : '';
 		$requiredBlank = !empty($data->options->required) ? 'group-blank-required' : '';
+		$readonly = !empty($data->options->required) ? 'readonly' : '';
 		$sizeInput = 'input-small';
 		$valueDate = '';
 		$valueDateRange = '';
@@ -214,14 +234,14 @@ class JSNFormGenerateHelper
 			$sizeInput = 'input-medium';
 		}
 		$title = $data->label != 'Date/Time' ? $data->label : 'JSN_UNIFORM_DEFAULT_LABEL_DATE';
-		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}\">
+		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}-jsn-uf-form-field\">
 					<label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label>
 						<div class=\"controls {$requiredBlank}\">
-							<div class=\"input-append jsn-inline\"><input data-jsnUf-date-settings='" . htmlentities($dateSettings, ENT_QUOTES, "UTF-8") . "' placeholder=\"" . htmlentities($placeholder, ENT_QUOTES, "UTF-8") . "\" value=\"" . $valueDate . "\" class=\"jsn-daterangepicker {$sizeInput}\" id=\"{$data->id}\" name=\"date[{$data->id}][date]\" type=\"text\" readonly /></div>
+							<div class=\"input-append jsn-inline\"><input data-jsnUf-date-settings='" . htmlentities($dateSettings, ENT_QUOTES, "UTF-8") . "' placeholder=\"" . htmlentities($placeholder, ENT_QUOTES, "UTF-8") . "\" value=\"" . $valueDate . "\" class=\"jsn-daterangepicker {$sizeInput}\" id=\"{$data->id}-jsn-uf-form-field\" name=\"date[{$data->id}][date]\" type=\"text\" {$readonly} /></div>
 								";
 		if ($data->options->enableRageSelection == "1" || $data->options->enableRageSelection == 1)
 		{
-			$html .= "<div class=\"input-append jsn-inline\"><input data-jsnUf-date-settings='" . htmlentities($dateSettings, ENT_QUOTES, "UTF-8") . "' placeholder=\"" . htmlentities($placeholderDateRange, ENT_QUOTES, "UTF-8") . "\" value=\"" . htmlentities($valueDateRange, ENT_QUOTES, "UTF-8") . "\" class=\"jsn-daterangepicker {$sizeInput}\" id=\"range_{$data->id}\" name=\"date[{$data->id}][daterange]\" type=\"text\" readonly /></div>";
+			$html .= "<div class=\"input-append jsn-inline\"><input data-jsnUf-date-settings='" . htmlentities($dateSettings, ENT_QUOTES, "UTF-8") . "' placeholder=\"" . htmlentities($placeholderDateRange, ENT_QUOTES, "UTF-8") . "\" value=\"" . htmlentities($valueDateRange, ENT_QUOTES, "UTF-8") . "\" class=\"jsn-daterangepicker {$sizeInput}\" id=\"range_{$data->id}\" name=\"date[{$data->id}][daterange]\" type=\"text\" {$readonly} /></div>";
 		}
 		$html .= "</div></div>";
 		return $html;
@@ -309,7 +329,7 @@ class JSNFormGenerateHelper
 			}
 		}
 		$title = $data->label != 'Currency' ? $data->label : 'JSN_UNIFORM_DEFAULT_LABEL_CURRENCY';
-		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls {$requiredBlank} currency-control clearfix\"><div class=\"clearfix\">{$inputContent}</div></div></div>";
+		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}-jsn-uf-form-field\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls {$requiredBlank} currency-control clearfix\"><div class=\"clearfix\">{$inputContent}</div></div></div>";
 		return $html;
 	}
 
@@ -350,7 +370,7 @@ class JSNFormGenerateHelper
 		$placeholderOneField = !empty($data->options->oneField) ? JText::_($data->options->oneField) : "";
 		$placeholderTwoField = !empty($data->options->twoField) ? JText::_($data->options->twoField) : "";
 		$placeholderThreeField = !empty($data->options->threeField) ? JText::_($data->options->threeField) : "";
-		$inputContent = "<input class=\"phone jsn-input-medium-fluid\" id=\"{$data->id}\" name=\"phone[{$data->id}][default]\" type=\"text\" value=\"{$defaultValue}\" placeholder=\"" . htmlentities($placeholder, ENT_QUOTES, "UTF-8") . "\" />";
+		$inputContent = "<input class=\"phone jsn-input-medium-fluid\" id=\"{$data->id}-jsn-uf-form-field\" name=\"phone[{$data->id}][default]\" type=\"text\" value=\"{$defaultValue}\" placeholder=\"" . htmlentities($placeholder, ENT_QUOTES, "UTF-8") . "\" />";
 		if (isset($data->options->format) && $data->options->format == "3-field")
 		{
 			$inputContent = "<div class=\"jsn-inline\"><input id=\"one_{$data->id}\" name=\"phone[{$data->id}][one]\" value='" . htmlentities($oneValue, ENT_QUOTES, "UTF-8") . "' type=\"text\" placeholder=\"" . htmlentities($placeholderOneField, ENT_QUOTES, "UTF-8") . "\" class=\"phone jsn-input-mini-fluid\"></div>
@@ -359,7 +379,7 @@ class JSNFormGenerateHelper
 							<span class=\"jsn-field-prefix\">-</span>
 							<div class=\"jsn-inline\"><input id=\"three_{$data->id}\" name=\"phone[{$data->id}][three]\" value='" . htmlentities($threeValue, ENT_QUOTES, "UTF-8") . "' type=\"text\" placeholder=\"" . htmlentities($placeholderThreeField, ENT_QUOTES, "UTF-8") . "\" class=\"phone jsn-input-mini-fluid\"></div>";
 		}
-		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls {$requiredBlank}\">{$inputContent}</div></div>";
+		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}-jsn-uf-form-field\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls {$requiredBlank}\">{$inputContent}</div></div>";
 		return $html;
 	}
 
@@ -404,7 +424,7 @@ class JSNFormGenerateHelper
 		$rows = !empty($data->options->rows) && (int) $data->options->rows ? $data->options->rows : '10';
 		$instruction = !empty($data->options->instruction) ? " <i original-title=\"" . htmlentities(JText::_($data->options->instruction), ENT_QUOTES, "UTF-8") . "\" class=\"icon-question-sign\"></i>" : '';
 		$placeholder = !empty($data->options->value) ? JText::_($data->options->value) : "";
-		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls {$requiredBlank}\"><textarea {$limitValue} rows=\"{$rows}\" class=\" {$styleClassLimit} {$sizeInput}\" id=\"{$data->id}\" name=\"{$data->id}\" placeholder=\"" . htmlentities($placeholder, ENT_QUOTES, "UTF-8") . "\">{$defaultValue}</textarea></div></div>";
+		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}-jsn-uf-form-field\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls {$requiredBlank}\"><textarea {$limitValue} rows=\"{$rows}\" class=\" {$styleClassLimit} {$sizeInput}\" id=\"{$data->id}-jsn-uf-form-field\" name=\"{$data->id}\" placeholder=\"" . htmlentities($placeholder, ENT_QUOTES, "UTF-8") . "\">{$defaultValue}</textarea></div></div>";
 		return $html;
 	}
 
@@ -465,7 +485,71 @@ class JSNFormGenerateHelper
 		{
 			$showDecimal = "<span class=\"jsn-field-prefix\">.</span><input {$limitValue} class=\"number input-mini number-decimal\" name=\"number[{$data->id}][decimal]\" type=\"number\" value=\"" . htmlentities($defaultValueDecimal, ENT_QUOTES, "UTF-8") . "\" placeholder=\"" . htmlentities($placeholderDecimal, ENT_QUOTES, "UTF-8") . "\" />";
 		}
-		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls\"><input {$limitValue} class=\"number {$requiredInteger} {$styleClassLimit} {$sizeInput} {$paymentActive}\" id=\"{$data->id}\" name=\"number[{$data->id}][value]\" type=\"number\" value=\"" . htmlentities($defaultValue, ENT_QUOTES, "UTF-8") . "\" placeholder=\"" . htmlentities($placeholder, ENT_QUOTES, "UTF-8") . "\" />{$showDecimal}</div></div>";
+		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}-jsn-uf-form-field\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls\"><input {$limitValue} class=\"number {$requiredInteger} {$styleClassLimit} {$sizeInput} {$paymentActive}\" id=\"{$data->id}-jsn-uf-form-field\" name=\"number[{$data->id}][value]\" type=\"number\" value=\"" . htmlentities($defaultValue, ENT_QUOTES, "UTF-8") . "\" placeholder=\"" . htmlentities($placeholder, ENT_QUOTES, "UTF-8") . "\" />{$showDecimal}</div></div>";
+		return $html;
+	}
+
+	/**
+	 * Generate HTML code for `Slider` input control.
+	 *
+	 * @param   object  $data        Field parameters.
+	 * @param   array   $submission  Submitted data.
+	 *
+	 * @return  string
+	 */
+	public static function fieldSlider($data, $submission = null)
+	{
+		// Prepare variables.
+		$identify = !empty($data->identify) ? $data->identify : '';
+		$title = $data->label != 'Slider' ? $data->label : JText::_('JSN_UNIFORM_DEFAULT_LABEL_SLIDER');
+		$customClass = !empty($data->options->customClass) ? $data->options->customClass : '';
+		$instruction = !empty($data->options->instruction) ? '<i original-title="' . htmlentities(JText::_($data->options->instruction), ENT_QUOTES, 'UTF-8') . '" class="icon-question-sign"></i>' : '';
+		$required = !empty($data->options->required) ? '<span class="required">*</span>' : '';
+		$requiredInteger = !empty($data->options->required) ? 'integer-required' : '';
+		$hideField = !empty($data->options->hideField) ? 'hide' : '';
+		$sizeInput = !empty($data->options->size) ? $data->options->size : '';
+		$placeholder = $data->options->value;
+
+		// Prepare slider step and value limitation.
+		$stepAttr = "step='{$data->options->step}'";
+		$minAttr = "min='{$data->options->min}'";
+		$maxAttr = "max='{$data->options->max}'";
+
+		$jsonLimit = json_encode(array(
+			'limitMin' => $data->options->min,
+			'limitMax' => $data->options->max
+		));
+
+		$limitValue = "data-limit='{$jsonLimit}'";
+		$styleClassLimit = 'number-limit-required';
+
+		// Check if submission data provided?
+		$defaultValue = '';
+
+		if (!empty($submission))
+		{
+			if (!empty($submission['slider'][$data->id]['value']))
+			{
+				$defaultValue = strpos($submission['slider'][$data->id]['value'], '.') === false
+					? intval($submission['slider'][$data->id]['value'])
+					: floatval($submission['slider'][$data->id]['value']);
+			}
+			elseif (!empty($submission['slider'][$data->id]))
+			{
+				$defaultValue = strpos($submission['slider'][$data->id], '.') === false
+					? intval($submission['slider'][$data->id])
+					: floatval($submission['slider'][$data->id]);
+			}
+		}
+
+		if (empty($defaultValue))
+		{
+			$defaultValue = strpos($placeholder, '.') === false ? intval($placeholder) : floatval($placeholder);
+		}
+
+		// Generate HTML code.
+		$html = "<div class='control-group {$customClass} {$identify} {$hideField}' data-id='{$data->id}-jsn-uf-form-field'><label class='control-label'>" . htmlentities(JText::_($title), ENT_QUOTES, 'UTF-8') . " {$required} {$instruction}</label><div class='controls'><input class='jsn-uf-slider {$requiredInteger} {$styleClassLimit} {$sizeInput}' id='{$data->id}-jsn-uf-form-field' type='range' name='slider[{$data->id}][value]' value='{$defaultValue}' {$minAttr} {$maxAttr} {$stepAttr} {$limitValue} oninput='this.nextElementSibling.textContent = this.value;' onchange='this.nextElementSibling.textContent = this.value;' /> <span class='jsn-uf-slider-value'>{$defaultValue}</span></div></div>";
+
 		return $html;
 	}
 
@@ -487,10 +571,11 @@ class JSNFormGenerateHelper
 		$customClass = !empty($data->options->customClass) ? $data->options->customClass : "";
 		$required = !empty($data->options->required) ? '<span class="required">*</span>' : '';
 		$requiredBlank = !empty($data->options->required) ? 'group-blank-required' : '';
+		$requiredBlankItem = !empty($data->options->required) ? 'item-blank-required' : '';
 		$instruction = !empty($data->options->instruction) ? " <i original-title=\"" . htmlentities(JText::_($data->options->instruction), ENT_QUOTES, "UTF-8") . "\" class=\"icon-question-sign\"></i>" : '';
 		$listField = !empty($data->options->sortableField) ? json_decode($data->options->sortableField) : array("vtitle", "vfirst", "vmiddle", "vlast");
 		$title = $data->label != 'Name' ? $data->label : 'JSN_UNIFORM_DEFAULT_LABEL_NAME';
-		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div id=\"{$data->id}\" class=\"controls {$requiredBlank}\">";
+		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}-jsn-uf-form-field\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div id=\"{$data->id}-jsn-uf-form-field\" class=\"controls {$requiredBlank}\">";
 		$valueFirstName = '';
 		$valueLastName = '';
 		$valueMiddle = '';
@@ -576,7 +661,7 @@ class JSNFormGenerateHelper
 				case "vfirst":
 					if (!empty($data->options->vfirst))
 					{
-						$html .= "<input type=\"text\" class=\"{$sizeInput}\" value='" . htmlentities($valueFirstName, ENT_QUOTES, "UTF-8") . "' name=\"name[{$data->id}][first]\" placeholder=\"" . htmlentities(JText::_("First"), ENT_QUOTES, "UTF-8") . "\" />&nbsp;&nbsp;";
+						$html .= "<input type=\"text\" class=\"{$sizeInput} {$requiredBlankItem}\" value='" . htmlentities($valueFirstName, ENT_QUOTES, "UTF-8") . "' name=\"name[{$data->id}][first]\" placeholder=\"" . htmlentities(JText::_("First"), ENT_QUOTES, "UTF-8") . "\" />&nbsp;&nbsp;";
 					}
 					break;
 				case "vmiddle":
@@ -588,7 +673,7 @@ class JSNFormGenerateHelper
 				case "vlast":
 					if (!empty($data->options->vlast))
 					{
-						$html .= "<input type=\"text\" class=\"{$sizeInput}\" value='" . htmlentities($valueLastName, ENT_QUOTES, "UTF-8") . "' name=\"name[{$data->id}][last]\" placeholder=\"" . htmlentities(JText::_("Last"), ENT_QUOTES, "UTF-8") . "\" />";
+						$html .= "<input type=\"text\" class=\"{$sizeInput} {$requiredBlankItem}\" value='" . htmlentities($valueLastName, ENT_QUOTES, "UTF-8") . "' name=\"name[{$data->id}][last]\" placeholder=\"" . htmlentities(JText::_("Last"), ENT_QUOTES, "UTF-8") . "\" />";
 					}
 					break;
 			}
@@ -617,7 +702,7 @@ class JSNFormGenerateHelper
 		$multiple = !empty($data->options->multiple) ? 'multiple' : '';
 		$required = !empty($data->options->required) ? '<span class="required">*</span>' : '';
 		$instruction = !empty($data->options->instruction) ? " <i original-title=\"" . htmlentities(JText::_($data->options->instruction), ENT_QUOTES, "UTF-8") . "\" class=\"icon-question-sign\"></i>" : '';
-		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls {$requiredBlank}\"><input id=\"{$data->id}\" class=\"input-file\" name=\"{$data->id}[]\" {$multiple} type=\"file\" /></div></div>";
+		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}-jsn-uf-form-field\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls {$requiredBlank}\"><input id=\"{$data->id}-jsn-uf-form-field\" class=\"input-file\" name=\"{$data->id}[]\" {$multiple} type=\"file\" /></div></div>";
 		return $html;
 	}
 
@@ -660,8 +745,8 @@ class JSNFormGenerateHelper
 		$placeholder = !empty($data->options->value) ? JText::_($data->options->value) : "";
 		$placeholderConfirm = !empty($data->options->valueConfirm) ? JText::_($data->options->valueConfirm) : "";
 
-		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls\">";
-		$html .= "<input class=\"email {$requiredEmail} {$sizeInput}\" id=\"{$data->id}\" name=\"{$data->id}\" type=\"text\" value=\"" . htmlentities($defaultValue, ENT_QUOTES, "UTF-8") . "\" placeholder=\"" . htmlentities($placeholder, ENT_QUOTES, "UTF-8") . "\" />";
+		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}-jsn-uf-form-field\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls\">";
+		$html .= "<input class=\"email {$requiredEmail} {$sizeInput}\" id=\"{$data->id}-jsn-uf-form-field\" name=\"{$data->id}\" type=\"text\" value=\"" . htmlentities($defaultValue, ENT_QUOTES, "UTF-8") . "\" placeholder=\"" . htmlentities($placeholder, ENT_QUOTES, "UTF-8") . "\" />";
 		if (!empty($data->options->requiredConfirm))
 		{
 			$html .= "<input class=\"{$sizeInput} jsn-email-confirm\" id=\"{$data->id}_confirm\" name=\"{$data->id}_confirm\" type=\"text\" value=\"" . htmlentities($defaultValueConfirm, ENT_QUOTES, "UTF-8") . "\" placeholder=\"" . htmlentities($placeholderConfirm, ENT_QUOTES, "UTF-8") . "\" />";
@@ -681,7 +766,11 @@ class JSNFormGenerateHelper
 	 */
 	public static function fieldDropdown($data, $dataSumbission, $paymentType)
 	{
+		$document = JFactory::getDocument();
+		$document->addScript(JURI::base(true) . '/components/com_uniform/assets/js/jsn_uf_jquery_safe.js');
+		$document->addScript(JURI::root(true) . '/media/jui/js/jquery.min.js');
 		JHtml::_('jquery.framework');
+
 		JSNHtmlAsset::addStyle(JURI::base(true) . '/components/com_uniform/assets/js/libs/select2/select2.css');
 		JSNHtmlAsset::addScript(JURI::base(true) . '/components/com_uniform/assets/js/libs/select2/select2.js');
 		$identify = !empty($data->identify) ? $data->identify : "";
@@ -747,7 +836,7 @@ class JSNFormGenerateHelper
 		{
 			$paymentActive = isset($data->options->paymentMoneyValue) && $data->options->paymentMoneyValue == "Yes" ? 'payment-active' : '';
 		}
-		$html = "<div class='control-group {$customClass} {$identify} {$hideField}' data-settings='" . htmlentities($dataSettings, ENT_QUOTES, "UTF-8") . "' data-id='{$data->id}'><label  class='control-label'>" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class='controls {$requiredBlank}'><select id='{$data->id}' class='dropdown {$sizeInput} {$randomDropdown} {$paymentActive} jsn-uf-select2-dropdown' name='{$data->id}'>";
+		$html = "<div class='control-group {$customClass} {$identify} {$hideField}' data-settings='" . htmlentities($dataSettings, ENT_QUOTES, "UTF-8") . "' data-id='{$data->id}-jsn-uf-form-field'><label  class='control-label'>" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class='controls {$requiredBlank}'><select id='{$data->id}-jsn-uf-form-field' class='dropdown {$sizeInput} {$randomDropdown} {$paymentActive}' name='{$data->id}'>";
 
 		if (isset($data->options->items) && is_array($data->options->items))
 		{
@@ -879,7 +968,7 @@ class JSNFormGenerateHelper
 		{
 			$paymentActive = isset($data->options->paymentMoneyValue) && $data->options->paymentMoneyValue == "Yes" ? 'payment-active' : '';
 		}
-		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField} \" data-id=\"{$data->id}\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls {$requiredBlank}\"><select {$multiple} id=\"{$data->id}\" class=\"list {$sizeInput} {$randomList} {$paymentActive}\" name=\"{$data->id}[]\">";
+		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField} \" data-id=\"{$data->id}-jsn-uf-form-field\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls {$requiredBlank}\"><select {$multiple} id=\"{$data->id}-jsn-uf-form-field\" class=\"list {$sizeInput} {$randomList} {$paymentActive}\" name=\"{$data->id}[]\">";
 		if (isset($data->options->items) && is_array($data->options->items))
 		{
 			foreach ($data->options->items as $option)
@@ -969,17 +1058,24 @@ class JSNFormGenerateHelper
 	 */
 	public static function fieldCountry($data, $dataSumbission)
 	{
+		$document = JFactory::getDocument();
+		$document->addScript(JURI::base(true) . '/components/com_uniform/assets/js/jsn_uf_jquery_safe.js');
+		$document->addScript(JURI::root(true) . '/media/jui/js/jquery.min.js');
+		JHtml::_('jquery.framework');
+
+		JSNHtmlAsset::addStyle(JURI::base(true) . '/components/com_uniform/assets/js/libs/select2/select2.css');
+		JSNHtmlAsset::addScript(JURI::base(true) . '/components/com_uniform/assets/js/libs/select2/select2.js');
 
 		$identify = !empty($data->identify) ? $data->identify : "";
 		$title = $data->label != 'Country' ? $data->label : 'JSN_UNIFORM_DEFAULT_LABEL_COUNTRY';
 		$hideField = !empty($data->options->hideField) ? 'hide' : '';
 		$customClass = !empty($data->options->customClass) ? $data->options->customClass : "";
 		$required = !empty($data->options->required) ? '<span class="required">*</span>' : '';
-		$requiredBlank = !empty($data->options->required) ? 'blank-required' : '';
+		$requiredBlank = !empty($data->options->required) ? 'dropdown-required' : '';
 		$instruction = !empty($data->options->instruction) ? " <i original-title=\"" . htmlentities(JText::_($data->options->instruction), ENT_QUOTES, "UTF-8") . "\" class=\"icon-question-sign\"></i>" : '';
 		$defaultValue = !empty($dataSumbission[$data->id]) ? $dataSumbission[$data->id] : "";
 		$sizeInput = !empty($data->options->size) ? $data->options->size : '';
-		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField} \" data-id=\"{$data->id}\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls {$requiredBlank}\"><select id=\"{$data->id}\" class=\"{$sizeInput}\" name=\"{$data->id}\">";
+		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField} \" data-id=\"{$data->id}-jsn-uf-form-field\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls {$requiredBlank}\"><select id=\"{$data->id}-jsn-uf-form-field\" class=\"dropdown {$sizeInput}\" name=\"{$data->id}\">";
 		if (isset($data->options->items) && is_array($data->options->items))
 		{
 			foreach ($data->options->items as $option)
@@ -1104,7 +1200,7 @@ class JSNFormGenerateHelper
 		{
 			$paymentActive = isset($data->options->paymentMoneyValue) && $data->options->paymentMoneyValue == "Yes" ? 'payment-active' : '';
 		}
-		$html = "<div class='control-group {$customClass} {$identify} {$hideField}' data-settings='" . htmlentities($dataSettings, ENT_QUOTES, "UTF-8") . "' data-id='{$data->id}'><label  class='control-label'>" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class='controls {$requiredChoices}'><div id='{$data->id}' class='choices jsn-columns-container {$data->options->layout} {$randomChoices} {$paymentActive}'>";
+		$html = "<div class='control-group {$customClass} {$identify} {$hideField}' data-settings='" . htmlentities($dataSettings, ENT_QUOTES, "UTF-8") . "' data-id='{$data->id}-jsn-uf-form-field'><label  class='control-label'>" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class='controls {$requiredChoices}'><div id='{$data->id}-jsn-uf-form-field' class='choices jsn-columns-container {$data->options->layout} {$randomChoices} {$paymentActive}'>";
 
 		$defaultValue = isset($dataSumbission[$data->id]) ? $dataSumbission[$data->id] : "";
 		if (isset($data->options->items) && is_array($data->options->items))
@@ -1292,7 +1388,7 @@ class JSNFormGenerateHelper
 
 		}
 
-		$html = "<div class='control-group {$customClass} {$identify} {$hideField}' data-settings='" . htmlentities($dataSettings, ENT_QUOTES, "UTF-8") . "' data-id='{$data->id}'><label class='control-label'>" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class='controls'><div id='{$data->id}' class='checkboxes jsn-columns-container {$data->options->layout} {$randomCheckbox} {$requiredCheckbox} {$paymentActive}' $limitChoises>";
+		$html = "<div class='control-group {$customClass} {$identify} {$hideField}' data-settings='" . htmlentities($dataSettings, ENT_QUOTES, "UTF-8") . "' data-id='{$data->id}-jsn-uf-form-field'><label class='control-label'>" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class='controls'><div id='{$data->id}-jsn-uf-form-field' class='checkboxes jsn-columns-container {$data->options->layout} {$randomCheckbox} {$requiredCheckbox} {$paymentActive}' $limitChoises>";
 		$defaultValue = isset($dataSumbission[$data->id]) ? $dataSumbission[$data->id] : "";
 		if (isset($data->options->items) && is_array($data->options->items))
 		{
@@ -1412,7 +1508,7 @@ class JSNFormGenerateHelper
 		$instruction = !empty($data->options->instruction) ? " <i original-title=\"" . htmlentities(JText::_($data->options->instruction), ENT_QUOTES, "UTF-8") . "\" class=\"icon-question-sign\"></i>" : '';
 		$listField = !empty($data->options->sortableField) ? json_decode($data->options->sortableField) : array("vstreetAddress", "vstreetAddress2", "vcity", "vstate", "vcode", "vcountry");
 
-		$html = "<div class=\"control-group {$customClass} jsn-group-field {$identify} {$hideField} \" data-id=\"{$data->id}\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div id=\"{$data->id}\" class=\"controls {$requiredBlank}\">";
+		$html = "<div class=\"control-group {$customClass} jsn-group-field {$identify} {$hideField} \" data-id=\"{$data->id}-jsn-uf-form-field\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div id=\"{$data->id}-jsn-uf-form-field\" class=\"controls {$requiredBlank}\">";
 
 		$position2 = array_search('vstreetAddress2', $listField);
 		$position1 = array_search('vstreetAddress', $listField);
@@ -1435,7 +1531,7 @@ class JSNFormGenerateHelper
 					$field[$val] = "<input type=\"text\" value='" . htmlentities($valueStreet, ENT_QUOTES, "UTF-8") . "' name=\"address[{$data->id}][street]\" placeholder=\"" . htmlentities(JText::_("Street_Address"), ENT_QUOTES, "UTF-8") . "\" class=\"jsn-input-xxlarge-fluid {$requiredBlankItem}\" />";
 					break;
 				case "vstreetAddress2":
-					$field[$val] = "<input type=\"text\" value='" . htmlentities($valueLine2, ENT_QUOTES, "UTF-8") . "' name=\"address[{$data->id}][line2]\" placeholder=\"" . htmlentities(JText::_("Address_Line_2"), ENT_QUOTES, "UTF-8") . "\" class=\"jsn-input-xxlarge-fluid {$requiredBlankItem}\" />";
+					$field[$val] = "<input type=\"text\" value='" . htmlentities($valueLine2, ENT_QUOTES, "UTF-8") . "' name=\"address[{$data->id}][line2]\" placeholder=\"" . htmlentities(JText::_("Address_Line_2"), ENT_QUOTES, "UTF-8") . "\" class=\"jsn-input-xxlarge-fluid\" />";
 					break;
 				case "vcity":
 					$field[$val] = "<input value='" . htmlentities($valueCity, ENT_QUOTES, "UTF-8") . "' type=\"text\" name=\"address[{$data->id}][city]\" class=\"jsn-input-xlarge-fluid {$requiredBlankItem}\" placeholder=\"" . htmlentities(JText::_("City"), ENT_QUOTES, "UTF-8") . "\" />";
@@ -1444,7 +1540,7 @@ class JSNFormGenerateHelper
 					$field[$val] = "<input value='" . htmlentities($valueState, ENT_QUOTES, "UTF-8") . "'  name=\"address[{$data->id}][state]\" type=\"text\" placeholder=\"" . htmlentities(JText::_("State_Province_Region"), ENT_QUOTES, "UTF-8") . "\" class=\"jsn-input-xlarge-fluid {$requiredBlankItem}\" />";
 					break;
 				case "vcode":
-					$field[$val] = "<input value='" . htmlentities($valueCode, ENT_QUOTES, "UTF-8") . "'  type=\"text\" name=\"address[{$data->id}][code]\" class=\"jsn-input-xlarge-fluid\" placeholder=\"" . htmlentities(JText::_("Postal_Zip_code"), ENT_QUOTES, "UTF-8") . "\" />";
+					$field[$val] = "<input value='" . htmlentities($valueCode, ENT_QUOTES, "UTF-8") . "'  type=\"text\" name=\"address[{$data->id}][code]\" class=\"jsn-input-xlarge-fluid {$requiredBlankItem}\" placeholder=\"" . htmlentities(JText::_("Postal_Zip_code"), ENT_QUOTES, "UTF-8") . "\" />";
 					break;
 				case "vcountry":
 					$field[$val] = "<select class=\"jsn-input-xlarge-fluid\" name=\"address[{$data->id}][country]\">";
@@ -1514,7 +1610,7 @@ class JSNFormGenerateHelper
 			$check++;
 		}
 
-		if($sortableField[$position2] == 'vstreetAddress2')
+		if(@ $sortableField[$position2] == 'vstreetAddress2')
 		{
 			$html .= "<div class='row-fluid'><div class='span12'>" . $field[$sortableField[$position2]] . "</div></div>\n";
 		}
@@ -1584,9 +1680,9 @@ class JSNFormGenerateHelper
 		{
 			$confirmHtml = "<div><input {$limitValue} class=\"{$sizeInput}\" name=\"password[{$data->id}][]\" type=\"password\" value=\"\" placeholder=\"" . htmlentities($placeholderConfirm, ENT_QUOTES, "UTF-8") . "\" /></div>";
 		}
-		$html = "<div class=\"control-group {$customClass} jsn-group-field {$identify} {$hideField}\" data-id=\"{$data->id}\">
+		$html = "<div class=\"control-group {$customClass} jsn-group-field {$identify} {$hideField}\" data-id=\"{$data->id}-jsn-uf-form-field\">
 		<label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label>
-			<div class=\"controls {$requiredBlank} {$styleClassLimit}\" id=\"{$data->id}\" >
+			<div class=\"controls {$requiredBlank} {$styleClassLimit}\" id=\"{$data->id}-jsn-uf-form-field\" >
 				<div><input {$limitValue} class=\"{$sizeInput}\" name=\"password[{$data->id}][]\" type=\"password\" value=\"\" placeholder=\"" . htmlentities($placeholder, ENT_QUOTES, "UTF-8") . "\" /></div>
 				{$confirmHtml}
 			</div>
@@ -1612,7 +1708,7 @@ class JSNFormGenerateHelper
 		$hideField = !empty($data->options->hideField) ? 'hide' : '';
 		$customClass = !empty($data->options->customClass) ? $data->options->customClass : "";
 		$value = isset($data->options->value) ? JText::_($data->options->value) : "";
-		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField} \" data-id=\"{$data->id}\"><label class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "</label><div class=\"controls clearfix\">{$value}</div></div>";
+		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField} \" data-id=\"{$data->id}-jsn-uf-form-field\"><label class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "</label><div class=\"controls clearfix\">{$value}</div></div>";
 		return $html;
 	}
 
@@ -1636,7 +1732,7 @@ class JSNFormGenerateHelper
 		$formatWidth = isset($data->options->formatWidth) ? $data->options->formatWidth : "";
 		$googleMaps = isset($data->options->googleMaps) ? $data->options->googleMaps : "";
 		$googleMapsMarKer = isset($data->options->googleMapsMarKer) ? $data->options->googleMapsMarKer : "";
-		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField} \" data-id=\"{$data->id}\"><div class=\"content-google-maps clearfix\" data-width='{$width}{$formatWidth}' data-height='{$height}' data-value='{$googleMaps}' data-marker='" . htmlentities($googleMapsMarKer, ENT_QUOTES, "UTF-8") . "'><div class=\"google_maps map rounded\"></div></div></div>";
+		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField} \" data-id=\"{$data->id}-jsn-uf-form-field\"><div class=\"content-google-maps clearfix\" data-width='{$width}{$formatWidth}' data-height='{$height}' data-value='{$googleMaps}' data-marker='" . htmlentities($googleMapsMarKer, ENT_QUOTES, "UTF-8") . "'><div class=\"google_maps map rounded\"></div></div></div>";
 		return $html;
 	}
 
@@ -1668,7 +1764,7 @@ class JSNFormGenerateHelper
 				$dataSettings = str_replace($matche[0], '|' .$matche[1], $dataSettings);
 			}
 		}
-		$html = "<div class='control-group {$customClass} {$identify} {$hideField}' data-settings='" . htmlentities($dataSettings, ENT_QUOTES, "UTF-8") . "' data-id='{$data->id}'><label class='control-label'>" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class='controls jsnuf-table-responsive'>";
+		$html = "<div class='control-group {$customClass} {$identify} {$hideField}' data-settings='" . htmlentities($dataSettings, ENT_QUOTES, "UTF-8") . "' data-id='{$data->id}-jsn-uf-form-field'><label class='control-label'>" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class='controls jsnuf-table-responsive'>";
 
 		if (isset($data->options->rows) && is_array($data->options->rows) && isset($data->options->columns) && is_array($data->options->columns))
 		{
@@ -1737,7 +1833,7 @@ class JSNFormGenerateHelper
 		$defaultValue = !empty($dataSumbission[$data->id]) ? $dataSumbission[$data->id] : "";
 		$sizeInput = !empty($data->options->size) ? $data->options->size : '';
 		$disableMultiple = !empty($data->options->disableMultiple) && $data->options->disableMultiple == '1' ? "" : "multiple";
-		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField} \" data-id=\"{$data->id}\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls {$requiredBlank}\"><select {$disableMultiple} id=\"{$data->id}\" class=\"list {$sizeInput} {$randomList} \" name=\"{$data->id}[]\">";
+		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField} \" data-id=\"{$data->id}-jsn-uf-form-field\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$required}{$instruction}</label><div class=\"controls {$requiredBlank}\"><select {$disableMultiple} id=\"{$data->id}-jsn-uf-form-field\" class=\"list {$sizeInput} {$randomList} \" name=\"{$data->id}[]\">";
 		if (isset($data->options->items) && is_array($data->options->items))
 		{
 			foreach ($data->options->items as $option)
@@ -1803,7 +1899,7 @@ class JSNFormGenerateHelper
 		$instruction = !empty($data->options->instruction) ? " <i original-title=\"" . htmlentities(JText::_($data->options->instruction), ENT_QUOTES, "UTF-8") . "\" class=\"icon-question-sign\"></i>" : '';
 		$value = !empty($data->options->identificationCode) ? JText::_($data->options->identificationCode) : "";
 		$value .= JSNUniformHelper::generateIdentificationCode($length, $type);
-		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$instruction}</label><div class=\"controls \"><span>$value</span><input type=\"hidden\" name=\"identification-code[{$data->id}]\" value=\"{$value}\"></div></div>";
+		$html = "<div class=\"control-group {$customClass} {$identify} {$hideField}\" data-id=\"{$data->id}-jsn-uf-form-field\"><label  class=\"control-label\">" . htmlentities(JText::_($title), ENT_QUOTES, "UTF-8") . "{$instruction}</label><div class=\"controls \"><span>$value</span><input type=\"hidden\" name=\"identification-code[{$data->id}]\" value=\"{$value}\"></div></div>";
 		return $html;
 	}
 }

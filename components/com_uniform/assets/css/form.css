@@ -261,7 +261,7 @@
 .hide {
     display: none;
 }
-.jsn-master .jsn-bootstrap .jsn-uf-select2-dropdown{
+.jsn-master .jsn-bootstrap .btn-group.dropdown.select2-offscreen{
     position: absolute;
 }
 .jsn-master .jsn-bootstrap .form-search .jsn-group-field input,

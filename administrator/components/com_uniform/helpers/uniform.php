@@ -94,7 +94,7 @@ class JSNUniformHelper
         }
         catch (RuntimeException $e)
         {
-            JError::raiseWarning(500, $e->getMessage());
+	        JFactory::getApplication()->enqueueMessage($e->getMessage(), 'warning');
         }
         return $options;
     }
@@ -382,7 +382,7 @@ class JSNUniformHelper
         // Check for a database error.
         if ($db->getErrorNum())
         {
-            JError::raiseWarning(500, $db->getErrorMsg());
+	        JFactory::getApplication()->enqueueMessage($db->getErrorMsg(), 'warning');
         }
         return $menus;
     }
@@ -411,7 +411,7 @@ class JSNUniformHelper
         // Check for a database error.
         if ($db->getErrorNum())
         {
-            JError::raiseWarning(500, $db->getErrorMsg());
+	        JFactory::getApplication()->enqueueMessage($db->getErrorMsg(), 'warning');
         }
         return $forms;
     }
@@ -722,7 +722,7 @@ class JSNUniformHelper
         $db->setQuery($query);
         if (!$db->execute())
         {
-            JError::raiseWarning(500, $db->getErrorMsg());
+	        JFactory::getApplication()->enqueueMessage($db->getErrorMsg(), 'warning');
         }
     }
 
@@ -1069,6 +1069,16 @@ class JSNUniformHelper
                 }
 
                 break;
+	        case 'slider':
+	        	if (strpos($submission->$key, '.') === false)
+		        {
+			        $contentField = intval($submission->$key);
+		        }
+	        	else
+		        {
+			        $contentField = floatval($submission->$key);
+		        }
+	        break;
             default:
                 if ($checkNull)
                 {
@@ -1101,7 +1111,7 @@ class JSNUniformHelper
     public static function getSelectForm($name, $id = null, $view = "", $value = null, $checkVersion = false)
     {
         $enabledCSS = 'hide';
-        $menuid = JRequest::getInt('id');
+        $menuid = JFactory::getApplication()->input->getInt('id', 0);
         $formID = $value;
         $db = JFactory::getDBO();
         $query = $db->getQuery(true);
@@ -1735,10 +1745,10 @@ class JSNUniformHelper
             $formPages = $db->loadObjectList();
         }
         /* define language */
-        $arrayTranslated = array('JSN_UNIFORM_CHARACTERS','JSN_UNIFORM_WORDS','JSN_UNIFORM_CONFIRM_FIELD_PASSWORD_MIN_MAX_CHARACTER', 'JSN_UNIFORM_CONFIRM_FIELD_EMAIL_CONFIRM', 'JSN_UNIFORM_CONFIRM_FIELD_MIN_NUMBER', 'JSN_UNIFORM_CONFIRM_FIELD_MAX_NUMBER', 'JSN_UNIFORM_DATE_HOUR_TEXT', 'JSN_UNIFORM_DATE_MINUTE_TEXT', 'JSN_UNIFORM_DATE_CLOSE_TEXT', 'JSN_UNIFORM_DATE_PREV_TEXT', 'JSN_UNIFORM_DATE_NEXT_TEXT', 'JSN_UNIFORM_DATE_CURRENT_TEXT', 'JSN_UNIFORM_DATE_MONTH_JANUARY', 'JSN_UNIFORM_DATE_MONTH_FEBRUARY', 'JSN_UNIFORM_DATE_MONTH_MARCH', 'JSN_UNIFORM_DATE_MONTH_APRIL', 'JSN_UNIFORM_DATE_MONTH_MAY', 'JSN_UNIFORM_DATE_MONTH_JUNE', 'JSN_UNIFORM_DATE_MONTH_JULY', 'JSN_UNIFORM_DATE_MONTH_AUGUST', 'JSN_UNIFORM_DATE_MONTH_SEPTEMBER', 'JSN_UNIFORM_DATE_MONTH_OCTOBER', 'JSN_UNIFORM_DATE_MONTH_NOVEMBER', 'JSN_UNIFORM_DATE_MONTH_DECEMBER', 'JSN_UNIFORM_DATE_MONTH_JANUARY_SHORT', 'JSN_UNIFORM_DATE_MONTH_FEBRUARY_SHORT', 'JSN_UNIFORM_DATE_MONTH_MARCH_SHORT', 'JSN_UNIFORM_DATE_MONTH_APRIL_SHORT', 'JSN_UNIFORM_DATE_MONTH_MAY_SHORT', 'JSN_UNIFORM_DATE_MONTH_JUNE_SHORT', 'JSN_UNIFORM_DATE_MONTH_JULY_SHORT', 'JSN_UNIFORM_DATE_MONTH_AUGUST_SHORT', 'JSN_UNIFORM_DATE_MONTH_SEPTEMBER_SHORT', 'JSN_UNIFORM_DATE_MONTH_OCTOBER_SHORT', 'JSN_UNIFORM_DATE_MONTH_NOVEMBER_SHORT', 'JSN_UNIFORM_DATE_MONTH_DECEMBER_SHORT', 'JSN_UNIFORM_DATE_DAY_SUNDAY', 'JSN_UNIFORM_DATE_DAY_MONDAY', 'JSN_UNIFORM_DATE_DAY_TUESDAY', 'JSN_UNIFORM_DATE_DAY_WEDNESDAY', 'JSN_UNIFORM_DATE_DAY_THURSDAY', 'JSN_UNIFORM_DATE_DAY_FRIDAY', 'JSN_UNIFORM_DATE_DAY_SATURDAY', 'JSN_UNIFORM_DATE_DAY_SUNDAY_SHORT', 'JSN_UNIFORM_DATE_DAY_MONDAY_SHORT', 'JSN_UNIFORM_DATE_DAY_TUESDAY_SHORT', 'JSN_UNIFORM_DATE_DAY_WEDNESDAY_SHORT', 'JSN_UNIFORM_DATE_DAY_THURSDAY_SHORT', 'JSN_UNIFORM_DATE_DAY_FRIDAY_SHORT', 'JSN_UNIFORM_DATE_DAY_SATURDAY_SHORT', 'JSN_UNIFORM_DATE_DAY_SUNDAY_MIN', 'JSN_UNIFORM_DATE_DAY_MONDAY_MIN', 'JSN_UNIFORM_DATE_DAY_TUESDAY_MIN', 'JSN_UNIFORM_DATE_DAY_WEDNESDAY_MIN', 'JSN_UNIFORM_DATE_DAY_THURSDAY_MIN', 'JSN_UNIFORM_DATE_DAY_FRIDAY_MIN', 'JSN_UNIFORM_DATE_DAY_SATURDAY_MIN', 'JSN_UNIFORM_DATE_DAY_WEEK_HEADER', 'JSN_UNIFORM_CONFIRM_FIELD_MAX_LENGTH', 'JSN_UNIFORM_CONFIRM_FIELD_MIN_LENGTH', 'JSN_UNIFORM_CAPTCHA_PUBLICKEY', 'JSN_UNIFORM_BUTTON_BACK', 'JSN_UNIFORM_BUTTON_NEXT', 'JSN_UNIFORM_BUTTON_RESET','JSN_UNIFORM_BUTTON_PREVIEW', 'JSN_UNIFORM_BUTTON_SUBMIT', 'JSN_UNIFORM_CONFIRM_FIELD_CANNOT_EMPTY', 'JSN_UNIFORM_CONFIRM_FIELD_INVALID', 'JSN_UNIFORM_WORDS_LEFT', 'JSN_UNIFORM_CHARACTERS_LEFT');
+        $arrayTranslated = array('JSN_UNIFORM_CHARACTERS','JSN_UNIFORM_WORDS','JSN_UNIFORM_CONFIRM_FIELD_PASSWORD_MIN_MAX_CHARACTER', 'JSN_UNIFORM_CONFIRM_FIELD_EMAIL_CONFIRM', 'JSN_UNIFORM_CONFIRM_FIELD_MIN_NUMBER', 'JSN_UNIFORM_CONFIRM_FIELD_MAX_NUMBER', 'JSN_UNIFORM_DATE_HOUR_TEXT', 'JSN_UNIFORM_DATE_MINUTE_TEXT', 'JSN_UNIFORM_DATE_CLOSE_TEXT', 'JSN_UNIFORM_DATE_PREV_TEXT', 'JSN_UNIFORM_DATE_NEXT_TEXT', 'JSN_UNIFORM_DATE_CURRENT_TEXT', 'JSN_UNIFORM_DATE_MONTH_JANUARY', 'JSN_UNIFORM_DATE_MONTH_FEBRUARY', 'JSN_UNIFORM_DATE_MONTH_MARCH', 'JSN_UNIFORM_DATE_MONTH_APRIL', 'JSN_UNIFORM_DATE_MONTH_MAY', 'JSN_UNIFORM_DATE_MONTH_JUNE', 'JSN_UNIFORM_DATE_MONTH_JULY', 'JSN_UNIFORM_DATE_MONTH_AUGUST', 'JSN_UNIFORM_DATE_MONTH_SEPTEMBER', 'JSN_UNIFORM_DATE_MONTH_OCTOBER', 'JSN_UNIFORM_DATE_MONTH_NOVEMBER', 'JSN_UNIFORM_DATE_MONTH_DECEMBER', 'JSN_UNIFORM_DATE_MONTH_JANUARY_SHORT', 'JSN_UNIFORM_DATE_MONTH_FEBRUARY_SHORT', 'JSN_UNIFORM_DATE_MONTH_MARCH_SHORT', 'JSN_UNIFORM_DATE_MONTH_APRIL_SHORT', 'JSN_UNIFORM_DATE_MONTH_MAY_SHORT', 'JSN_UNIFORM_DATE_MONTH_JUNE_SHORT', 'JSN_UNIFORM_DATE_MONTH_JULY_SHORT', 'JSN_UNIFORM_DATE_MONTH_AUGUST_SHORT', 'JSN_UNIFORM_DATE_MONTH_SEPTEMBER_SHORT', 'JSN_UNIFORM_DATE_MONTH_OCTOBER_SHORT', 'JSN_UNIFORM_DATE_MONTH_NOVEMBER_SHORT', 'JSN_UNIFORM_DATE_MONTH_DECEMBER_SHORT', 'JSN_UNIFORM_DATE_DAY_SUNDAY', 'JSN_UNIFORM_DATE_DAY_MONDAY', 'JSN_UNIFORM_DATE_DAY_TUESDAY', 'JSN_UNIFORM_DATE_DAY_WEDNESDAY', 'JSN_UNIFORM_DATE_DAY_THURSDAY', 'JSN_UNIFORM_DATE_DAY_FRIDAY', 'JSN_UNIFORM_DATE_DAY_SATURDAY', 'JSN_UNIFORM_DATE_DAY_SUNDAY_SHORT', 'JSN_UNIFORM_DATE_DAY_MONDAY_SHORT', 'JSN_UNIFORM_DATE_DAY_TUESDAY_SHORT', 'JSN_UNIFORM_DATE_DAY_WEDNESDAY_SHORT', 'JSN_UNIFORM_DATE_DAY_THURSDAY_SHORT', 'JSN_UNIFORM_DATE_DAY_FRIDAY_SHORT', 'JSN_UNIFORM_DATE_DAY_SATURDAY_SHORT', 'JSN_UNIFORM_DATE_DAY_SUNDAY_MIN', 'JSN_UNIFORM_DATE_DAY_MONDAY_MIN', 'JSN_UNIFORM_DATE_DAY_TUESDAY_MIN', 'JSN_UNIFORM_DATE_DAY_WEDNESDAY_MIN', 'JSN_UNIFORM_DATE_DAY_THURSDAY_MIN', 'JSN_UNIFORM_DATE_DAY_FRIDAY_MIN', 'JSN_UNIFORM_DATE_DAY_SATURDAY_MIN', 'JSN_UNIFORM_DATE_DAY_WEEK_HEADER', 'JSN_UNIFORM_CONFIRM_FIELD_MAX_LENGTH', 'JSN_UNIFORM_CONFIRM_FIELD_MIN_LENGTH', 'JSN_UNIFORM_CAPTCHA_PUBLICKEY', 'JSN_UNIFORM_BUTTON_BACK', 'JSN_UNIFORM_BUTTON_NEXT', 'JSN_UNIFORM_BUTTON_RESET','JSN_UNIFORM_BUTTON_PREVIEW', 'JSN_UNIFORM_BUTTON_SUBMIT', 'JSN_UNIFORM_CONFIRM_FIELD_CANNOT_EMPTY', 'JSN_UNIFORM_CONFIRM_FIELD_INVALID', 'JSN_UNIFORM_WORDS_LEFT', 'JSN_UNIFORM_CHARACTERS_LEFT', 'JSN_UNIFORM_VALIDATION_FAILS', 'JSN_UNIFORM_MAX_LENGTH_ALERT');
         /* Check load JS */
         $checkLoadJS = array();
-        $checkLoadJSTipsy = false;
+        $checkLoadJSTipsy = true;
 
         if ($items)
         {
@@ -1864,7 +1874,7 @@ class JSNUniformHelper
                     }else{
                         $showTotalMoneyClass = '';
                     }
-                    $html .='<div class="control-group '. $showTotalMoneyClass .'">
+                    /*$html .='<div class="control-group '. $showTotalMoneyClass .'">
 									<div class="controls">
 										<div class="form-payments">
 											<div class="payment-total-money">
@@ -1872,9 +1882,30 @@ class JSNUniformHelper
 												<input type="hidden" id="jform_form_payment_money_value_text" name="jsn_form_total_money[form_payment_money_value_text]" value="'. $paymentTotalMoneyText .'">
 												<input type="hidden" id="jform_form_payment_money_value" name="jsn_form_total_money[form_payment_money_value]" value="'. $paymentTotalMoneyValue .'">
 											</div>
+											' . ($formSettings->extra_fee_type === 'none' ? '' : '
+											<div class="payment-extra-fee">
+												<h3><span class="extra-fee-text">' . $formSettings->extra_fee_text . ': </span>' . ($formSettings->extra_fee_type === 'flat' ? str_replace('<span class="total-money">0.00</span>', "<span class=\"extra-fee\">{$formSettings->extra_fee_value}</span>", $totalMoney[0]) : "{$formSettings->extra_fee_value}%") . '</h3>
+												<input type="hidden" id="jform_payment_extra_fee_type" name="jsn_form_total_money[extra_fee_type]" value="' . $formSettings->extra_fee_type . '">
+												<input type="hidden" id="jform_payment_extra_fee_value" name="jsn_form_total_money[extra_fee_value]" value="' . $formSettings->extra_fee_value . '">
+											</div>
+											<div class="payment-total-includes-extra-fee">
+												<h3><span class="total-includes-extra-fee-text">'. $formSettings->total_includes_extra_fee_text .': </span>' . str_replace('<span class="total-money">0.00</span>', '<span class="total-includes-extra-fee">0.00</span>', $totalMoney[0]) . '</h3>
+												<input type="hidden" id="jform_payment_total_includes_extra_fee" name="jsn_form_total_money[total_includes_extra_fee]" value="0.00">
+											</div>' ) . '
 										</div>
 									</div>
-								</div>';
+								</div>';*/
+                    $html .='<div class="control-group '. $showTotalMoneyClass .'">
+                                    <div class="controls">
+                                        <div class="form-payments">
+                                            <div class="payment-total-money">
+                                                <h3><span class="payment-text">'. $paymentTotalMoneyText .': </span>'.$totalMoney[0].'</h3>
+                                                <input type="hidden" id="jform_form_payment_money_value_text" name="jsn_form_total_money[form_payment_money_value_text]" value="'. $paymentTotalMoneyText .'">
+                                                <input type="hidden" id="jform_form_payment_money_value" name="jsn_form_total_money[form_payment_money_value]" value="'. $paymentTotalMoneyValue .'">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>';
                 }
                 if ($i + 1 == count($formPages))
                 {
@@ -1903,6 +1934,27 @@ class JSNUniformHelper
 							</div>';
                         }
                     }
+
+                    // Confirm sending email.
+	                /*require_once JPATH_ROOT . '/administrator/components/com_uniform/models/emailsettings.php';
+
+                    $emailSettings = new JSNUniformModelEmailSettings;
+	                $emailSettings = $emailSettings->getItem();
+
+	                if ((int) $emailSettings->confirm_sending_email)
+	                {
+		                $html .= '<div class="control-group confirm-sending-email">
+							<div class="controls">
+								<h3>
+									<label class="checkbox">
+										<input type="checkbox" name="confirm_sending_email" value="1" />
+										' . JText::_('JSN_UNIFORM_CONFIRM_SENDING_EMAIL_TEXT') . '
+									</label>
+								</h3>
+							</div>
+						</div>';
+	                }*/
+
                     if (!empty($items->form_captcha) && $items->form_captcha == 1 && (! (int) $items->form_hide_captcha_if_logged_in || ! (int) $user->get('id')))
                     {
                         $config = JSNConfigHelper::get('com_uniform');
@@ -2042,7 +2094,10 @@ class JSNUniformHelper
             }
             $getHeadData = JFactory::getDocument()->getHeadData();
             $checkLoadScript = true;
-            $scripts = array();
+
+			// Make sure no any script is missed when rendering multiple forms on the same page.
+			$scripts = array();
+
             foreach ($getHeadData['scripts'] as $script => $option)
             {
                 if ($script == JSN_UNIFORM_ASSETS_URI . '/js/form.js')
@@ -2106,7 +2161,8 @@ class JSNUniformHelper
             }
             if ($checkLoadScript)
             {
-                $document->addScript(JSN_UNIFORM_ASSETS_URI . '/js/jsn_uf_jquery_safe.js');
+
+            	$document->addScript(JSN_UNIFORM_ASSETS_URI . '/js/jsn_uf_jquery_safe.js');
                 $document->addScript(JURI::root(true) . '/media/jui/js/jquery.min.js');
                 $document->addScript(JSN_UNIFORM_ASSETS_URI . '/js/libs/jquery.placeholder.js');
                 $document->addScript(JSN_UNIFORM_ASSETS_URI . '/js/libs/jquery.form.js');
@@ -2346,5 +2402,20 @@ class JSNUniformHelper
         $identifiedNames[JSNUtilsText::getConstant('IDENTIFIED_NAME', 'framework')] = JSNUtilsText::getConstant('VERSION', 'framework');
         $identifiedNames[JSN_UNIFORM_IDENTIFIED_NAME] = JSN_UNIFORM_VERSION;
         return $identifiedNames;
+    }
+
+    public static function isOwnerSubmission($userID, $sid, $formID)
+    {
+        $db             = JFactory::getDBO();
+        $query		  	= $db->getQuery(true);
+        $query->select('COUNT(*)');
+        $query->from($db->quoteName('#__jsn_uniform_submissions'));
+        $query->where($db->quoteName('submission_id') . ' = ' . $db->quote((int) $sid));
+        $query->where($db->quoteName('user_id') . ' = ' . $db->quote((int) $userID));
+        $query->where($db->quoteName('form_id') . ' = ' . $db->quote((int) $formID));
+        $db->setQuery($query);
+        $result = $db->loadResult();
+
+        return $result;
     }
 }
