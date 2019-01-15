@@ -85,7 +85,7 @@ class JSNUniformViewSubmissions extends JSNBaseView
 				}
 				else
 				{
-					JError::raiseNotice(100, $msg);
+					JFactory::getApplication()->enqueueMessage($msg, 'notice');
 				}
 			}
 

@@ -104,10 +104,10 @@ class JSNUniformModelForm extends JModelItem
 				$return->actionFormData = $formData;
 				break;
 			case 2:
-				$this->_db->setQuery($this->_db->getQuery(true)->select('link')->from("#__menu")->where("id = " . (int) $formData));
+				$this->_db->setQuery($this->_db->getQuery(true)->select('link, id')->from("#__menu")->where("id = " . (int) $formData));
 				$menuItem = $this->_db->loadObject();
 				$return->actionForm = "url";
-				$return->actionFormData = isset($menuItem->link) ? $menuItem->link : '';
+				$return->actionFormData = isset($menuItem->link) ? JRoute::_('index.php?Itemid=' . (int) $menuItem->id, false) : '';
 				break;
 			case 3:
 				require_once JPATH_SITE . '/components/com_content/helpers/route.php';
@@ -302,6 +302,37 @@ class JSNUniformModelForm extends JModelItem
 	}
 
 	/**
+	 * Get value for `slider` input control.
+	 *
+	 * @param   array   $post             Post form
+	 * @param   string  $fieldIdentifier  Field indentifier
+	 * @param   string  $fieldTitle       Field Title
+	 * @param   array   &$validationForm  Validation form
+	 *
+	 * @return  mixed
+	 */
+	private function _fieldSlider($post, $fieldIdentifier, $fieldTitle, &$validationForm)
+	{
+		$value = 0;
+
+		if (is_array($post['slider'][$fieldIdentifier])
+			&& array_key_exists('value', $post['slider'][$fieldIdentifier]))
+		{
+			$value = strpos($post['slider'][$fieldIdentifier]['value'], '.') === false
+				? intval($post['slider'][$fieldIdentifier]['value'])
+				: floatval($post['slider'][$fieldIdentifier]['value']);
+		}
+		elseif (is_scalar($post['slider'][$fieldIdentifier]))
+		{
+			$value = strpos($post['slider'][$fieldIdentifier], '.') === false
+				? intval($post['slider'][$fieldIdentifier])
+				: floatval($post['slider'][$fieldIdentifier]);
+		}
+
+		return $value;
+	}
+
+	/**
 	 * Setting filed type Date
 	 *
 	 * @param   Array   $post             Post form
@@ -440,11 +471,11 @@ class JSNUniformModelForm extends JModelItem
 	/**
 	 * Check field duplicates
 	 *
-	 * @param   Array   $post             Post form
-	 * @param   String  $tableSubmission  Table submission
-	 * @param   String  $fieldIdentifier  Field indentifier
-	 * @param   String  $fieldTitle       Field Title
-	 * @param   Array   &$validationForm  Validation form
+	 * @param   int     $formId           Form ID.
+	 * @param   string  $fieldIdentifier  Field identifier.
+	 * @param   string  $fieldValue       Field value.
+	 * @param   string  $fieldTitle       Field title.
+	 * @param   array   &$validationForm  Validation results.
 	 *
 	 * @return  array
 	 */
@@ -688,18 +719,29 @@ class JSNUniformModelForm extends JModelItem
 				if(version_compare($params->version, '2.0', '>=')){
 					JPluginHelper::importPlugin('captcha');
 					$dispatcher = JEventDispatcher::getInstance();
-					$checkAnswer = $dispatcher->trigger('onCheckAnswer');
-					if(is_array($checkAnswer))
+					try
 					{
-						if($checkAnswer[0] == false)
+						$checkAnswer = $dispatcher->trigger('onCheckAnswer');
+						if (is_array($checkAnswer))
+						{
+							if ($checkAnswer[0] == false)
+							{
+								$return->error['captcha'] = JText::_('JSN_UNIFORM_ERROR_CAPTCHA');
+
+								return $return;
+							}
+						}
+						elseif ($checkAnswer == false)
 						{
 							$return->error['captcha'] = JText::_('JSN_UNIFORM_ERROR_CAPTCHA');
+
 							return $return;
 						}
 					}
-					elseif($checkAnswer == false)
+					catch (Exception $e)
 					{
-						$return->error['captcha'] = JText::_('JSN_UNIFORM_ERROR_CAPTCHA');
+						$return->error['captcha'] = $e->getMessage();
+
 						return $return;
 					}
 				}else{
@@ -784,10 +826,81 @@ class JSNUniformModelForm extends JModelItem
 				}
 			}
 		}
+
+		// Get hidden fields.
+		$hiddenFields = array();
+
+		foreach ($columsSubmission as $colum)
+		{
+			// Get field settings.
+			$fieldSettings = isset($colum->field_settings) ? json_decode($colum->field_settings) : null;
+
+			if ($fieldSettings)
+			{
+				// Check if field is hidden by default.
+				if (!empty($fieldSettings->options->hideField) && (int) $fieldSettings->options->hideField)
+				{
+					$hiddenFields[] = $colum->field_identifier;
+				}
+			}
+		}
+
+		foreach ($columsSubmission as $colum)
+		{
+			// Only field of type `checkboxes`, `choices` or `dropdown` can show/hide other field(s).
+			if (in_array($colum->field_type, array('checkboxes', 'choices', 'dropdown')))
+			{
+				// Get field settings.
+				$fieldSettings = isset($colum->field_settings) ? json_decode($colum->field_settings) : null;
+
+				// Check if field has item actions?
+				if (!empty($fieldSettings->options->itemAction))
+				{
+					// Get field value.
+					if ($colum->field_type === 'checkboxes')
+					{
+						$values = json_decode($this->_fieldJson($post, $colum->field_type, $colum->field_id, true), true);
+					}
+					else
+					{
+						$values = (array) $this->_fieldOthers($post, $fieldSettings, $colum->field_id);
+					}
+
+					// Get field actions.
+					$actions = json_decode($fieldSettings->options->itemAction, true);
+
+					foreach ($values as $value)
+					{
+						if (!empty($actions[$value]))
+						{
+							if (!empty($actions[$value]['hideField']))
+							{
+								// Add fields hidden by this item's action to list of hidden field.
+								$hiddenFields = array_unique(array_merge($hiddenFields, $actions[$value]['hideField']));
+							}
+							elseif (!empty($actions[$value]['showField']))
+							{
+								// Remove fields unhidden by this item's action from list of hidden field.
+								$hiddenFields = array_diff($hiddenFields, $actions[$value]['showField']);
+							}
+						}
+					}
+				}
+			}
+		}
+
+		// Process submitted data.
 		$this->_getActionForm($dataForms->form_post_action, $dataForms->form_post_action_data, $return);
 		$fieldEmail = array();
 		foreach ($columsSubmission as $colum)
 		{
+			// Simply continue if the current field is hidden.
+			if (in_array($colum->field_identifier, $hiddenFields))
+			{
+				// AstoSoft
+				//continue;
+			}
+
 			if (!in_array($colum->field_id, $fieldClear))
 			{
 				$fieldName = "";
@@ -829,6 +942,10 @@ class JSNUniformModelForm extends JModelItem
 					{
 						$value = $this->_fieldNumber($post, $fieldName, $colum->field_title, $validationForm);
 					}
+					elseif ($colum->field_type == 'slider')
+					{
+						$value = $this->_fieldSlider($post, $fieldName, $colum->field_title, $validationForm);
+					}
 					else if ($colum->field_type == "date")
 					{
 						$value = $this->_fieldDate($post, $fieldName, $colum->field_title, $validationForm);
@@ -853,6 +970,29 @@ class JSNUniformModelForm extends JModelItem
 					{
 						$submissionsData[] = array('form_id' => $dataFormId, 'field_id' => $colum->field_id, 'submission_data_value' => $value, 'field_type' => $colum->field_type);
 					}
+
+					// Process validation rule.
+					if (!empty($value) && !empty($fieldSettings->options)
+						&& !empty($fieldSettings->options->validPattern) && !empty($fieldSettings->options->validSample))
+					{
+						try
+						{
+							$pattern = str_replace('~', '\\~', $fieldSettings->options->validPattern);
+
+							if (!preg_match("~{$pattern}~", $value))
+							{
+								$validationForm[$fieldName] = JText::sprintf(
+									'JSN_UNIFORM_VALIDATION_FAILS',
+									$fieldSettings->options->validSample
+								);
+							}
+						}
+						catch (Exception $e)
+						{
+							$validationForm[$fieldName] = $e->getMessage();
+						}
+					}
+
 					$keyField = $colum->field_id;
 					$submissions = new stdClass();
 					$submissions->$keyField = $value;
@@ -874,7 +1014,7 @@ class JSNUniformModelForm extends JModelItem
 							{
 								if (in_array($colum->field_id, $dataArray))
 								{
-									$dataContentEmail[$colum->field_identifier] = $contentField ? str_replace("\n", "<br/>", trim($contentField)) : "<span>N/A</span>";
+									$dataContentEmail[$colum->field_identifier] = (!is_null($contentField) && $contentField !== '') ? str_replace("\n", "<br/>", trim($contentField)) : "<span>N/A</span>";
 								}
 							}
 						}
@@ -884,7 +1024,7 @@ class JSNUniformModelForm extends JModelItem
 							{
 								if (in_array($colum->field_id, $dataArray))
 								{
-									$dataContentEmail[$colum->field_identifier] = $contentField ? str_replace("\n", "<br/>", trim($contentField)) : "<span>N/A</span>";
+									$dataContentEmail[$colum->field_identifier] = (!is_null($contentField) && $contentField !== '') ? str_replace("\n", "<br/>", trim($contentField)) : "<span>N/A</span>";
 								}
 							}
 						}
@@ -954,12 +1094,12 @@ class JSNUniformModelForm extends JModelItem
 									}
 									else
 									{
-										$dataContentEmail[$colum->field_identifier] = $contentField ? str_replace("\n", "<br/>", trim($contentField)) : "<span>N/A</span>";
+										$dataContentEmail[$colum->field_identifier] = (!is_null($contentField) && $contentField !== '') ? str_replace("\n", "<br/>", trim($contentField)) : "<span>N/A</span>";
 									}
 								}
 								else
 								{
-									$dataContentEmail[$colum->field_identifier] = $contentField ? str_replace("\n", "<br/>", trim($contentField)) : "<span>N/A</span>";
+									$dataContentEmail[$colum->field_identifier] = (!is_null($contentField) && $contentField !== '') ? str_replace("\n", "<br/>", trim($contentField)) : "<span>N/A</span>";
 								}
 							}
 						}
@@ -1163,7 +1303,7 @@ class JSNUniformModelForm extends JModelItem
 		if (!$validationForm)
 		{
 			$_save = $this->_save($dataForms, $return, $post, $submissionsData, $dataContentEmail, $nameFileByIndentifier, $requiredField, $fileAttach, $recepientEmail);
-            //Add submission ID to session for Ajax Upload File
+			//Add submission ID to session for Ajax Upload File
             $session = JFactory::getSession();
             $session->set('jsn_submission_form_' . $post['form_id'], $_save);
 			//Run Script on Form Processed
@@ -1196,6 +1336,30 @@ class JSNUniformModelForm extends JModelItem
 
 			if((string)$dataForms->form_payment_type != '')
 			{
+				/*// Set subtotal amount.
+				$post['subtotal_amount'] = floatval($post['jsn_form_total_money']['form_payment_money_value']);
+
+				// Check if extra fee is set?
+				if (isset($post['jsn_form_total_money']['extra_fee_type']) && $post['jsn_form_total_money']['extra_fee_type'] != 'none')
+				{
+					// Calculate extra fee amount.
+					$post['extra_fee_amount'] = 0;
+
+					switch ($post['jsn_form_total_money']['extra_fee_type'])
+					{
+						case 'flat':
+							$post['extra_fee_amount'] = floatval($post['jsn_form_total_money']['extra_fee_value']);
+						break;
+
+						case 'percent':
+							$post['extra_fee_amount'] = (floatval($post['subtotal_amount']) / 100) * floatval($post['jsn_form_total_money']['extra_fee_value']);
+						break;
+					}
+
+					// Calculate total includes extra fee.
+					$post['total_includes_extra_fee'] = $post['subtotal_amount'] + $post['extra_fee_amount'];
+				}*/
+
 				$dispatcher = JEventDispatcher::getInstance();
 				JPluginHelper::importPlugin('uniform', (string)$dataForms->form_payment_type);
 				$dispatcher->trigger('processToPostPaymentGateway', array($post, $fieldData, $_save));
@@ -1385,7 +1549,6 @@ class JSNUniformModelForm extends JModelItem
 
 		$formSubmitter = isset($dataForms->form_submitter) ? json_decode($dataForms->form_submitter) : '';
 		$checkEmailSubmitter = true;
-		// AstoSoft
 		$defaultSubject = isset($dataForms->form_title) ? $dataForms->form_title : '';
 
 		if ($dataTemplates)
@@ -1463,35 +1626,42 @@ class JSNUniformModelForm extends JModelItem
 				{
 					$checkEmailSubmitter = false;
 
-					$listEmailSubmitter = array();
-					foreach ($formSubmitter as $item)
-					{
-						if (!empty($item))
-						{
-							$emailSubmitter = new stdClass;
-							$emailSubmitter->email_address = isset($dataContentEmail[$item]) ? $dataContentEmail[$item] : "";
+					// Check if user confirmed sending email.
+					//if (empty($emailTemplate->confirm_sending_email) || ! (int) $emailTemplate->confirm_sending_email
+						//|| (isset($postData['confirm_sending_email']) && (int) $postData['confirm_sending_email']))
+					//{
+						$listEmailSubmitter = array();
 
-							if (!empty($emailSubmitter->email_address))
+						foreach ($formSubmitter as $item)
+						{
+							if (!empty($item))
 							{
-								$listEmailSubmitter[] = $emailSubmitter;
+								$emailSubmitter                = new stdClass;
+								$emailSubmitter->email_address = isset($dataContentEmail[$item]) ? $dataContentEmail[$item] : "";
+
+								if (!empty($emailSubmitter->email_address))
+								{
+									$listEmailSubmitter[] = $emailSubmitter;
+								}
 							}
 						}
-					}
 
-					if ($isSent)
-					{
-						if (!$isAjaxUploadFile)
+						if ($isSent)
 						{
-							$sent = $this->_sendEmailList($emailTemplate, $listEmailSubmitter, $fileAttach);
-							// Set the success message if it was a success
-							if (! ($sent instanceof Exception))
+							if (!$isAjaxUploadFile)
 							{
-								$msg = JText::_('JSN_UNIFORM_EMAIL_THANKS');
+								$sent = $this->_sendEmailList($emailTemplate, $listEmailSubmitter, $fileAttach);
+
+								// Set the success message if it was a success
+								if (!($sent instanceof Exception))
+								{
+									$msg = JText::_('JSN_UNIFORM_EMAIL_THANKS');
+								}
 							}
 						}
-					}
-
+					//}
 				}
+
 				if ($emailTemplate->template_notify_to == 1)
 				{
 					if ($isSent)
