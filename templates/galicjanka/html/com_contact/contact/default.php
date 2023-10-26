@@ -13,7 +13,7 @@ $cparams = JComponentHelper::getParams('com_media');
 
 jimport('joomla.html.html.bootstrap');
 ?>
-<?php if ($this->contact->misc && $this->params->get('show_misc')) : ?>
+<?php if ($this->contact->misc && $this->params->get('show_misc')): ?>
 <div class="naglowek">
 	<?php echo TSFilter::nosingleletter($this->contact->misc); ?>
 </div>
@@ -27,12 +27,12 @@ jimport('joomla.html.html.bootstrap');
 				<a id="formularz" class="back pc-no"><?php echo JText::_('COM_CONTACT_FORMULARZ'); ?></a>
 			</div>
 		</div>
-		<div class="contact-form">
+		<!-- <div class="contact-form">
 			<div class="center">
 				<a id="cofnij" class="back pc-no"><?php echo JText::_('COM_CONTACT_COFNIJ'); ?></a>
 			</div>
-			<?php  echo $this->loadTemplate('form');  ?>
-		</div>
+			<?php // echo $this->loadTemplate('form');  ?>
+		</div> -->
 		<div class="clr"></div>
 	</div>
 </div>
