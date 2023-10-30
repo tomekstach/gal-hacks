@@ -33,6 +33,13 @@ jimport('joomla.html.html.bootstrap');
 			</div>
 			<?php // echo $this->loadTemplate('form');  ?>
 		</div> -->
+		<div class="contact-form">
+			<div class="center">
+				<a id="cofnij" class="back pc-no"><?php echo JText::_('COM_CONTACT_COFNIJ'); ?></a>
+			</div>
+			<div class="contact-form-inner">
+				<?php echo JHtml::_('content.prepare', '{loadposition contact-form}'); ?>
+			</div>
 		<div class="clr"></div>
 	</div>
 </div>
